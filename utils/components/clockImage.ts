@@ -1,0 +1,1 @@
+export const Cn = () => console.log('hola');

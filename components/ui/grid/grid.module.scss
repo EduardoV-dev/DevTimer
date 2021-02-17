@@ -1,0 +1,41 @@
+@import "../../../styles/responsive";
+
+$directions: (
+  "flexRow": "row",
+  "flexColumn": "column",
+);
+
+.grid {
+  &_parent {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &_child {
+    display: block;
+  }
+
+  @each $name, $value in $breakpoints {
+    @include responsive($name) {
+      @for $i from 1 to 13 {
+        &_#{$name}_#{$i} {
+          flex-basis: ($i / 12) * 100%;
+        }
+      }
+    }
+  }
+
+  @each $bp, $value in $breakpoints {
+    @include responsive($bp) {
+      @each $name, $value in $directions {
+        &_direction_#{$bp}_#{$value} {
+          flex-direction: $value;
+        }
+      }
+    }
+  }
+
+  &_no_spacing {
+    padding: 0;
+  }
+}

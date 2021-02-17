@@ -8,7 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/classnames": "^2.2.11",
+    "@types/styled-components": "^5.1.7",
     "babel-plugin-styled-components": "^1.12.0",
+    "classnames": "^2.2.6",
     "next": "10.0.7",
     "node-sass": "^4.14.1",
     "react": "17.0.1",

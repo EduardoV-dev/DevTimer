@@ -1,4 +1,5 @@
 import React from 'react';
+import { HomeLayout } from '../components/layout';
 
 interface Props {
 
@@ -6,7 +7,7 @@ interface Props {
 
 const Home: React.FC<Props> = (): JSX.Element => {
   return (  
-    <h1>Hola Mundo</h1>
+    <HomeLayout />
   );
 }
 

@@ -1,0 +1,15 @@
+export { default as AddProjectIcon } from './addProject';
+export { default as ChevronIcon } from './chevron';
+export { default as DeleteIcon } from './delete';
+export { default as EditIcon } from './edit';
+export { default as FacebookIcon } from './facebook';
+export { default as GithubIcon } from './github';
+export { default as LogoIcon } from './logo';
+export { default as PauseIcon } from './pause';
+export { default as PlayIcon } from './play';
+export { default as SearchIcon } from './search';
+export { default as TaskCompletedIcon } from './taskCompleted';
+export { default as TaskProgressIcon } from './taskProgress';
+export { default as TaskTodoIcon } from './taskTodo';
+export { default as TasksIcon } from './tasks';
+export { default as TodoListIcon } from './todoList';
