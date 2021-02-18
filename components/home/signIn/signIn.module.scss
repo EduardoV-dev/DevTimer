@@ -1,4 +1,4 @@
-@import '../../../styles/responsive';
+@import "../../../styles/responsive";
 
 .signIn {
   width: 90%;
@@ -12,14 +12,14 @@
   max-width: 36rem;
   transform: translate(-50%, -50%);
   animation: signInAnimate 1s ease forwards;
-  
+
   @keyframes signInAnimate {
     100% {
       top: 58%;
       opacity: 1;
     }
   }
-  
+
   @include responsive(lg) {
     width: 100%;
     max-width: none;
@@ -27,15 +27,26 @@
     top: 0;
     left: 0;
     transform: none;
-    padding: 2rem 0;
+    padding: 1rem 2rem;
     border-radius: 0;
     animation: none;
     opacity: 1;
+    min-height: 100%;
+  }
+
+  &_logo {
+    display: none;
+
+    @include responsive(lg) {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 8rem;
+    }
   }
 
   &_subtitle {
     margin-bottom: 0.5rem;
-    
+
     @include responsive(sm) {
       width: 30rem;
     }
@@ -43,7 +54,14 @@
 
   &_title {
     margin-bottom: 1rem;
-    width: 30rem;
+
+    @include responsive(sm) {
+      width: 30rem;
+    }
+
+    @include responsive(lg) {
+      width: 20rem;
+    }
   }
 
   &_button {
@@ -51,6 +69,7 @@
     display: flex;
     align-items: center;
     width: 100%;
+    padding-left: 0.8rem;
 
     @include responsive(sm) {
       width: 16rem;
@@ -59,9 +78,9 @@
     &:first-of-type {
       margin: 0;
     }
+  }
 
-    svg {
-      margin-right: 0.8rem;
-    }
+  &_icon {
+    margin-right: 0.8rem;
   }
 }

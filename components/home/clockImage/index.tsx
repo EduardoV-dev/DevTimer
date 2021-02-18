@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Logo } from '../../common';
 import { Img } from '../../ui';
+import s from './clockImage.module.scss';
 
 interface Props {
 
@@ -19,11 +20,11 @@ const ClockImage: React.FC<Props> = (): JSX.Element => {
 
   return (
     <>
-      <Logo />
+      <Logo className={s.clockImage_logo} />
       <Img
         src='/static/img/HomePic.jpg'
         alt='Home page clock image'
-        maxHeight='20rem'
+        className={s.clockImage_img}
       />
     </>
   );

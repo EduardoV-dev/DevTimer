@@ -3,6 +3,7 @@ import s from './grid.module.scss';
 import cn from 'classnames';
 
 type Col = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+type Spacing = 'sm' | 'md' | 'lg' | 'xl';
 type Direction = 'row' | 'column';
 
 interface Props {
@@ -19,7 +20,6 @@ interface Props {
   direction_md?: Direction;
   direction_lg?: Direction;
   direction_xl?: Direction;
-  no_spacing?: boolean;
 }
 
 const Grid: React.FC<Props> = ({
@@ -36,7 +36,6 @@ const Grid: React.FC<Props> = ({
   direction_md,
   direction_lg,
   direction_xl,
-  no_spacing,
 }): JSX.Element => {
   const classNames = cn({
     [s.grid_parent]: parent,
@@ -51,7 +50,6 @@ const Grid: React.FC<Props> = ({
     [s[`grid_direction_md_${direction_md}`]]: direction_md,
     [s[`grid_direction_lg_${direction_lg}`]]: direction_lg,
     [s[`grid_direction_xl_${direction_xl}`]]: direction_xl,
-    [s.grid_no_spacing]: no_spacing,
   });
 
   return (

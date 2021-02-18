@@ -10,6 +10,7 @@ export const Btn = styled.button<ButtonProps>`
   font-size: 1rem;
   color: ${({ theme: { light } }) => light};
   font-weight: bold;
+  transition: all 0.3s ease;
 
   &:hover,
   &:focus {
@@ -18,13 +19,40 @@ export const Btn = styled.button<ButtonProps>`
 
   ${({ primary }) => primary && css`
     background-color: ${({ theme: { primary } }) => primary};
+
+    &:hover,
+    &:focus {
+      background-color: ${({ theme: { primaryHover } }) => primaryHover};
+    }
+
+    &:active {
+      box-shadow: 1px 1px 0 2px ${({ theme: { primary } }) => primary};
+    }
   `}
 
   ${({ github }) => github && css`
     background-color: ${({ theme: { dark } }) => dark};
+
+    &:hover,
+    &:focus {
+      background-color: ${({ theme: { darkHover } }) => darkHover};
+    }
+
+    &:active {
+      box-shadow: 1px 1px 0 2px ${({ theme: { dark } }) => dark};
+    }
   `}
 
   ${({ facebook }) => facebook && css`
     background-color: ${({ theme: { facebook } }) => facebook};
+
+    &:hover,
+    &:focus {
+      background-color: ${({ theme: { facebookHover } }) => facebookHover};
+    }
+
+    &:active {
+      box-shadow: 1px 1px 0 2px ${({ theme: { facebook } }) => facebook};
+    }
   `}
 `;

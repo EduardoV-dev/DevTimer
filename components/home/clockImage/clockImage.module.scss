@@ -1,0 +1,23 @@
+@import "../../../styles/responsive";
+
+.clockImage {
+  &_img {
+    max-height: 20rem;
+
+    @include responsive(lg) {
+      min-height: 100vh;
+    }
+  }
+
+  &_logo {
+    position: absolute;
+    z-index: 1;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    @include responsive(lg) {
+      display: none;
+    }
+  }
+}

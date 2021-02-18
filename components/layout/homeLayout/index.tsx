@@ -8,7 +8,7 @@ interface Props {
 
 const HomeLayout: React.FC<Props> = (): JSX.Element => {
   return (
-    <Grid parent no_spacing>
+    <Grid parent>
       <Grid child xs={12} lg={5}>
         <ClockImage />
       </Grid>
