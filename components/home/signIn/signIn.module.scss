@@ -1,5 +1,67 @@
+@import '../../../styles/responsive';
+
 .signIn {
+  width: 90%;
+  border-radius: 30px;
+  padding: 2rem 1rem;
+  position: absolute;
+  z-index: 1;
+  top: 70%;
+  opacity: 0;
+  left: 50%;
+  max-width: 36rem;
+  transform: translate(-50%, -50%);
+  animation: signInAnimate 1s ease forwards;
+  
+  @keyframes signInAnimate {
+    100% {
+      top: 58%;
+      opacity: 1;
+    }
+  }
+  
+  @include responsive(lg) {
+    width: 100%;
+    max-width: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    padding: 2rem 0;
+    border-radius: 0;
+    animation: none;
+    opacity: 1;
+  }
+
   &_subtitle {
     margin-bottom: 0.5rem;
+    
+    @include responsive(sm) {
+      width: 30rem;
+    }
+  }
+
+  &_title {
+    margin-bottom: 1rem;
+    width: 30rem;
+  }
+
+  &_button {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    @include responsive(sm) {
+      width: 16rem;
+    }
+
+    &:first-of-type {
+      margin: 0;
+    }
+
+    svg {
+      margin-right: 0.8rem;
+    }
   }
 }

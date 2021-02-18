@@ -4,3 +4,4 @@ export { default as Headline } from './titles/headline';
 export { default as Container } from './containers/container';
 export { default as Title } from './titles/title';
 export { default as Subtitle } from './titles/subtitle';
+export { default as Button } from './button';
