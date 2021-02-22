@@ -6,18 +6,13 @@
   padding: 2rem 1rem;
   position: absolute;
   z-index: 1;
-  top: 70%;
-  opacity: 0;
+  top: 58%;
   left: 50%;
   max-width: 36rem;
   transform: translate(-50%, -50%);
-  animation: signInAnimate 1s ease forwards;
 
-  @keyframes signInAnimate {
-    100% {
-      top: 58%;
-      opacity: 1;
-    }
+  @include responsive(sm) {
+    max-width: 33rem;
   }
 
   @include responsive(lg) {
@@ -29,8 +24,6 @@
     transform: none;
     padding: 1rem 2rem;
     border-radius: 0;
-    animation: none;
-    opacity: 1;
     min-height: 100%;
   }
 
@@ -65,18 +58,19 @@
   }
 
   &_button {
-    margin-top: 1rem;
     display: flex;
+    justify-content: center;
+    margin-top: 1rem;
     align-items: center;
     width: 100%;
     padding-left: 0.8rem;
 
-    @include responsive(sm) {
-      width: 16rem;
-    }
-
     &:first-of-type {
       margin: 0;
+    }
+
+    @include responsive(lg) {
+      max-width: 19.5rem;
     }
   }
 

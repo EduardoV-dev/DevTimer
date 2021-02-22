@@ -12,6 +12,7 @@
     "@types/styled-components": "^5.1.7",
     "babel-plugin-styled-components": "^1.12.0",
     "classnames": "^2.2.6",
+    "gsap": "^3.6.0",
     "next": "10.0.7",
     "node-sass": "^4.14.1",
     "react": "17.0.1",

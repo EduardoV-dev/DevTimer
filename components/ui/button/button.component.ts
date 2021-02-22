@@ -26,7 +26,7 @@ export const Btn = styled.button<ButtonProps>`
     }
 
     &:active {
-      box-shadow: 1px 1px 0 2px ${({ theme: { primary } }) => primary};
+      box-shadow: 0px 0px 0 2px ${({ theme: { primary } }) => primary};
     }
   `}
 
@@ -39,7 +39,7 @@ export const Btn = styled.button<ButtonProps>`
     }
 
     &:active {
-      box-shadow: 1px 1px 0 2px ${({ theme: { dark } }) => dark};
+      box-shadow: 0px 0px 0 2px ${({ theme: { dark } }) => dark};
     }
   `}
 
@@ -52,7 +52,7 @@ export const Btn = styled.button<ButtonProps>`
     }
 
     &:active {
-      box-shadow: 1px 1px 0 2px ${({ theme: { facebook } }) => facebook};
+      box-shadow: 0px 0px 0 2px ${({ theme: { facebook } }) => facebook};
     }
   `}
 `;

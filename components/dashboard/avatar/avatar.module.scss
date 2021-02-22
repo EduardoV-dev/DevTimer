@@ -1,0 +1,11 @@
+.avatar {
+  &_username {
+    margin-right: 1rem;
+  }
+
+  &_userimage {
+    border-radius: 50%;
+    width: 64px !important;
+    height: 64px !important;
+  }
+}

@@ -21,7 +21,7 @@ const SignIn: React.FC<Props> = (): JSX.Element => {
       <Title className={s.signIn_title}>
         Control the time it takes to develop certain tasks.
       </Title>
-      <Button facebook className={s.signIn_button} loading disabled>
+      <Button facebook className={s.signIn_button} loading={true.toString()} disabled>
         <FacebookIcon width={32} height={32} className={s.signIn_icon} />
         Sign in with Facebook
       </Button>

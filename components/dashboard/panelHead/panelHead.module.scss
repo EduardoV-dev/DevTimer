@@ -1,0 +1,10 @@
+.panelHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &_icon {
+    margin-left: 1rem;
+    transition: all ease 0.3s;
+  }
+}

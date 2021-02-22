@@ -3,7 +3,6 @@ import { Div } from './container.component';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
-  wrapper?: boolean;
   className?: string;
   bgColor?: any;
 }

@@ -6,13 +6,13 @@ import { Btn } from './button.component';
 interface Props extends ButtonProps {
   children: (string | JSX.Element)[] | string;
   className: string;
-  loading?: boolean;
+  loading?: string;
   disabled?: boolean;
 }
 
 const Button: React.FC<Props> = (props): JSX.Element => {
   const { loading } = props;
-
+  
   return (
     <>
       {loading ? (
