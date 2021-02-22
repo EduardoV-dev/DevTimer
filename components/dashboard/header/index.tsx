@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header as Container, Wrapper } from '../../ui';
-import { Avatar } from '../index';
+import { Avatar } from '../../common';
 import s from './header.module.scss';
 
 interface Props {

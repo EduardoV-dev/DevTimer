@@ -1,10 +1,12 @@
 import React from 'react';
+import { Titles } from '../../../../models/interfaces/components';
+import { Boolean } from '../../../../models/types/components';
 import { H2 } from './title.component';
 
-interface Props {
-  children: string;
+interface Props extends Titles {
+  children: (string | JSX.Element)[] | string;
   className?: string;
-  uppercase?: string;
+  uppercase?: Boolean;
 }
 
 const Title: React.FC<Props> = (props): JSX.Element => {

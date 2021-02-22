@@ -4,6 +4,7 @@ export const light = {
   light: '#F2F2F2',
   dark: '#333',
   darkHover: '#585858',
-  facebook: '#3C589F',
-  facebookHover: '#3F69D3',
+  secondary: '#3C589F',
+  secondaryHover: '#3F69D3',
+  todo: '#C7D431',
 };

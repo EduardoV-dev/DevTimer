@@ -9,3 +9,4 @@ export { default as Subtitle } from './titles/subtitle';
 export { default as Button } from './button';
 export { default as Span } from './text/span';
 export { default as P } from './text/p';
+export { default as Link } from './text/link';

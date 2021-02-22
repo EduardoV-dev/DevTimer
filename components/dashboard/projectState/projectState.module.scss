@@ -1,0 +1,13 @@
+.projectState {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  border-radius: 5px;
+  padding: 1rem;
+
+  &_statusContainer {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid hsl(162, 59%, 45%);
+  }
+}

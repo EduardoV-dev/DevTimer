@@ -3,7 +3,8 @@ import { Bold } from '../../../../models/interfaces/components';
 import { P as Pgph } from './p.component';
 
 interface Props extends Bold {
-  children: (JSX.Element | String)[] | string;
+  children: (JSX.Element | string)[] | string;
+  className?: string;
 }
 
 const P: React.FC<Props> = (props): JSX.Element => {

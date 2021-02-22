@@ -44,15 +44,15 @@ export const Btn = styled.button<ButtonProps>`
   `}
 
   ${({ facebook }) => facebook && css`
-    background-color: ${({ theme: { facebook } }) => facebook};
+    background-color: ${({ theme: { secondary } }) => secondary};
 
     &:hover,
     &:focus {
-      background-color: ${({ theme: { facebookHover } }) => facebookHover};
+      background-color: ${({ theme: { secondaryHover } }) => secondaryHover};
     }
 
     &:active {
-      box-shadow: 0px 0px 0 2px ${({ theme: { facebook } }) => facebook};
+      box-shadow: 0px 0px 0 2px ${({ theme: { secondary } }) => secondary};
     }
   `}
 `;

@@ -1,0 +1,16 @@
+.taskStatus {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &_data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &_icon {
+    margin-right: 0.5rem;
+  }
+}

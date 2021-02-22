@@ -8,7 +8,8 @@ export interface ButtonProps {
 }
 
 export interface Titles {
-  uppercase?: boolean;
+  uppercase?: Boolean;
+  fontSize?: string;
 }
 
 export interface Avatar {
@@ -17,4 +18,9 @@ export interface Avatar {
 
 export interface Bold {
   bold?: Boolean;
+}
+
+export interface TaskStatus {
+  text: string;
+  icon: (props: any) => JSX.Element;
 }

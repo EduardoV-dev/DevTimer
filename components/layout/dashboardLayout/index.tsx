@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, ProjectData } from '../../dashboard';
+import { Header, ProjectData, ProjectState } from '../../dashboard';
 import { Grid } from '../../ui';
 
 interface Props {
@@ -18,6 +18,9 @@ const DashboardLayout: React.FC<Props> = (props): JSX.Element => {
         </Grid>
         <Grid child xs={12}>
           <ProjectData />
+        </Grid>
+        <Grid child xs={12}>
+          <ProjectState />
         </Grid>
       </Grid>
     </Grid>

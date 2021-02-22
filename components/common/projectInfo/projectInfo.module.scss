@@ -1,0 +1,11 @@
+.projectInfo {
+  margin-bottom: 1rem;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &_title {
+    margin-bottom: 0.3rem; 
+  }
+}
