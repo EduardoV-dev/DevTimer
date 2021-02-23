@@ -1,9 +1,9 @@
 import { Boolean } from '../../types/components';
 
 export interface ButtonProps {
-  primary?: boolean;
-  facebook?: boolean;
-  github?: boolean;
+  primary?: Boolean;
+  facebook?: Boolean;
+  github?: Boolean;
   loading?: string;
 }
 
@@ -20,7 +20,7 @@ export interface Bold {
   bold?: Boolean;
 }
 
-export interface TaskStatus {
-  text: string;
-  icon: (props: any) => JSX.Element;
+export interface Component {
+  text?: string;
+  component: (props: any) => JSX.Element;
 }

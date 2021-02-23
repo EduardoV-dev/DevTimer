@@ -11,8 +11,8 @@ interface Props {
 const ProjectState: React.FC<Props> = (props): JSX.Element => {
   return (
     <Container
-      bgColor={({ theme }) => theme.light}
       className={s.projectState}
+      card='true'
     >
       <Container className={s.projectState_statusContainer}>
         <Title fontSize='1.25rem'>Status</Title>

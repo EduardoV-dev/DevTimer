@@ -1,0 +1,15 @@
+.tasksList {
+  margin-top: 1rem !important;
+
+  &_head {
+    margin: 0;
+  }
+
+  &_badgeContainer {
+    margin-top: 1rem;
+  }
+
+  &_badge {
+    margin-right: 0.5rem;
+  }
+}

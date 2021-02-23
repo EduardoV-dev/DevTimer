@@ -1,10 +1,12 @@
 import React from 'react';
+import { Boolean } from '../../../../models/types/components';
 import { Div } from './container.component';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
   className?: string;
   bgColor?: any;
+  card?: Boolean;
 }
 
 const Container: React.FC<Props> = (props): JSX.Element => {

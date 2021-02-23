@@ -5,7 +5,8 @@ import { Btn } from './button.component';
 
 interface Props extends ButtonProps {
   children: (string | JSX.Element)[] | string;
-  className: string;
+  type: 'submit' | 'button';
+  className?: string;
   loading?: string;
   disabled?: boolean;
 }

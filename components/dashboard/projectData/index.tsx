@@ -10,8 +10,8 @@ interface Props {
 const ProjectData: React.FC<Props> = (props): JSX.Element => {
   return (
     <Container
-      bgColor={({ theme }) => theme.light}
       className={s.projectData}
+      card='true'
     >
       <PanelHead />
       <ProjectInfo 

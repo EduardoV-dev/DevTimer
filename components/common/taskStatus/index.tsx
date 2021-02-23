@@ -1,7 +1,7 @@
 import React from 'react';
-import { TaskStatus as TaskStat } from '../../../models/interfaces/components';
+import { Component } from '../../../models/interfaces/components';
 import { TaskStatusType } from '../../../models/types/components';
-import { getTaskType } from '../../../utils/components/taskStatus';
+import { getTaskType } from '../../../utils/components';
 import { Container, P, Span } from '../../ui';
 import s from './taskStatus.module.scss';
 
@@ -14,14 +14,13 @@ const TaskStatus: React.FC<Props> = ({
   type,
   quantity,
 }): JSX.Element => {
-  const task: TaskStat = getTaskType(type);
-  const { text } = task;
+  const task: Component = getTaskType(type);
 
   return (
     <Container className={s.taskStatus}>
       <Container className={s.taskStatus_data}>
-        <task.icon className={s.taskStatus_icon} />
-        <P bold='true'>{text}:</P>
+        <task.component className={s.taskStatus_icon} />
+        <P bold='true'>{task.text}:</P>
       </Container>
       <Span {...{ type }}>{quantity}</Span>
     </Container>
