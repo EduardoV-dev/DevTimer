@@ -1,0 +1,19 @@
+.task {
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(0.95);
+    cursor: pointer;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &_content {
+    margin-bottom: 0.5rem;
+  }
+}

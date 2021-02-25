@@ -1,11 +1,18 @@
 import {
+  DeleteIcon,
+  EditIcon,
   TaskCompletedIcon,
   TaskProgressIcon,
   TasksIcon,
   TaskTodoIcon
 } from "../../components/icons";
 import { Input, TextArea } from '../../components/ui';
-import { FormGroupType, TaskStatusType } from "../../models/types/components";
+import {
+  FormGroupType,
+  PanelHeadType,
+  PanelHeadActions,
+  TaskStatusType
+} from "../../models/types/components";
 import { Component } from "../../models/interfaces/components";
 
 export const getTaskType = (type: TaskStatusType): Component => {
@@ -45,3 +52,17 @@ export const getFormGroup = (type: FormGroupType): Component => {
       break;
   }
 }
+
+export const getPanelHeadActions = (type: PanelHeadActions): Component => ({
+  text: capitalize(type),
+  component: type === 'delete' ? DeleteIcon : EditIcon,
+});
+
+const capitalize = (str: string): string =>
+  str.charAt(0).toUpperCase() + str.slice(1);
+
+export const getTaskStatusTag = (type: TaskStatusType): string =>
+  type === 'progress' ? 'In progress' : capitalize(type);
+
+export const getPanelHeadType = (type: PanelHeadType): string =>
+  type === 'project' ? 'Project:' : 'Task:';

@@ -5,11 +5,17 @@
     margin: 0;
   }
 
-  &_badgeContainer {
+  &_badgeContainer,
+  &_list {
     margin-top: 1rem;
   }
 
   &_badge {
     margin-right: 0.5rem;
+  }
+
+  &_list {
+    max-height: 22.5rem;
+    overflow-y: auto;
   }
 }

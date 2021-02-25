@@ -9,6 +9,8 @@ interface Props extends Avatar, Titles {
   type?: TaskStatusType;
   badge?: Boolean;
   badgeActive?: Boolean;
+  fontColor?: any;
+  fontFamily?: 'Raleway' | 'Montserrat';
 }
 
 const Span: React.FC<Props> = (props): JSX.Element => {

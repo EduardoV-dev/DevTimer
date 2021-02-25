@@ -7,17 +7,4 @@
   &_span {
     margin-left: 0.5rem;
   }
-
-  &_icon {
-    margin-left: 1rem;
-    transition: all ease 0.1s;
-
-    &:hover {
-      transform: scale(1.2);
-    }
-  }
-
-  &_text {
-    display: none;
-  }
 }

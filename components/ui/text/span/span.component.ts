@@ -3,6 +3,8 @@ import { Avatar, Titles } from '../../../../models/interfaces/components';
 import { Boolean, TaskStatusType } from '../../../../models/types/components';
 
 interface Props extends Avatar, Titles {
+  fontFamily?: 'Raleway' | 'Montserrat';
+  fontColor?: string;
   type?: TaskStatusType;
   badge?: Boolean;
   badgeActive?: Boolean;
@@ -10,18 +12,14 @@ interface Props extends Avatar, Titles {
 
 export const SpanComp = styled.span<Props>`
   display: inline-block;
-  font-family: 'Raleway', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: ${({ fontFamily }) => fontFamily || 'Raleway'}, 
+  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: ${({ fontSize }) => fontSize || '1rem'};
-  color: ${({ theme }) => theme.primary};
+  color: ${({ fontColor, theme }) => fontColor || theme.dark};
   font-weight: bold;
-
-  ${({ avatar }) => avatar && css`
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  `};
 
   ${({ type }) => type === 'total' && css`
     text-decoration: underline;
-    color: ${({ theme }) => theme.dark};
   `};
 
   ${({ type }) => type === 'todo' && css`
@@ -33,6 +31,7 @@ export const SpanComp = styled.span<Props>`
   `};
 
   ${({ type }) => type === 'completed' && css`
+    color: ${({ theme }) => theme.primary};
     text-decoration: line-through;
   `};
 

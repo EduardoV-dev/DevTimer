@@ -13,7 +13,7 @@ const ProjectData: React.FC<Props> = (props): JSX.Element => {
       className={s.projectData}
       card='true'
     >
-      <PanelHead />
+      <PanelHead type='project' />
       <ProjectInfo 
         title='Description'
         description='Project description here lorem ipsum dolor sit ame asu madre'

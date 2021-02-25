@@ -5,6 +5,7 @@ import {
   ProjectState,
   NewTaskForm,
   TasksList,
+  TaskData,
 } from '../../dashboard';
 import { Grid } from '../../ui';
 
@@ -33,6 +34,9 @@ const DashboardLayout: React.FC<Props> = (props): JSX.Element => {
         </Grid>
         <Grid child xs={12}>
           <TasksList />
+        </Grid>
+        <Grid child xs={12}>
+          <TaskData />
         </Grid>
       </Grid>
     </Grid>
