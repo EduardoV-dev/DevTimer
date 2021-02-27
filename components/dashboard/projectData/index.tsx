@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container } from '../../ui';
 import { PanelHead, ProjectInfo } from '../../common';
-import s from './projectData.module.scss';
 
 interface Props {
 
@@ -9,10 +8,7 @@ interface Props {
 
 const ProjectData: React.FC<Props> = (props): JSX.Element => {
   return (
-    <Container
-      className={s.projectData}
-      card='true'
-    >
+    <Container card='true'>
       <PanelHead type='project' />
       <ProjectInfo 
         title='Description'

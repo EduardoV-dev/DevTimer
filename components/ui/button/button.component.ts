@@ -8,7 +8,8 @@ export const Btn = styled.button<ButtonProps>`
   outline: none;
   font-family: 'Raleway', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1rem;
-  color: ${({ theme: { light } }) => light};
+  background-color: ${({ theme }) => theme.lightDarken};
+  color: ${({ theme, fontColor }) => fontColor || theme.light};
   font-weight: bold;
   transition: all 0.3s ease;
 
@@ -16,6 +17,11 @@ export const Btn = styled.button<ButtonProps>`
   &:focus {
     cursor: pointer;
   }
+
+  ${({ block }) => block && css`
+    display: block;
+    width: 100%;
+  `}; 
 
   ${({ primary }) => primary && css`
     background-color: ${({ theme: { primary } }) => primary};

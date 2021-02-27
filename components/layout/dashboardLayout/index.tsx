@@ -6,39 +6,43 @@ import {
   NewTaskForm,
   TasksList,
   TaskData,
+  MenuToggler,
+  Menu,
 } from '../../dashboard';
 import { Grid } from '../../ui';
 
-interface Props {
-
-}
+interface Props {}
 
 const DashboardLayout: React.FC<Props> = (props): JSX.Element => {
   return (
-    <Grid parent>
-      {/* <Grid child>
-        Sidebar component here
-      </Grid> */}
-      <Grid parent child xs={12}>
+    <Grid parent wrap='nowrap'>
+      <Grid child xs={0} lg={3} xl={2}>
+        <Menu type='aside' />
+      </Grid>
+      <Grid parent xs={12} lg={9} xl={10}>
         <Grid child xs={12}>
           <Header />
         </Grid>
-        <Grid child xs={12}>
-          <ProjectData />
-        </Grid>
-        <Grid child xs={12}>
-          <ProjectState />
-        </Grid>
-        <Grid child xs={12}>
-          <NewTaskForm />
-        </Grid>
-        <Grid child xs={12}>
-          <TasksList />
-        </Grid>
-        <Grid child xs={12}>
-          <TaskData />
+        <Grid parent xs={12} spacing='sm'>
+          <Grid child xs={12} md={6} lg={5} xl={5}>
+            <ProjectData />
+          </Grid>
+          <Grid child xs={12} md={6} lg={7} xl={4}>
+            <ProjectState />
+          </Grid>
+          <Grid child xs={12} sm={6} lg={5} xl={3}>
+            <NewTaskForm />
+          </Grid>
+          <Grid child xs={12} sm={6} lg={7} xl={4}>
+            <TasksList />
+          </Grid>
+          <Grid child xs={12} lg={12} xl={8}>
+            <TaskData />
+          </Grid>
         </Grid>
       </Grid>
+      <MenuToggler />
+      <Menu type='float' />
     </Grid>
   );
 }

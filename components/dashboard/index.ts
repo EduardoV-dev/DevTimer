@@ -6,3 +6,7 @@ export { default as TasksList } from './tasksList';
 export { default as Task } from './task';
 export { default as TaskData } from './taskData';
 export { default as TaskTimer } from './taskTimer';
+export { default as MenuToggler } from './menuToggler';
+export { default as Menu } from './menu';
+export { default as ProjectList } from './projectList';
+export { default as Project } from './project';

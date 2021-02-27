@@ -2,9 +2,9 @@ import React from 'react';
 import s from './grid.module.scss';
 import cn from 'classnames';
 
-type Col = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+type Col = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 type Spacing = 'sm' | 'md' | 'lg' | 'xl';
-type Direction = 'row' | 'column';
+type Wrap = 'wrap' | 'nowrap';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -15,11 +15,9 @@ interface Props {
   md?: Col;
   lg?: Col;
   xl?: Col;
-  direction_xs?: Direction;
-  direction_sm?: Direction;
-  direction_md?: Direction;
-  direction_lg?: Direction;
-  direction_xl?: Direction;
+  spacing?: Spacing;
+  inner_spacing?: Spacing;
+  wrap?: Wrap,
 }
 
 const Grid: React.FC<Props> = ({
@@ -31,11 +29,9 @@ const Grid: React.FC<Props> = ({
   md,
   lg,
   xl,
-  direction_xs,
-  direction_sm,
-  direction_md,
-  direction_lg,
-  direction_xl,
+  spacing,
+  wrap,
+  inner_spacing,
 }): JSX.Element => {
   const classNames = cn({
     [s.grid_parent]: parent,
@@ -45,11 +41,9 @@ const Grid: React.FC<Props> = ({
     [s[`grid_md_${md}`]]: md,
     [s[`grid_lg_${lg}`]]: lg,
     [s[`grid_xl_${xl}`]]: xl,
-    [s[`grid_direction_xs_${direction_xs}`]]: direction_xs,
-    [s[`grid_direction_sm_${direction_sm}`]]: direction_sm,
-    [s[`grid_direction_md_${direction_md}`]]: direction_md,
-    [s[`grid_direction_lg_${direction_lg}`]]: direction_lg,
-    [s[`grid_direction_xl_${direction_xl}`]]: direction_xl,
+    [s[`grid_spacing_${spacing}`]]: spacing,
+    [s[`grid_${wrap}`]]: wrap,
+    [s[`grid_inner_spacing_${inner_spacing}`]]: inner_spacing,
   });
 
   return (

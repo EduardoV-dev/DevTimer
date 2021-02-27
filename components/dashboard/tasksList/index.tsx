@@ -8,10 +8,7 @@ interface Props {}
 
 const TasksList: React.FC<Props> = (): JSX.Element => {
   return (
-    <Container
-      className={s.tasksList}
-      card='true'
-    >
+    <Container card='true'>
       <Container className={s.tasksList_head}>
         <SearchInput placeholder='Search a task' noStyled='true' />
         <Container className={s.tasksList_badgeContainer}>

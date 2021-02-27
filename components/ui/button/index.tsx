@@ -9,6 +9,7 @@ interface Props extends ButtonProps {
   className?: string;
   loading?: string;
   disabled?: boolean;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button: React.FC<Props> = (props): JSX.Element => {

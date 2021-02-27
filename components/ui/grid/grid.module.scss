@@ -6,10 +6,15 @@ $directions: (
 );
 
 $spacing: (
-  "sm": 1rem,
-  "md": 3rem,
-  "lg": 5rem,
-  "xl": 10rem,
+  "sm": 0.5rem,
+  "md": 1.5rem,
+  "lg": 3rem,
+  "xl": 5rem,
+);
+
+$wrap: (
+  "wrap": wrap,
+  "nowrap": nowrap,
 );
 
 .grid {
@@ -24,7 +29,7 @@ $spacing: (
 
   @each $name, $value in $breakpoints {
     @include responsive($name) {
-      @for $i from 1 to 13 {
+      @for $i from 0 to 13 {
         &_#{$name}_#{$i} {
           flex-basis: ($i / 12) * 100%;
         }
@@ -32,23 +37,21 @@ $spacing: (
     }
   }
 
-  @each $bp in $breakpoints {
-    @include responsive($bp) {
-      @each $name, $value in $directions {
-        &_direction_#{$bp}_#{$value} {
-          flex-direction: $value;
-        }
-      }
+  @each $name, $value in $spacing {
+    &_spacing_#{$name} > &_child {
+      padding: $value;
     }
   }
 
-  @each $bp in $breakpoints {
-    @include responsive($bp) {
-      @each $name, $value in $spacing {
-        &_direction_#{$bp}_#{$name} {
-          padding: $value
-        }
-      }
+  @each $name, $value in $spacing {
+    &_inner_spacing_#{$name} {
+      padding: $value;
+    }
+  }
+
+  @each $name, $value in $wrap {
+    &_#{$name} {
+      flex-wrap: $value;
     }
   }
 }

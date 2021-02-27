@@ -5,6 +5,8 @@ export interface ButtonProps {
   facebook?: Boolean;
   github?: Boolean;
   loading?: string;
+  fontColor?: any;
+  block?: Boolean;
 }
 
 export interface Titles {

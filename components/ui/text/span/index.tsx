@@ -1,9 +1,9 @@
 import React from 'react';
-import { Avatar, Titles } from '../../../../models/interfaces/components';
+import { Avatar, Bold, Titles } from '../../../../models/interfaces/components';
 import { Boolean, TaskStatusType } from '../../../../models/types/components';
 import { SpanComp } from './span.component';
 
-interface Props extends Avatar, Titles {
+interface Props extends Avatar, Titles, Bold {
   children: string | number;
   className?: string;
   type?: TaskStatusType;

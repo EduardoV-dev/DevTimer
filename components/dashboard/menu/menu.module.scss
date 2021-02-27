@@ -1,0 +1,74 @@
+@import "../../../styles/responsive";
+
+.menu {
+  &_float {
+    display: block;
+    width: 85%;
+    height: 100vh;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    padding: 1rem 0;
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+
+    /* When menu is active */
+    &_true {
+      display: block;
+      transform: translateX(0%);
+    }
+  }
+
+  &_aside {
+    display: none;
+    @include responsive(lg) {
+      display: block;
+      height: 100%;
+      padding-top: 0.5rem;
+      // max-width: 300px;
+      // width: auto;
+      // height: auto;
+      // position: relative;
+      // z-index: 1;
+      // transform: none;
+      // animation: none;
+    }
+  }
+
+  &_logo,
+  &_projectsTitle,
+  &_search,
+  &_projects {
+    margin-bottom: 2.5rem;
+  }
+
+  &_addProject {
+    display: flex !important;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.5rem;
+
+    &:hover {
+      filter: brightness(95%);
+    }
+
+    &Text {
+      margin-right: 1rem;
+    }
+  }
+
+  &_signout {
+    background-color: transparent !important;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #e2e2e2 !important;
+    }
+  }
+
+  &_chevron {
+    margin-right: 0.5rem;
+  }
+}

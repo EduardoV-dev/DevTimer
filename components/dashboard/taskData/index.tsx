@@ -10,10 +10,7 @@ interface Props {
 
 const TaskData: React.FC<Props> = (props): JSX.Element => {
   return (
-    <Container
-      className={s.taskData}
-      card='true'
-    >
+    <Container className={s.taskData} card='true'>
       <Container className={s.taskData_data}>
         <PanelHead type='task' />
         <ProjectInfo
@@ -34,7 +31,7 @@ const TaskData: React.FC<Props> = (props): JSX.Element => {
           link='true'
         />
       </Container>
-      <Container>
+      <Container className={s.taskData_timer}>
         <TaskTimer />
       </Container>
     </Container>

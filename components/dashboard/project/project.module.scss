@@ -1,0 +1,48 @@
+.project {
+  display: flex;
+  background-color: #fff !important;
+  padding: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  user-select: none;
+
+  &:hover {
+    padding: 0.6rem 0.5rem;
+    margin: 0.5rem auto;
+  }
+  
+  &_active {
+    padding: 0.6rem 0.5rem;
+    background-color: #3c589f !important;
+    transform: scaleY(1.1);
+    position: relative;
+    pointer-events: none;
+  }
+
+  &_active::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 4px;
+    background-color: #2FB48C;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: setActive 0.3s ease forwards;
+
+    @keyframes setActive {
+      100% {
+        width: 25%;
+      }
+    }
+  }
+
+  &_active p {
+    color: #f2f2f2;
+  }
+
+  &_active svg path {
+    stroke: #f2f2f2;
+  }
+}

@@ -1,6 +1,6 @@
-.tasksList {
-  margin-top: 1rem !important;
+@import '../../../styles/responsive';
 
+.tasksList {
   &_head {
     margin: 0;
   }
@@ -17,5 +17,13 @@
   &_list {
     max-height: 22.5rem;
     overflow-y: auto;
+
+    @include responsive(lg) {
+      max-height: 11.5rem;
+    }
+
+    @include responsive(xl) {
+      max-height: 30rem;
+    }
   }
 }

@@ -14,3 +14,4 @@ export { default as TaskTodoIcon } from './taskTodo';
 export { default as TasksIcon } from './tasks';
 export { default as TodoListIcon } from './todoList';
 export { default as LoadingIcon } from './loading';
+export { default as MenuToggleIcon } from './menuToggle';

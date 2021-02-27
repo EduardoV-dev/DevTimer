@@ -54,7 +54,6 @@ export const getFormGroup = (type: FormGroupType): Component => {
 }
 
 export const getPanelHeadActions = (type: PanelHeadActions): Component => ({
-  text: capitalize(type),
   component: type === 'delete' ? DeleteIcon : EditIcon,
 });
 
@@ -66,3 +65,13 @@ export const getTaskStatusTag = (type: TaskStatusType): string =>
 
 export const getPanelHeadType = (type: PanelHeadType): string =>
   type === 'project' ? 'Project:' : 'Task:';
+
+export const handleBackdrop = (menuState: boolean): void => {
+  if (menuState) {
+    document.querySelector('body').style.height = '100vh';
+    document.querySelector('body').style.overflow = 'hidden';
+  } else {
+    document.querySelector('body').style.height = 'auto';
+    document.querySelector('body').style.overflow = 'auto';
+  }
+}

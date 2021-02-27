@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
-import { Avatar, Titles } from '../../../../models/interfaces/components';
+import { Avatar, Bold, Titles } from '../../../../models/interfaces/components';
 import { Boolean, TaskStatusType } from '../../../../models/types/components';
 
-interface Props extends Avatar, Titles {
+interface Props extends Avatar, Titles, Bold {
   fontFamily?: 'Raleway' | 'Montserrat';
   fontColor?: string;
   type?: TaskStatusType;
@@ -16,7 +16,7 @@ export const SpanComp = styled.span<Props>`
   'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: ${({ fontSize }) => fontSize || '1rem'};
   color: ${({ fontColor, theme }) => fontColor || theme.dark};
-  font-weight: bold;
+  font-weight: ${({ bold }) => bold === 'false' ? 'regular' : 'bold'};
 
   ${({ type }) => type === 'total' && css`
     text-decoration: underline;

@@ -1,0 +1,24 @@
+@import '../../../styles/responsive';
+
+.menuToggler {
+  position: fixed;
+  z-index: 1;
+  width: 3rem;
+  height: 3rem;
+  bottom: 8%;
+  right: 10%;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @include responsive(lg) {
+    display: none;
+  }
+}
