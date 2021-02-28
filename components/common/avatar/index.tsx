@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../models/interfaces/redux';
+import { User } from '../../../models/interfaces/dashboard';
+import { RootState } from '../../../models/interfaces/general';
+import { getAvatarPictureURL } from '../../../utils/dashboard';
 import { Img, Span } from '../../ui';
 import s from './avatar.module.scss';
 
@@ -8,6 +10,9 @@ interface Props {}
 
 const Avatar: React.FC<Props> = (): JSX.Element => {
   const { user } = useSelector((state: RootState) => state.auth);
+  if (!user) return null;
+  const profile: User = useMemo(() => getAvatarPictureURL(user), [user]);
+  const { displayName, photoURL } = profile;
 
   return (
     <>
@@ -15,9 +20,9 @@ const Avatar: React.FC<Props> = (): JSX.Element => {
         fontFamily='Montserrat'
         className={s.avatar_username}
         fontColor={({ theme }) => theme.primary}
-      >Eduardo Varela</Span>
+      >{displayName}</Span>
       <Img
-        src='https://placekitten.com/250'
+        src={photoURL}
         alt='Avatar image'
         className={s.avatar_userimage}
       />

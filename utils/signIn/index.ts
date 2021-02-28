@@ -8,7 +8,7 @@ const signIn = (provider: Provider): Promise<any> =>
   provider === 'facebook' ? signInWithFacebook() : signInWithGithub();
 
 const saveUserFacebookUserImageInLS = (userImage: string): void =>
-  localStorage.setItem('user-image', userImage);
+  localStorage.setItem(process.env.NEXT_PUBLIC_LS_PICTURE_KEY, userImage);
 
 const extractFacebookUserImage = (user: any) =>
   user.additionalUserInfo.profile.picture.data.url;

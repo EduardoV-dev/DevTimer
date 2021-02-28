@@ -1,6 +1,7 @@
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../models/interfaces/redux';
+import { RootState } from '../../../models/interfaces/general';
 import { handleUserAuthChange } from '../../../utils/general';
 import {
   Header,
@@ -14,19 +15,25 @@ import {
 } from '../../dashboard';
 import { Grid } from '../../ui';
 
-interface Props { }
+interface Props {}
 
-const DashboardLayout: React.FC<Props> = (props): JSX.Element => {
+const DashboardLayout: React.FC<Props> = (): JSX.Element => {
   const dispatch = useDispatch();
+  const { push } = useRouter();
   const {
     ui: { isUiLoading },
-    // auth: { user }
+    auth: { user },
   } = useSelector((state: RootState) => state);
   useEffect(() => handleUserAuthChange(dispatch), []);
 
+  if (user === null) {
+    push('/');
+    return null;
+  }
+
   return (
     <>
-      {!isUiLoading && (
+      {(!isUiLoading && user !== null) && (
         <Grid parent wrap='nowrap'>
           <Grid child xs={0} lg={3} xl={2}>
             <Menu type='aside' />
