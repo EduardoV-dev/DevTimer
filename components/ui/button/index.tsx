@@ -7,8 +7,6 @@ interface Props extends ButtonProps {
   children: (string | JSX.Element)[] | string;
   type: 'submit' | 'button';
   className?: string;
-  loading?: string;
-  disabled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -17,7 +15,7 @@ const Button: React.FC<Props> = (props): JSX.Element => {
   
   return (
     <>
-      {loading ? (
+      {loading == 'true' ? (
         <Btn {...props}>
           <LoadingIcon 
             width={32}

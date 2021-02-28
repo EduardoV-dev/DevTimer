@@ -1,11 +1,21 @@
-import { Action, State } from "../../../models/interfaces/ui";
-import { CLOSE_MENU, OPEN_MENU } from '../../types/ui';
+import { Action, UiState } from "../../../models/interfaces/general";
+import {
+  OPEN_MENU,
+  TOGGLE_MODAL,
+  CLOSE_MENU,
+  BUTTON_FACEBOOK_LOADING,
+  BUTTON_GITHUB_LOADING,
+  UI_LOADING,
+} from '../../types/ui';
 
-const initialState = {
+const initialState: UiState = {
+  isUiLoading: true,
   isMenuDisplayed: false,
+  isFacebookButtonLoading: false,
+  isGithubButtonLoading: false,
 }
 
-const uiReducer = (state: State = initialState, action: Action) => {
+const uiReducer = (state: UiState = initialState, action: Action): UiState => {
   switch (action.type) {
     case OPEN_MENU:
       return {
@@ -16,6 +26,21 @@ const uiReducer = (state: State = initialState, action: Action) => {
       return {
         ...state,
         isMenuDisplayed: false,
+      }
+    case BUTTON_FACEBOOK_LOADING:
+      return {
+        ...state,
+        isFacebookButtonLoading: action.payload,
+      }
+    case BUTTON_GITHUB_LOADING:
+      return {
+        ...state,
+        isGithubButtonLoading: action.payload,
+      }
+    case UI_LOADING: 
+      return {
+        ...state,
+        isUiLoading: action.payload,
       }
     default:
       return { ...state };

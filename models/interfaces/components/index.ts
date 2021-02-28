@@ -4,7 +4,8 @@ export interface ButtonProps {
   primary?: Boolean;
   facebook?: Boolean;
   github?: Boolean;
-  loading?: string;
+  loading?: Boolean;
+  disabled?: boolean;
   fontColor?: any;
   block?: Boolean;
 }

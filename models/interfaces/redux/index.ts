@@ -1,5 +1,6 @@
-import { State as uiState } from '../ui';
+import { UiState, AuthState } from '../general';
 
 export interface RootState { 
-  ui: uiState;
+  ui: UiState;
+  auth: AuthState;
 }

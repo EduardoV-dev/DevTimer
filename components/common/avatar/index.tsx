@@ -1,13 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../models/interfaces/redux';
 import { Img, Span } from '../../ui';
 import s from './avatar.module.scss';
 
-interface Props {
-  src?: string;
-  alt?: string;
-}
+interface Props {}
 
-const Avatar: React.FC<Props> = (props): JSX.Element => {
+const Avatar: React.FC<Props> = (): JSX.Element => {
+  const { user } = useSelector((state: RootState) => state.auth);
+
   return (
     <>
       <Span
