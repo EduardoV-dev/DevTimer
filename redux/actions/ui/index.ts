@@ -4,6 +4,8 @@ import {
   CLOSE_MENU,
   BUTTON_FACEBOOK_LOADING,
   BUTTON_GITHUB_LOADING,
+  BUTTON_ADD_PROJECT_LOADING,
+  BUTTON_ADD_TASK_LOADING,
   UI_LOADING,
 } from '../../types/ui';
 import { Action } from '../../../models/interfaces/general';
@@ -28,6 +30,16 @@ export const buttonFacebookLoadingAction = (loading: boolean): Action => ({
 
 export const buttonGithubLoadingAction = (loading: boolean): Action => ({
   type: BUTTON_GITHUB_LOADING,
+  payload: loading,
+});
+
+export const buttonAddProjectLoadingAction = (loading: boolean): Action => ({
+  type: BUTTON_ADD_PROJECT_LOADING,
+  payload: loading,
+});
+
+export const buttonAddTaskLoadingAction = (loading: boolean): Action => ({
+  type: BUTTON_ADD_TASK_LOADING,
   payload: loading,
 });
 

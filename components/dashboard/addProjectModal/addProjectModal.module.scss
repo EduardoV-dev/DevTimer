@@ -1,0 +1,17 @@
+@import '../../../styles/responsive';
+
+.addProjectModal {
+  position: fixed;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  padding: 1rem;
+  width: 90%;
+
+  @include responsive(sm) {
+    width: 100%;
+    max-width: 31.25rem;
+  }
+}

@@ -8,4 +8,5 @@ export const light = {
   secondary: '#3C589F',
   secondaryHover: '#3F69D3',
   todo: '#C7D431',
+  danger: '#FF858D',
 };

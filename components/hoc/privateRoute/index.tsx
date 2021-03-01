@@ -2,29 +2,46 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../models/interfaces/general';
-import { handleUserAuthChange } from '../../../utils/general';
+import { handlePrivateRouting, handleUserAuthChange } from '../../../utils/general';
 
-interface Props {
-  redirectTo?: string;
-}
+interface Props { }
 
-const PrivateRoute = (Component: React.FC) => (props: Props): JSX.Element => {
+const PrivateRoute = (Component: any) => (props: Props): JSX.Element => {
   const dispatch = useDispatch();
-  const { push } = useRouter();
+  const { push, pathname } = useRouter();
   const {
     ui: { isUiLoading },
     auth: { user },
   } = useSelector((state: RootState) => state);
 
-  useEffect(() => handleUserAuthChange(dispatch), []);
+  useEffect(() => {
+    handleUserAuthChange(dispatch);
+    if (user !== undefined)
+      handlePrivateRouting({
+        pathname,
+        user,
+        push,
+      });
+  }, [user]);
 
-  if (user) {
-    push('/dashboard');
-    return null;
+  switch (pathname) {
+    case '/':
+      return (
+        <>
+          {(!isUiLoading && user === null) && (
+            <Component {...props} />
+          )}
+        </>
+      );
+    case '/dashboard':
+      return (
+        <>
+          {(!isUiLoading && user !== null) && (
+            <Component {...props} />
+          )}
+        </>
+      );
   }
-  return (  
-    <Component {...props} />
-  );
 }
 
 export default PrivateRoute;

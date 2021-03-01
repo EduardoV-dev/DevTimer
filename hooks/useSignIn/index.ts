@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleButtonLoading, handleSignIn } from '../../utils/signIn';
-import { Provider } from '../../models/types/signIn';
-import { RootState } from '../../models/interfaces/redux';
+import { Provider } from '../../models/types/general';
+import { RootState } from '../../models/interfaces/general';
 
 const useSignIn = () => {
   const dispatch = useDispatch();

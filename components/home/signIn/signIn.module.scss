@@ -76,5 +76,17 @@
 
   &_icon {
     margin-right: 0.8rem;
+
+    @include responsive(lg) {
+      flex-basis: 2rem;
+      margin-left: 1.8rem;
+    }
+  }
+
+  &_text {
+    @include responsive(lg) {
+      flex: 1;
+      text-align: left;
+    }
   }
 }

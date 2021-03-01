@@ -66,8 +66,8 @@ export const getTaskStatusTag = (type: TaskStatusType): string =>
 export const getPanelHeadType = (type: PanelHeadType): string =>
   type === 'project' ? 'Project:' : 'Task:';
 
-export const handleBackdrop = (menuState: boolean): void => {
-  if (menuState) {
+export const handleBackdrop = (state: boolean): void => {
+  if (state) {
     document.querySelector('body').style.height = '100vh';
     document.querySelector('body').style.overflow = 'hidden';
   } else {

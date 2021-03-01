@@ -3,7 +3,7 @@ import useSignIn from '../../../hooks/useSignIn';
 import { handleSignIn } from '../../../utils/signIn';
 import { Logo } from '../../common';
 import { FacebookIcon, GithubIcon } from '../../icons';
-import { Container, Title, Subtitle, Button } from '../../ui';
+import { Container, Title, Subtitle, Button, Span } from '../../ui';
 import s from './signIn.module.scss';
 
 interface Props {
@@ -11,10 +11,10 @@ interface Props {
 }
 
 const SignIn: React.FC<Props> = (): JSX.Element => {
-  const { 
+  const {
     isFacebookButtonLoading,
     isGithubButtonLoading,
-    signIn 
+    signIn
   } = useSignIn();
 
   return (
@@ -38,7 +38,10 @@ const SignIn: React.FC<Props> = (): JSX.Element => {
         disabled={isFacebookButtonLoading}
       >
         <FacebookIcon width={32} height={32} className={s.signIn_icon} />
-        Sign in with Facebook
+        <Span
+          fontColor={({ theme }) => theme.light}
+          className={s.signIn_text}
+        >Sign in with Facebook</Span>
       </Button>
       <Button
         type='button'
@@ -49,7 +52,10 @@ const SignIn: React.FC<Props> = (): JSX.Element => {
         disabled={isGithubButtonLoading}
       >
         <GithubIcon width={32} height={32} className={s.signIn_icon} />
-        Sign in with Github
+        <Span
+          fontColor={({ theme }) => theme.light}
+          className={s.signIn_text}
+        >Sign in with Github</Span>
       </Button>
     </Container>
   );

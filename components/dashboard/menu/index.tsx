@@ -9,7 +9,8 @@ import { Button, Container, Span, Title, Wrapper } from '../../ui';
 import cn from 'classnames';
 import s from './menu.module.scss';
 import { useRouter } from 'next/router';
-import { handleSignOut } from '../../../services/api/dashboard';
+import { handleSignOut } from '../../../utils/dashboard';
+import { handleModal } from '../../../utils/ui';
 
 interface Props {
   type: 'aside' | 'float';
@@ -43,10 +44,11 @@ const Menu: React.FC<Props> = ({
             type='button'
             fontColor={({ theme }) => theme.dark}
             className={s.menu_addProject}
+            onClick={() => handleModal(true, dispatch)}
           >
             <Span bold='false' className={s.menu_addProjectText}>
               New Project
-          </Span>
+            </Span>
             <AddProjectIcon width={54} height={54} />
           </Button>
           <Title fontSize='1.25rem' className={s.menu_projectsTitle}>

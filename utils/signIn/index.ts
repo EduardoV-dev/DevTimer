@@ -1,7 +1,7 @@
 import { signInWithFacebook, signInWithGithub } from "../../services/api/signIn";
 import { pipe } from "../general";
 import { Dispatch } from "redux";
-import { Provider } from "../../models/types/signIn";
+import { Provider } from "../../models/types/general";
 import { buttonFacebookLoadingAction, buttonGithubLoadingAction } from "../../redux/actions/ui";
 
 const signIn = (provider: Provider): Promise<any> =>
