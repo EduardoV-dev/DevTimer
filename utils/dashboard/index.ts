@@ -1,11 +1,11 @@
 import { Dispatch } from "redux";
 import { Compose, ProjectErrors, User } from "../../models/interfaces/dashboard";
 import { saveProjectErrorsAction } from "../../redux/actions/dashboard";
-import { buttonAddProjectLoadingAction, toggleModalAction, uiLoadingAction } from "../../redux/actions/ui";
+import { showNotificationAction, toggleModalAction, uiLoadingAction } from "../../redux/actions/ui";
 import { createNewProject } from "../../services/api/dashboard";
 import { LS_IMAGE } from "../../services/consts";
 import { auth } from "../../services/firebase";
-import { trimFields } from "../general";
+import { handleButtonLoading, trimFields } from "../general";
 
 export const handleSignOut = (push: any, dispatch: Dispatch<any>) =>
   auth().signOut()
@@ -45,12 +45,20 @@ export const addProject = ({ errors, credentials, dispatch }: Compose) => {
 
   dispatch(saveProjectErrorsAction({}));
 
-  console.log(credentials);
-
   createNewProject(credentials)
-    .catch((err: any) => console.log(err))
+    .then(() =>
+      dispatch(showNotificationAction({
+        type: 'success',
+        title: 'New project created!',
+        message: 'The project DevTimer was created successfully',
+      })))
+    .catch((err: any) => dispatch(showNotificationAction({
+      type: 'error',
+      title: 'Error',
+      message: err.message,
+    })))
     .finally(() => {
-      dispatch(buttonAddProjectLoadingAction(false));
+      handleButtonLoading('addProject', false, dispatch);
       dispatch(toggleModalAction(false));
     });
 }

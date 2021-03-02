@@ -1,6 +1,5 @@
 import React from 'react';
 import useSignIn from '../../../hooks/useSignIn';
-import { handleSignIn } from '../../../utils/signIn';
 import { Logo } from '../../common';
 import { FacebookIcon, GithubIcon } from '../../icons';
 import { Container, Title, Subtitle, Button, Span } from '../../ui';
@@ -12,8 +11,8 @@ interface Props {
 
 const SignIn: React.FC<Props> = (): JSX.Element => {
   const {
-    isFacebookButtonLoading,
-    isGithubButtonLoading,
+    facebook,
+    github,
     signIn
   } = useSignIn();
 
@@ -34,8 +33,8 @@ const SignIn: React.FC<Props> = (): JSX.Element => {
         facebook='true'
         className={s.signIn_button}
         onClick={() => signIn('facebook')}
-        loading={isFacebookButtonLoading ? 'true' : 'false'}
-        disabled={isFacebookButtonLoading}
+        loading={facebook ? 'true' : 'false'}
+        disabled={facebook}
       >
         <FacebookIcon width={32} height={32} className={s.signIn_icon} />
         <Span
@@ -48,8 +47,8 @@ const SignIn: React.FC<Props> = (): JSX.Element => {
         github='true'
         className={s.signIn_button}
         onClick={() => signIn('github')}
-        loading={isGithubButtonLoading ? 'true' : 'false'}
-        disabled={isGithubButtonLoading}
+        loading={github ? 'true' : 'false'}
+        disabled={github}
       >
         <GithubIcon width={32} height={32} className={s.signIn_icon} />
         <Span

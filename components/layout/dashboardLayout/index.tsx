@@ -12,6 +12,7 @@ import {
   AddProjectModal,
 } from '../../dashboard';
 import { Grid } from '../../ui';
+import { Notification } from '../../common';
 
 interface Props {}
 
@@ -46,6 +47,7 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
       <MenuToggler />
       <Menu type='float' />
       <AddProjectModal />
+      <Notification />
     </Grid>
   );
 }

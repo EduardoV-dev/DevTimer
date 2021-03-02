@@ -1,0 +1,24 @@
+.notification {
+  position: fixed;
+  z-index: 1;
+  bottom: 10%;
+  right: -100%;
+  border-radius: 5px;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+  
+  &_true {
+    right: 0;
+  }
+
+  &_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &_x {
+    font-size: 1.5rem !important;
+    cursor: pointer;
+  }
+}

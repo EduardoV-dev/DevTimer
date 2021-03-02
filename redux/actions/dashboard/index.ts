@@ -1,8 +1,14 @@
 import {
+  SAVE_PROJECTS,
   SAVE_PROJECT_ERRORS,
 } from "../../types/dashboard";
 import { ProjectErrors } from "../../../models/interfaces/dashboard";
 import { Action } from "../../../models/interfaces/general";
+
+export const saveProjectsAction = (projects: any): Action => ({
+  type: SAVE_PROJECTS,
+  payload: projects,
+});
 
 export const saveProjectErrorsAction = (errors: ProjectErrors): Action => ({
   type: SAVE_PROJECT_ERRORS,

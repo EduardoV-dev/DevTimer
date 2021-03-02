@@ -1,29 +1,27 @@
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleButtonLoading, handleSignIn } from '../../utils/signIn';
+import { handleSignIn } from '../../utils/signIn';
 import { Provider } from '../../models/types/general';
 import { RootState } from '../../models/interfaces/general';
+import { handleButtonLoading } from '../../utils/general';
 
 const useSignIn = () => {
   const dispatch = useDispatch();
-  const {
-    isFacebookButtonLoading,
-    isGithubButtonLoading
-  } = useSelector((state: RootState) => state.ui);
+  const { isButtonLoading: { facebook, github } } = useSelector((state: RootState) => state.ui);
   const { push } = useRouter();
 
   const signIn = (provider: Provider): void => {
-    dispatch(handleButtonLoading(provider, true));
+    handleButtonLoading(provider, true, dispatch);
     handleSignIn(provider)
       .then(() => {
-        dispatch(handleButtonLoading(provider, false));
+        handleButtonLoading(provider, false, dispatch);
         push('/dashboard');
       });
   }
 
-  return { 
-    isFacebookButtonLoading,
-    isGithubButtonLoading,
+  return {
+    facebook,
+    github,
     signIn,
   };
 }

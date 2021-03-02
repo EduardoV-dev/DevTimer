@@ -1,8 +1,8 @@
 import { Dispatch } from "redux";
 import { Compose, Project } from "../../models/interfaces/dashboard";
-import { TrimType } from "../../models/types/general";
+import { Provider, TrimType } from "../../models/types/general";
 import { saveUserAction } from "../../redux/actions/auth";
-import { uiLoadingAction } from "../../redux/actions/ui";
+import { buttonLoadingAction, uiLoadingAction } from "../../redux/actions/ui";
 import { auth } from "../../services/firebase";
 
 type Pipe = any[];
@@ -60,3 +60,6 @@ export const trimFields = (type: TrimType, credentials: Project): Project => {
       return;
   }
 }
+
+export const handleButtonLoading = (provider: Provider, loadingState: boolean, dispatch: Dispatch<any>) =>
+  dispatch(buttonLoadingAction({ provider, loadingState }));

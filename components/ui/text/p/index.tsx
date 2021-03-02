@@ -5,6 +5,7 @@ import { P as Pgph } from './p.component';
 interface Props extends Bold {
   children: (JSX.Element | string)[] | string;
   className?: string;
+  fontColor?: any;
 }
 
 const P: React.FC<Props> = (props): JSX.Element => {

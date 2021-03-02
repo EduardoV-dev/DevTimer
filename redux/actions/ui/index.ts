@@ -2,13 +2,13 @@ import {
   OPEN_MENU,
   TOGGLE_MODAL,
   CLOSE_MENU,
-  BUTTON_FACEBOOK_LOADING,
-  BUTTON_GITHUB_LOADING,
-  BUTTON_ADD_PROJECT_LOADING,
-  BUTTON_ADD_TASK_LOADING,
+  BUTTON_LOADING,
   UI_LOADING,
+  SHOW_NOTIFICATION,
+  HIDE_NOTIFICATION,
 } from '../../types/ui';
-import { Action } from '../../../models/interfaces/general';
+import { Notification } from '../../../models/interfaces/general';
+import { Action, ButtonLoading } from '../../../models/interfaces/general';
 
 export const toggleModalAction = (modalState: boolean): Action => ({
   type: TOGGLE_MODAL,
@@ -23,27 +23,21 @@ export const closeMenuAction = (): Action => ({
   type: CLOSE_MENU,
 });
 
-export const buttonFacebookLoadingAction = (loading: boolean): Action => ({
-  type: BUTTON_FACEBOOK_LOADING,
-  payload: loading,
-});
-
-export const buttonGithubLoadingAction = (loading: boolean): Action => ({
-  type: BUTTON_GITHUB_LOADING,
-  payload: loading,
-});
-
-export const buttonAddProjectLoadingAction = (loading: boolean): Action => ({
-  type: BUTTON_ADD_PROJECT_LOADING,
-  payload: loading,
-});
-
-export const buttonAddTaskLoadingAction = (loading: boolean): Action => ({
-  type: BUTTON_ADD_TASK_LOADING,
-  payload: loading,
+export const buttonLoadingAction = (loadingArgs: ButtonLoading): Action => ({
+  type: BUTTON_LOADING,
+  payload: loadingArgs,
 });
 
 export const uiLoadingAction = (loading: boolean): Action => ({
   type: UI_LOADING,
   payload: loading,
+});
+
+export const showNotificationAction = (notification: Notification = null): Action => ({
+  type: SHOW_NOTIFICATION,
+  payload: notification,
+});
+
+export const hideNotificationAction = (): Action => ({
+  type: HIDE_NOTIFICATION,
 });
