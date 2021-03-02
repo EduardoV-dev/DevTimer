@@ -11,6 +11,9 @@ export interface Project {
   name: string;
   description: string;
   githubRepositoryLink?: string;
+  createdAt?: number;
+  lastestUpdate?: number;
+  userId?: string;
 }
 
 export interface AddProject {

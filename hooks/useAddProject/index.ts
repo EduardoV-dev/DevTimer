@@ -14,21 +14,19 @@ const useAddProject = (initialState: Project): AddProject => {
     setProjectData({ ...projectData, [target.name]: target.value });
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    dispatch(buttonAddProjectLoadingAction(true));
+
     const args: Compose = {
       e,
       credentials: projectData,
       dispatch,
     }
 
-    dispatch(buttonAddProjectLoadingAction(true));
-
     pipe(
       preventDefault,
       checkProjectData,
       addProject,
     )(args);
-
-    dispatch(buttonAddProjectLoadingAction(false));
   }
 
   return { projectData, handleOnChange, handleOnSubmit };

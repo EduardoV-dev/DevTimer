@@ -2,11 +2,12 @@ import { Dispatch } from "redux";
 import { Compose, Project } from "../../models/interfaces/dashboard";
 import { TrimType } from "../../models/types/general";
 import { saveUserAction } from "../../redux/actions/auth";
-import { buttonAddProjectLoadingAction, uiLoadingAction } from "../../redux/actions/ui";
+import { uiLoadingAction } from "../../redux/actions/ui";
 import { auth } from "../../services/firebase";
 
 type Pipe = any[];
 type Function = (x: any) => any;
+
 interface PrivateRoutingConfig {
   pathname: string;
   user: any;
@@ -53,6 +54,7 @@ export const trimFields = (type: TrimType, credentials: Project): Project => {
         name: name.trim(),
         description: description.trim(),
         githubRepositoryLink: githubRepositoryLink.trim(),
+        userId: credentials.userId,
       }
     default:
       return;

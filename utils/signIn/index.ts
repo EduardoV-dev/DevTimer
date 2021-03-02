@@ -3,12 +3,13 @@ import { pipe } from "../general";
 import { Dispatch } from "redux";
 import { Provider } from "../../models/types/general";
 import { buttonFacebookLoadingAction, buttonGithubLoadingAction } from "../../redux/actions/ui";
+import { LS_IMAGE } from "../../services/consts";
 
 const signIn = (provider: Provider): Promise<any> =>
   provider === 'facebook' ? signInWithFacebook() : signInWithGithub();
 
 const saveUserFacebookUserImageInLS = (userImage: string): void =>
-  localStorage.setItem(process.env.NEXT_PUBLIC_LS_PICTURE_KEY, userImage);
+  localStorage.setItem(LS_IMAGE, userImage);
 
 const extractFacebookUserImage = (user: any) =>
   user.additionalUserInfo.profile.picture.data.url;

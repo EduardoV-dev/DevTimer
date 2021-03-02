@@ -12,15 +12,20 @@ interface Props { }
 const AddProjectModal: React.FC<Props> = (props): JSX.Element => {
   const dispatch = useDispatch();
   const {
-    ui: { isModalDisplayed },
+    ui: {
+      isModalDisplayed,
+      isAddProjectButtonLoading
+    },
     dashboard: { projectErrors },
+    auth: { user: { uid } },
   } = useSelector((state: RootState) => state);
   const { projectData, handleOnChange, handleOnSubmit } = useAddProject({
     name: '',
     description: '',
     githubRepositoryLink: '',
+    userId: uid,
   });
-  
+
   const { name, description, githubRepositoryLink } = projectData;
 
   return (
@@ -62,7 +67,12 @@ const AddProjectModal: React.FC<Props> = (props): JSX.Element => {
                 onChange={handleOnChange}
                 error={projectErrors.githubRepositoryLink}
               />
-              <Button type='submit' primary='true'>
+              <Button
+                type='submit'
+                primary='true'
+                disabled={isAddProjectButtonLoading}
+                loading={isAddProjectButtonLoading ? 'true' : 'false'}
+              >
                 Create project
               </Button>
             </Form>
