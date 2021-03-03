@@ -7,7 +7,7 @@ import { auth, db } from "../../firebase";
 export const signOut = () =>
   auth().signOut();
 
-export const createNewProject = (project: Project): Promise<any> => {
+export const createNewProject = (project: Project) => {
   const now: number = Date.now();
 
   const newProject: Project = {
@@ -15,13 +15,14 @@ export const createNewProject = (project: Project): Promise<any> => {
     createdAt: now,
     lastestUpdate: now,
   }
+
   return db.collection(PROJECTS).add(newProject);
 }
 
-export const getProjects = (dispatch: Dispatch<any>): void => {
-  db.collection(PROJECTS).onSnapshot((snapshot: any) => {
-    const projects = snapshot.map((project: any) => ({ id: project.id, ...project }));
+export const getProjectsByUserId = (uid: string, dispatch: Dispatch<any>): void => {
+  if (!uid) return;
+  db.collection(PROJECTS).where('uid', '==', uid).onSnapshot((snapshot) => {
+    const projects = snapshot.docs.map((project) => ({id: project.id, ...project.data()}));
     dispatch(saveProjectsAction(projects));
-    console.log(projects);
   });
 }

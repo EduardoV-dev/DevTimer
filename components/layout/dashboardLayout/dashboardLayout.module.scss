@@ -1,0 +1,14 @@
+.dashboardLayout {
+  &_initialView {
+    max-width: 30rem;
+    margin: 0 auto !important;
+  }
+
+  &_title {
+    margin-bottom: 3rem;
+  }
+
+  &_illustration {
+    max-width: 500px;
+  }
+}

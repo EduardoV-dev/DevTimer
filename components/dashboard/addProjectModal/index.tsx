@@ -14,7 +14,9 @@ const AddProjectModal: React.FC<Props> = (props): JSX.Element => {
   const {
     ui: {
       isModalDisplayed,
-      isAddProjectButtonLoading
+      isButtonLoading: {
+        addProject,
+      },
     },
     dashboard: { projectErrors },
     auth: { user: { uid } },
@@ -23,7 +25,7 @@ const AddProjectModal: React.FC<Props> = (props): JSX.Element => {
     name: '',
     description: '',
     githubRepositoryLink: '',
-    userId: uid,
+    uid,
   });
 
   const { name, description, githubRepositoryLink } = projectData;
@@ -70,8 +72,8 @@ const AddProjectModal: React.FC<Props> = (props): JSX.Element => {
               <Button
                 type='submit'
                 primary='true'
-                disabled={isAddProjectButtonLoading}
-                loading={isAddProjectButtonLoading ? 'true' : 'false'}
+                disabled={addProject}
+                loading={addProject ? 'true' : 'false'}
               >
                 Create project
               </Button>

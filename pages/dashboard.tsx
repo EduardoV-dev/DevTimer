@@ -6,7 +6,7 @@ interface Props {
 }
 
 const Dashboard: React.FC<Props> = (): JSX.Element => {
-  return (  
+  return (
     <DashboardLayout />
   );
 }

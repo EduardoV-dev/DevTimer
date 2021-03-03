@@ -7,10 +7,12 @@ import cn from 'classnames';
 
 interface Props {
   active?: Boolean;
+  projectName: string;
 }
 
 const Project: React.FC<Props> = ({
   active,
+  projectName,
 }): JSX.Element => {
   const classNames = cn(s.project, {
     [s.project_active]: active,
@@ -18,7 +20,7 @@ const Project: React.FC<Props> = ({
 
   return (  
     <Li className={classNames}>
-      <P>Another project more</P>
+      <P>{projectName}</P>
       <ChevronIcon rotate='true' width={12} height={12} />
     </Li>
   );

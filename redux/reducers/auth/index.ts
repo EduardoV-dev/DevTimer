@@ -2,7 +2,7 @@ import { Action, AuthState } from "../../../models/interfaces/general";
 import { SAVE_USER } from "../../types/auth";
 
 const initialState: AuthState = {
-  user: undefined,
+  user: null,
 }
 
 const authReducer = (state: AuthState = initialState, action: Action): AuthState => {

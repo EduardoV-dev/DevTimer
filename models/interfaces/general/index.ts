@@ -1,6 +1,6 @@
 import { NotificationType } from "../../types/components";
 import { Provider } from "../../types/general";
-import { ProjectErrors } from "../dashboard";
+import { Project, ProjectErrors } from "../dashboard";
 
 export interface RootState {
   ui: UiState;
@@ -33,7 +33,7 @@ export interface AuthState {
 }
 
 export interface DashboardState {
-  projects: [];
+  projects: Project[];
   projectErrors: ProjectErrors;
 }
 

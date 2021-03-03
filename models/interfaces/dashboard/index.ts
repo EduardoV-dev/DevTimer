@@ -13,7 +13,8 @@ export interface Project {
   githubRepositoryLink?: string;
   createdAt?: number;
   lastestUpdate?: number;
-  userId?: string;
+  uid?: string;
+  id?: string;
 }
 
 export interface AddProject {

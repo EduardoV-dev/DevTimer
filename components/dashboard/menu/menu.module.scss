@@ -24,15 +24,9 @@
     display: none;
     @include responsive(lg) {
       display: block;
+      min-height: 100vh;
       height: 100%;
       padding-top: 0.5rem;
-      // max-width: 300px;
-      // width: auto;
-      // height: auto;
-      // position: relative;
-      // z-index: 1;
-      // transform: none;
-      // animation: none;
     }
   }
 
@@ -41,6 +35,10 @@
   &_search,
   &_projects {
     margin-bottom: 2.5rem;
+  }
+
+  &_projects {
+    border-radius: 5px;
   }
 
   &_addProject {

@@ -54,7 +54,7 @@ export const trimFields = (type: TrimType, credentials: Project): Project => {
         name: name.trim(),
         description: description.trim(),
         githubRepositoryLink: githubRepositoryLink.trim(),
-        userId: credentials.userId,
+        uid: credentials.uid,
       }
     default:
       return;

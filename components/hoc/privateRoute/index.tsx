@@ -7,6 +7,8 @@ import { handlePrivateRouting, handleUserAuthChange } from '../../../utils/gener
 interface Props { }
 
 const PrivateRoute = (Component: any) => (props: Props): JSX.Element => {
+  Component.displayName = `withPrivateRoute(${Component.displayName || Component.name})`;
+ 
   const dispatch = useDispatch();
   const { push, pathname } = useRouter();
   const {
