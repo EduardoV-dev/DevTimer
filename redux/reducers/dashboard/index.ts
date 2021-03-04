@@ -1,12 +1,14 @@
 import { Action, DashboardState } from "../../../models/interfaces/general";
 import { 
   SAVE_PROJECTS,
-  SAVE_PROJECT_ERRORS
+  SAVE_PROJECT_ERRORS,
+  SELECT_PROJECT,
 } from "../../types/dashboard";
 
 const initialState: DashboardState = {
-  projects: [],
+  projects: null,
   projectErrors: {},
+  selectedProject: null,
 }
 
 const dashboardReducer = (state: DashboardState = initialState, action: Action): DashboardState => {
@@ -20,6 +22,11 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
         return {
           ...state,
           projects: action.payload,
+        }
+      case SELECT_PROJECT:
+        return {
+          ...state,
+          selectedProject: action.payload,
         }
     default:
       return { ...state };

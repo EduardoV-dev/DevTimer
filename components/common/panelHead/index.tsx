@@ -7,10 +7,12 @@ import s from './panelHead.module.scss';
 
 interface Props {
   type: PanelHeadType;
+  name: string;
 }
 
 const PanelHead: React.FC<Props> = ({
   type,
+  name,
 }): JSX.Element => {
   return (
     <Container className={s.panelHead}>
@@ -20,7 +22,7 @@ const PanelHead: React.FC<Props> = ({
           fontColor={({ theme }) => theme.primary}
           fontSize='1.25rem'
           className={s.panelHead_span}
-        >DevTimer</Span>
+        >{name}</Span>
       </Title>
       <Container>
         <Actions type='delete' />

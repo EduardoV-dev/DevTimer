@@ -8,7 +8,7 @@ interface Props {
 
 const Link: React.FC<Props> = (props): JSX.Element => {
   return (
-    <LinkComp {...props}  target='_blank' rel='noreferrer noopener' />
+    <LinkComp {...props} target='_blank' rel='noreferrer noopener' />
   )
 }
 

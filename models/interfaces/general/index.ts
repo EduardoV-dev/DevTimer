@@ -35,6 +35,7 @@ export interface AuthState {
 export interface DashboardState {
   projects: Project[];
   projectErrors: ProjectErrors;
+  selectedProject: null | Project;
 }
 
 export interface Action {

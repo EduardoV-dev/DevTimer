@@ -24,13 +24,11 @@ interface Props { }
 const DashboardLayout: React.FC<Props> = (): JSX.Element => {
   const dispatch = useDispatch();
   const {
-    dashboard: { projects },
+    dashboard: { selectedProject },
     auth: { user: { uid } },
   } = useSelector((state: RootState) => state);
 
   useEffect(() => getProjectsByUserId(uid, dispatch), []);
-
-  if (!projects) return null;
 
   return (
     <Grid parent wrap='nowrap'>
@@ -42,7 +40,7 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
           <Header />
         </Grid>
         <Grid parent xs={12} spacing='sm'>
-          {!projects.length ? (
+          {!selectedProject ? (
             <Container className={s.dashboardLayout_initialView}>
               <Wrapper>
                 <Headline className={s.dashboardLayout_title}>

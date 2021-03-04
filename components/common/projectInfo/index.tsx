@@ -19,10 +19,10 @@ const ProjectInfo: React.FC<Props> = ({
       <P bold='true' className={s.projectInfo_title}>{title}:</P>
       {link ? (
         <Link
-          href='https://github.com/EduardoV-dev/DevTimer/'
-        >https://github.com/EduardoV-dev/DevTimer/</Link>
+          href={description}
+        >{description}</Link>
       ) : (
-        <P>{description}</P>
+        <P>{!description ? 'No github link provided' : description}</P>
       )}
     </Container>
   );

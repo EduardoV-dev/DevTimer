@@ -1,31 +1,37 @@
 import React from 'react';
 import { Container } from '../../ui';
 import { PanelHead, ProjectInfo } from '../../common';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../models/interfaces/general';
+import { formatDate } from '../../../utils/dashboard';
 
 interface Props {
 
 }
 
 const ProjectData: React.FC<Props> = (props): JSX.Element => {
+  const { selectedProject } = useSelector((state: RootState) => state.dashboard);
+  const { name, description, createdAt, lastestUpdate, githubRepositoryLink, } = selectedProject;
+
   return (
     <Container card='true'>
-      <PanelHead type='project' />
+      <PanelHead type='project' name={name} />
       <ProjectInfo 
         title='Description'
-        description='Project description here lorem ipsum dolor sit ame asu madre'
+        description={description}
       />
       <ProjectInfo 
         title='Created at'
-        description='March 13rd 2021, 09:32am'
+        description={formatDate(createdAt)}
       />
       <ProjectInfo 
         title='Lastest update'
-        description='March 13rd 2021, 09:32am'
+        description={formatDate(lastestUpdate)}
       />
       <ProjectInfo 
         title='Github repository'
-        description='https://github.com/EduardoV-dev/Image-Finder'
-        link='true'
+        description={githubRepositoryLink}
+        link={!description ? 'false' : 'true'}
       />
     </Container>
   );

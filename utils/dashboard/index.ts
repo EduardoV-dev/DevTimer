@@ -1,16 +1,16 @@
 import { Dispatch } from "redux";
 import { Compose, ProjectErrors, User } from "../../models/interfaces/dashboard";
-import { saveProjectErrorsAction } from "../../redux/actions/dashboard";
+import { saveProjectErrorsAction, saveProjectsAction } from "../../redux/actions/dashboard";
 import { showNotificationAction, toggleModalAction, uiLoadingAction } from "../../redux/actions/ui";
-import { createNewProject } from "../../services/api/dashboard";
+import { createNewProject, signOut } from "../../services/api/dashboard";
 import { LS_IMAGE } from "../../services/consts";
-import { auth } from "../../services/firebase";
 import { handleButtonLoading, trimFields } from "../general";
 
 export const handleSignOut = (push: any, dispatch: Dispatch<any>) =>
-  auth().signOut()
+  signOut()
     .then(() => {
       dispatch(uiLoadingAction(true));
+      dispatch(saveProjectsAction(null));
       push('/');
     })
     .catch((err: any) => console.log(err.message));
@@ -33,8 +33,6 @@ export const checkProjectData = ({ credentials, dispatch }: Compose): Compose =>
     errors.name = 'The project name can not be empty!';
   if (description === '')
     errors.description = 'The description can not be empty!';
-  /* if (/^([A-Za-z0-9]+@|http(|s)\:\/\/)([A-Za-z0-9.]+(:\d+)?)(?::|\/)([\d\/\w.-]+?)(\.git)?$/i.test(githubRepositoryLink))
-    errors.githubRepositoryLink = 'The repository link is not valid!';*/
 
   return { errors, credentials: projectData, dispatch };
 }
@@ -52,7 +50,7 @@ export const addProject = ({ errors, credentials, dispatch }: Compose) => {
         title: 'New project created!',
         message: 'The project DevTimer was created successfully',
       })))
-    .catch((err: any) => dispatch(showNotificationAction({
+    .catch(err => dispatch(showNotificationAction({
       type: 'error',
       title: 'Error',
       message: err.message,
@@ -61,4 +59,17 @@ export const addProject = ({ errors, credentials, dispatch }: Compose) => {
       handleButtonLoading('addProject', false, dispatch);
       dispatch(toggleModalAction(false));
     });
+}
+
+export const formatDate = (timestamp: number): string => {
+  const date = new Date(timestamp);
+  const format = Intl.DateTimeFormat('en-US', { 
+    month: 'long', 
+    day: 'numeric', 
+    year: 'numeric', 
+    hour12: true,
+    hour: 'numeric',
+    minute: 'numeric',
+  });
+  return format.format(date);
 }

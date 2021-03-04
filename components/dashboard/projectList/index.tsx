@@ -15,6 +15,8 @@ const ProjectList: React.FC<Props> = ({
 }): JSX.Element => {
   const { projects } = useSelector((state: RootState) => state.dashboard);
 
+  if (!projects) return null;
+
   return (
     <Container bgColor={({ theme }) => theme.lightDarken} {...{ className }}>
       {projects.length ? (
@@ -22,7 +24,7 @@ const ProjectList: React.FC<Props> = ({
           {projects.map(project => (
             <Project 
               key={project.id}
-              projectName={project.name} 
+              project={project}
             />
           ))}
         </Ul>

@@ -21,8 +21,8 @@ export const createNewProject = (project: Project) => {
 
 export const getProjectsByUserId = (uid: string, dispatch: Dispatch<any>): void => {
   if (!uid) return;
-  db.collection(PROJECTS).where('uid', '==', uid).onSnapshot((snapshot) => {
-    const projects = snapshot.docs.map((project) => ({id: project.id, ...project.data()}));
+  db.collection(PROJECTS).where('uid', '==', uid).orderBy('lastestUpdate', 'desc').onSnapshot(snapshot => {
+    const projects = snapshot.docs.map(project => ({id: project.id, ...project.data()}));
     dispatch(saveProjectsAction(projects));
   });
 }

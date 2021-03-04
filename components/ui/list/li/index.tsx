@@ -6,6 +6,7 @@ interface Props {
   className?: string;
   bgColor?: any;
   title?: string;
+  onClick?: (e: React.MouseEvent<HTMLLIElement>) => void;
 }
 
 const Li: React.FC<Props> = (props): JSX.Element => {
