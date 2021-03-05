@@ -1,8 +1,11 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../models/interfaces/general';
-import { handlePrivateRouting, handleUserAuthChange } from '../../../utils/general';
+import { RootState } from '../../../models/interfaces/common';
+import { handleUserAuthChange } from '../../../services/api/signIn';
+import { handlePrivateRouting } from '../../../utils/common';
+import { LoadingIcon } from '../../icons';
+import { Container } from '../../ui';
 
 interface Props { }
 
@@ -13,11 +16,11 @@ const PrivateRoute = (Component: any) => (props: Props): JSX.Element => {
   const { push, pathname } = useRouter();
   const {
     ui: { isUiLoading },
-    auth: { user },
+    signIn: { user },
   } = useSelector((state: RootState) => state);
 
   useEffect(() => {
-    handleUserAuthChange(dispatch);
+    dispatch(handleUserAuthChange());
     if (user !== undefined)
       handlePrivateRouting({
         pathname,
@@ -25,7 +28,7 @@ const PrivateRoute = (Component: any) => (props: Props): JSX.Element => {
         push,
       });
   }, [user]);
-
+  
   switch (pathname) {
     case '/':
       return (

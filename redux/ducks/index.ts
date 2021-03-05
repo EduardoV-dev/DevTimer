@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux';
 import uiReducer from './ui';
-import authReducer from './auth';
+import signInReducer from './signIn';
 import dashboardReducer from './dashboard';
 
-const rootReducer = combineReducers({
+export default combineReducers({
   ui: uiReducer,
-  auth: authReducer,
+  signIn: signInReducer,
   dashboard: dashboardReducer,
 });
-
-export default rootReducer;

@@ -9,12 +9,12 @@ import {
   TaskData,
   MenuToggler,
   Menu,
-  AddProjectModal,
+  AddProject,
 } from '../../dashboard';
 import { Container, Grid, Headline, Wrapper } from '../../ui';
 import { Notification } from '../../common';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../models/interfaces/general';
+import { RootState } from '../../../models/interfaces/common';
 import { IllustrationIcon } from '../../icons';
 import s from './dashboardLayout.module.scss';
 import { getProjectsByUserId } from '../../../services/api/dashboard';
@@ -25,10 +25,10 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
   const dispatch = useDispatch();
   const {
     dashboard: { selectedProject },
-    auth: { user: { uid } },
+    signIn: { user: { uid } },
   } = useSelector((state: RootState) => state);
 
-  useEffect(() => getProjectsByUserId(uid, dispatch), []);
+  useEffect(() => { dispatch(getProjectsByUserId(uid)) }, []);
 
   return (
     <Grid parent wrap='nowrap'>
@@ -74,7 +74,7 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
       </Grid>
       <MenuToggler />
       <Menu type='float' />
-      <AddProjectModal />
+      <AddProject />
       <Notification />
     </Grid>
   );

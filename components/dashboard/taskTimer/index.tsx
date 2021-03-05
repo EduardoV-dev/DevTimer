@@ -3,11 +3,9 @@ import { PauseIcon } from '../../icons';
 import { Button, Container, P, Title } from '../../ui';
 import s from './taskTimer.module.scss';
 
-interface Props {
+interface Props {}
 
-}
-
-const TaskTimer: React.FC<Props> = (props): JSX.Element => {
+const TaskTimer: React.FC<Props> = (): JSX.Element => {
   return (
     <Container
       bgColor={({ theme }) => theme.lightDarken}

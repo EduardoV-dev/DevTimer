@@ -1,5 +1,5 @@
 import React from 'react';
-import { getFormGroup } from '../../../utils/components';
+import { getFormGroup } from '../../../utils/dashboard/components';
 import { Label, Container, P, Span } from '../../ui';
 import { FormGroupType } from '../../../models/types/components';
 import { Component } from '../../../models/interfaces/components';
@@ -15,6 +15,7 @@ interface Props {
   value?: string;
   onChange?: (e: OnChange) => void;
   error?: string;
+  autoFocus?: boolean;
 }
 
 const FormGroup: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const FormGroup: React.FC<Props> = ({
   value,
   onChange,
   error,
+  autoFocus,
 }): JSX.Element => {
   const formInput: Component = getFormGroup(componentType);
   
@@ -33,7 +35,14 @@ const FormGroup: React.FC<Props> = ({
     <Container className={s.formGroup}>
       <Label className={s.formGroup_label}>{labelText}</Label>
       <formInput.component
-        {... { type, placeholder, name, value, onChange }}
+        {... {
+          type,
+          placeholder,
+          name,
+          value,
+          onChange,
+          autoFocus,
+        }}
       />
       {error && (
         <Span

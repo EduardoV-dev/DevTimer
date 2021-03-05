@@ -8,6 +8,7 @@ interface Props {
   bgColor?: any;
   card?: Boolean;
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  center?: Boolean;
 }
 
 const Container: React.FC<Props> = (props): JSX.Element => {

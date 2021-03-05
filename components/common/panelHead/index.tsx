@@ -1,7 +1,7 @@
 import React from 'react';
 import { Actions } from '..';
 import { PanelHeadType } from '../../../models/types/components';
-import { getPanelHeadType } from '../../../utils/components';
+import { getPanelHeadType } from '../../../utils/dashboard/components';
 import { Container, Title, Span } from '../../ui';
 import s from './panelHead.module.scss';
 

@@ -10,4 +10,4 @@ export { default as MenuToggler } from './menuToggler';
 export { default as Menu } from './menu';
 export { default as ProjectList } from './projectList';
 export { default as Project } from './project';
-export { default as AddProjectModal } from './addProjectModal';
+export { default as AddProject } from './addProject';

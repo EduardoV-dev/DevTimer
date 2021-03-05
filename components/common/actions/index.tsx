@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from '../../../models/interfaces/components';
 import { PanelHeadActions } from '../../../models/types/components';
-import { getPanelHeadActions } from '../../../utils/components';
+import { getPanelHeadActions } from '../../../utils/dashboard/components';
 import s from './actions.module.scss';
 
 interface Props {

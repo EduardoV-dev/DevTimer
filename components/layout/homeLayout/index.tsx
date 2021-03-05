@@ -3,9 +3,7 @@ import { PrivateRoute } from '../../hoc';
 import { Grid } from '../../ui';
 import { ClockImage, SignIn } from '../../home';
 
-interface Props {
-
-}
+interface Props {}
 
 const HomeLayout: React.FC<Props> = (): JSX.Element => {
   return (

@@ -17,12 +17,12 @@ const ProjectInfo: React.FC<Props> = ({
   return (  
     <Container className={s.projectInfo}>
       <P bold='true' className={s.projectInfo_title}>{title}:</P>
-      {link ? (
+      {link === 'true' ? (
         <Link
           href={description}
         >{description}</Link>
       ) : (
-        <P>{!description ? 'No github link provided' : description}</P>
+        <P>{description}</P>
       )}
     </Container>
   );

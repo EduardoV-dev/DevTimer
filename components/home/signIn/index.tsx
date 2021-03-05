@@ -1,5 +1,8 @@
+import { useRouter } from 'next/router';
 import React from 'react';
-import useSignIn from '../../../hooks/useSignIn';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../models/interfaces/common';
+import { handleSignIn } from '../../../utils/signIn/handlers';
 import { Logo } from '../../common';
 import { FacebookIcon, GithubIcon } from '../../icons';
 import { Container, Title, Subtitle, Button, Span } from '../../ui';
@@ -10,11 +13,9 @@ interface Props {
 }
 
 const SignIn: React.FC<Props> = (): JSX.Element => {
-  const {
-    facebook,
-    github,
-    signIn
-  } = useSignIn();
+  const { push } = useRouter();
+  const dispatch = useDispatch();
+  const { isButtonLoading: { facebook, github } } = useSelector((state: RootState) => state.signIn);
 
   return (
     <Container
@@ -32,7 +33,7 @@ const SignIn: React.FC<Props> = (): JSX.Element => {
         type='button'
         facebook='true'
         className={s.signIn_button}
-        onClick={() => signIn('facebook')}
+        onClick={() => dispatch(handleSignIn('facebook', push))}
         loading={facebook ? 'true' : 'false'}
         disabled={facebook}
       >
@@ -46,7 +47,7 @@ const SignIn: React.FC<Props> = (): JSX.Element => {
         type='button'
         github='true'
         className={s.signIn_button}
-        onClick={() => signIn('github')}
+        onClick={() => dispatch(handleSignIn('github', push))}
         loading={github ? 'true' : 'false'}
         disabled={github}
       >

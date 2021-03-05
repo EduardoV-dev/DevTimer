@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../models/interfaces/general';
-import { hideNotificationAction } from '../../redux/actions/ui';
+import { RootState } from '../../models/interfaces/common';
+import { hideNotificationAction } from '../../redux/ducks/ui';
 
 const useNotification = () => {
   const {

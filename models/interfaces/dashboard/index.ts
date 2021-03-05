@@ -1,6 +1,6 @@
-import { FormEvent } from "react";
 import { Dispatch } from "redux";
-import { OnChange, OnSubmit } from "../../types/events";
+import { RegisterType, SubmitEvent } from "../../types/common";
+import { OnSubmit } from "../../types/events";
 
 export interface User {
   displayName: string;
@@ -17,20 +17,14 @@ export interface Project {
   id?: string;
 }
 
-export interface AddProject {
-  projectData: Project;
-  handleOnChange: ({ target }: OnChange) => void;
-  handleOnSubmit: (e: FormEvent) => void;
-}
-
 export interface Compose {
-  e?: OnSubmit;
-  dispatch?: Dispatch<any>;
-  errors?: ProjectErrors;
-  credentials?: any;
+  e?: OnSubmit | React.FormEvent<Element>;
+  errors?: ProjectFormErrors;
+  data?: Project;
+  type?: RegisterType;
 }
 
-export interface ProjectErrors {
+export interface ProjectFormErrors {
   name?: string;
   description?: string;
   githubRepositoryLink?: string;

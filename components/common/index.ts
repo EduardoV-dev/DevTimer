@@ -8,3 +8,4 @@ export { default as FormGroup } from './formGroup';
 export { default as SearchInput } from './searchInput';
 export { default as Backdrop } from './backdrop';
 export { default as Notification } from './notification';
+export { default as Modal } from './modal';

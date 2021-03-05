@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from '../../../models/interfaces/components';
 import { TaskStatusType } from '../../../models/types/components';
-import { getTaskType } from '../../../utils/components';
+import { getTaskType } from '../../../utils/dashboard/components';
 import { Container, P, Span } from '../../ui';
 import s from './taskStatus.module.scss';
 

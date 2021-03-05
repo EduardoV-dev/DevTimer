@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Container, P, Span, Wrapper } from '../../ui';
 import cn from 'classnames';
 import useNotification from '../../../hooks/useNotification';

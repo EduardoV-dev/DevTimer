@@ -27,3 +27,9 @@ export interface Component {
   text?: string;
   component: (props: any) => JSX.Element;
 }
+
+export interface PrivateRoutingConfig {
+  pathname: string;
+  user: any;
+  push: any;
+}

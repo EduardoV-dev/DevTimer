@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Project } from '../../models/interfaces/dashboard';
-import { RootState } from '../../models/interfaces/general';
+import { RootState } from '../../models/interfaces/common';
 
 const useSelectProject = (project: Project) => {
   const dispatch = useDispatch();

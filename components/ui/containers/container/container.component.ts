@@ -4,6 +4,7 @@ import { Boolean } from '../../../../models/types/components';
 interface Props {
   card?: Boolean;
   bgColor?: string;
+  center?: Boolean;
 }
 
 export const Div = styled.div<Props>`
@@ -15,5 +16,11 @@ export const Div = styled.div<Props>`
     margin: 0 auto;
     border-radius: 5px;
     padding: 1rem;
+  `};
+
+  ${({ center }) => center && css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
   `};
 `;

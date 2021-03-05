@@ -1,6 +1,6 @@
 import React from 'react';
 import { TaskStatusType } from '../../../models/types/components';
-import { getTaskStatusTag } from '../../../utils/components';
+import { getTaskStatusTag } from '../../../utils/dashboard/components';
 import { Li, Span } from '../../ui';
 import { P } from '../../ui/text/p/p.component';
 import s from './task.module.scss';

@@ -2,14 +2,12 @@ import React from 'react';
 import { Container } from '../../ui';
 import { PanelHead, ProjectInfo } from '../../common';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../models/interfaces/general';
-import { formatDate } from '../../../utils/dashboard';
+import { RootState } from '../../../models/interfaces/common';
+import { formatDate } from '../../../utils/dashboard/datetime';
 
-interface Props {
+interface Props {}
 
-}
-
-const ProjectData: React.FC<Props> = (props): JSX.Element => {
+const ProjectData: React.FC<Props> = (): JSX.Element => {
   const { selectedProject } = useSelector((state: RootState) => state.dashboard);
   const { name, description, createdAt, lastestUpdate, githubRepositoryLink, } = selectedProject;
 
@@ -30,8 +28,8 @@ const ProjectData: React.FC<Props> = (props): JSX.Element => {
       />
       <ProjectInfo 
         title='Github repository'
-        description={githubRepositoryLink}
-        link={!description ? 'false' : 'true'}
+        description={!githubRepositoryLink ? 'No github link provided' : githubRepositoryLink}
+        link={!githubRepositoryLink ? 'false' : 'true'}
       />
     </Container>
   );

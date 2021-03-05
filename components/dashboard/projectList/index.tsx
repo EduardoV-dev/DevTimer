@@ -2,8 +2,8 @@ import React from 'react';
 import { Container, P, Span, Ul, Wrapper } from '../../ui';
 import { Project } from '..';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../models/interfaces/general';
-import { TodoListIcon } from '../../icons';
+import { RootState } from '../../../models/interfaces/common';
+import { LoadingIcon, TodoListIcon } from '../../icons';
 import s from './projectList.module.scss';
 
 interface Props {
@@ -15,14 +15,22 @@ const ProjectList: React.FC<Props> = ({
 }): JSX.Element => {
   const { projects } = useSelector((state: RootState) => state.dashboard);
 
-  if (!projects) return null;
+  if (!projects) return (
+    <Container
+      bgColor={({ theme }) => theme.lightDarken}
+      {... { className }}
+      center='true'
+    >
+      <LoadingIcon width={32} height={32} fill='#333' />
+    </Container>
+  );
 
   return (
     <Container bgColor={({ theme }) => theme.lightDarken} {...{ className }}>
       {projects.length ? (
         <Ul>
           {projects.map(project => (
-            <Project 
+            <Project
               key={project.id}
               project={project}
             />

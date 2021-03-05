@@ -39,6 +39,8 @@
 
   &_projects {
     border-radius: 5px;
+    height: 12.5rem;
+    overflow-y: auto;
   }
 
   &_addProject {

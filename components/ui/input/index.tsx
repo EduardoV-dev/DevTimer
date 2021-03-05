@@ -11,6 +11,7 @@ interface Props {
   className?: string;
   noStyled?: Boolean;
   onChange?: (e: OnChange) => void;
+  autoFocus: boolean;
 }
 
 const Input: React.FC<Props> = (props): JSX.Element => {
