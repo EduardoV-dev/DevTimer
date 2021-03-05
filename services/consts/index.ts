@@ -2,18 +2,19 @@ import { NotificationMessages } from "../../models/interfaces/common";
 
 export const LS_IMAGE = 'LS_IMAGE';
 export const PROJECTS = 'projects';
+export const TASKS = 'tasks';
 
-export const notificationMessages = (projectName: string = ''): NotificationMessages => ({
+export const notificationMessages = (name: string = ''): NotificationMessages => ({
   success: {
     project: {
       type: 'success',
       title: 'New project created!!',
-      message: `The project (${projectName}) was created successfully!`,
+      message: `The project (${name}) was created successfully!`,
     },
     task: {
       type: 'success',
       title: 'New task created!',
-      message: `The task (${projectName}) was created successfully!`,
+      message: `The task (${name}) was created successfully!`,
     },
   },
   error: {
@@ -36,6 +37,11 @@ export const notificationMessages = (projectName: string = ''): NotificationMess
       type: 'error',
       title: 'Error',
       message: 'DevTimer was not able to load the projects, check your internet connection!',
-    }
+    },
+    getTasksById: {
+      type: 'error',
+      title: 'Error',
+      message: `DevTimer was not able to load the project's tasks, check your internet connection!`,
+    },
   }
 });

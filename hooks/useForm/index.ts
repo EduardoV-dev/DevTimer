@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { Project } from '../../models/interfaces/dashboard';
 import { OnChange } from '../../models/types/events';
 
-const useForm = (initialState: Project) => {
-  const [data, setData] = useState<Project>(initialState);
+const useForm = <T>(initialState: T) => {
+  const [data, setData] = useState<T>(initialState);
 
-  const handleOnChange = ({ target }: OnChange) =>
+  const handleOnChange = ({ target }: OnChange): void =>
     setData({ ...data, [target.name]: target.value });
 
-  return { data, handleOnChange };
+  const clearInputs = (): void =>
+    setData({ ...initialState });
+
+  return { data, handleOnChange, clearInputs };
 }
 
 export default useForm;

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { Bold } from '../../../../models/interfaces/components';
 
 interface Props extends Bold {
-  fontColor: any;
+  fontColor?: any;
 }
 
 export const P = styled.p<Props>`

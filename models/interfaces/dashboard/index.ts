@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
 import { RegisterType, SubmitEvent } from "../../types/common";
+import { TaskStatusType } from "../../types/components";
 import { OnSubmit } from "../../types/events";
 
 export interface User {
@@ -20,12 +21,27 @@ export interface Project {
 export interface Compose {
   e?: OnSubmit | React.FormEvent<Element>;
   errors?: ProjectFormErrors;
-  data?: Project;
+  data?: Project | Task;
   type?: RegisterType;
+  clearInputs?: () => void;
 }
 
-export interface ProjectFormErrors {
+export interface TaskFormErrors {
   name?: string;
   description?: string;
+}
+
+export interface ProjectFormErrors extends TaskFormErrors {
   githubRepositoryLink?: string;
+}
+
+export interface Task {
+  projectId?: string;
+  name: string;
+  description: string;
+  id?: string;
+  time?: number;
+  lastestUpdate?: number;
+  createdAt?: number;
+  state?: TaskStatusType;
 }

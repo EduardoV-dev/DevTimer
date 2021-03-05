@@ -29,17 +29,19 @@ export const handleOnSubmit = ({
   e,
   data,
   type,
+  clearInputs,
 }: Compose) => (dispatch: Dispatch<any>): void => {
   dispatch(createProjectAction());
 
   const args: Compose = {
     e,
     data,
+    clearInputs,
   }
 
   pipe(
     preventDefault,
     checkSubmitData(type),
-    addRegister(dispatch),
+    addRegister(dispatch, clearInputs),
   )(args);
 }

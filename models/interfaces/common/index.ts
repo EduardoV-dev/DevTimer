@@ -1,5 +1,5 @@
 import { NotificationType } from "../../types/components";
-import { Project, ProjectFormErrors } from "../dashboard";
+import { Project, ProjectFormErrors, Task, TaskFormErrors } from "../dashboard";
 
 export interface RootState {
   ui: UiState;
@@ -38,6 +38,9 @@ export interface DashboardState {
   projects: Project[];
   projectFormErrors: ProjectFormErrors;
   selectedProject: null | Project;
+  taskFormErrors: TaskFormErrors;
+  tasks: Task[];
+  selectedTask: null | Project;
 }
 
 export interface Action {
@@ -55,5 +58,6 @@ export interface NotificationMessages {
     task: Notification,
     network: Notification,
     getProjectsById: Notification,
+    getTasksById: Notification,
   },
 }

@@ -4,15 +4,13 @@ import { Container } from '../../ui';
 import { TaskTimer } from '..';
 import s from './taskData.module.scss';
 
-interface Props {
+interface Props {}
 
-}
-
-const TaskData: React.FC<Props> = (props): JSX.Element => {
+const TaskData: React.FC<Props> = (): JSX.Element => {
   return (
     <Container className={s.taskData} card='true'>
       <Container className={s.taskData_data}>
-        <PanelHead type='task' />
+        <PanelHead type='task' name='Task for completion' />
         <ProjectInfo
           title='Description'
           description='Project description here lorem ipsum dolor sit ame asu madre'

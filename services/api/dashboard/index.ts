@@ -1,8 +1,8 @@
 import { Dispatch } from "redux";
-import { Project } from "../../../models/interfaces/dashboard";
-import { loadProjectsAction } from "../../../redux/ducks/dashboard";
+import { Project, Task } from "../../../models/interfaces/dashboard";
+import { loadProjectsAction, loadTasksAction } from "../../../redux/ducks/dashboard";
 import { showNotificationAction } from "../../../redux/ducks/ui";
-import { notificationMessages, PROJECTS } from "../../consts";
+import { notificationMessages, PROJECTS, TASKS } from "../../consts";
 import { auth, db } from "../../firebase";
 
 export const signOut = () =>
@@ -29,5 +29,30 @@ export const getProjectsByUserId = (uid: string) => (dispatch: Dispatch<any>): v
     });
   } catch (e) {
     dispatch(showNotificationAction(notificationMessages().error.getProjectsById));
+  }
+}
+
+export const createNewTask = (task: Task) => {
+  const now: number = Date.now();
+
+  const newTask: Task = {
+    ...task,
+    createdAt: now,
+    lastestUpdate: now,
+    state: 'todo',
+  }
+
+  return db.collection(TASKS).add(newTask);
+}
+
+export const getTasksById = (projectId: string) => (dispatch: Dispatch<any>): void => {
+  if (!projectId) return;
+  try {
+    db.collection(TASKS).where('projectId', '==', projectId).orderBy('lastestUpdate', 'desc').onSnapshot(snapshot => {
+      const tasks = snapshot.docs.map(task => ({ id: task.id, ...task.data() }));
+      dispatch(loadTasksAction(tasks));
+    });
+  } catch (e) {
+    dispatch(showNotificationAction(notificationMessages().error.getTasksById));
   }
 }

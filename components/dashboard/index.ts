@@ -1,7 +1,7 @@
 export { default as Header } from './header';
 export { default as ProjectData } from './projectData';
 export { default as ProjectState } from './projectState';
-export { default as NewTaskForm } from './newTaskForm';
+export { default as AddTaskForm } from './addTaskForm';
 export { default as TasksList } from './tasksList';
 export { default as Task } from './task';
 export { default as TaskData } from './taskData';
@@ -10,4 +10,4 @@ export { default as MenuToggler } from './menuToggler';
 export { default as Menu } from './menu';
 export { default as ProjectList } from './projectList';
 export { default as Project } from './project';
-export { default as AddProject } from './addProject';
+export { default as AddProject } from './addProjectForm';

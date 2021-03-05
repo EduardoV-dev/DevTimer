@@ -4,7 +4,7 @@ import {
   Header,
   ProjectData,
   ProjectState,
-  NewTaskForm,
+  AddTaskForm,
   TasksList,
   TaskData,
   MenuToggler,
@@ -60,7 +60,7 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
                   <ProjectState />
                 </Grid>
                 <Grid child xs={12} sm={6} lg={5} xl={3}>
-                  <NewTaskForm />
+                  <AddTaskForm />
                 </Grid>
                 <Grid child xs={12} sm={6} lg={7} xl={4}>
                   <TasksList />

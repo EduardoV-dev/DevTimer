@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../../hooks/useForm';
 import { RootState } from '../../../models/interfaces/common';
+import { Project } from '../../../models/interfaces/dashboard';
 import { handleOnSubmit } from '../../../utils/dashboard/handlers';
 import { FormGroup, Modal } from '../../common';
 import { Button, Form } from '../../ui';
@@ -18,7 +19,7 @@ const AddProjectModal: React.FC<Props> = (): JSX.Element => {
     signIn: { user: { uid } },
   } = useSelector((state: RootState) => state);
 
-  const { data, handleOnChange } = useForm({
+  const { data, handleOnChange, clearInputs } = useForm<Project>({
     name: '',
     description: '',
     githubRepositoryLink: '',
@@ -29,7 +30,7 @@ const AddProjectModal: React.FC<Props> = (): JSX.Element => {
 
   return (
     <Modal>
-      <Form onSubmit={(e) => dispatch(handleOnSubmit({ e, data, type: 'project' }))}>
+      <Form onSubmit={(e) => dispatch(handleOnSubmit({ e, data, type: 'project', clearInputs }))}>
         <FormGroup
           type='input'
           componentType='input'

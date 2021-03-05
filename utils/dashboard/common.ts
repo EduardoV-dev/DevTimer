@@ -1,74 +1,111 @@
-import { Dispatch } from "redux";
-import { Compose, Project, ProjectFormErrors } from "../../models/interfaces/dashboard";
-import { RegisterType, SubmitEvent } from "../../models/types/common";
-import { createProjectErrorsAction, createProjectSuccessAction, saveProjectFormErrorsAction } from "../../redux/ducks/dashboard";
+import { Action, Dispatch } from "redux";
+import {
+  Compose,
+  Project,
+  ProjectFormErrors,
+  Task,
+  TaskFormErrors,
+} from "../../models/interfaces/dashboard";
+import { RegisterType } from "../../models/types/common";
+import {
+  createProjectErrorAction,
+  createProjectSuccessAction,
+  createTaskErrorAction,
+  createTaskSuccessAction,
+  saveProjectFormErrorsAction,
+  saveTaskFormErrorsAction,
+} from "../../redux/ducks/dashboard";
 import { showNotificationAction, toggleModalAction } from "../../redux/ducks/ui";
-import { createNewProject } from "../../services/api/dashboard";
+import { createNewProject, createNewTask } from "../../services/api/dashboard";
 import { notificationMessages } from "../../services/consts";
 
-export const preventDefault = ({ e, data }: Compose): Project => {
+export const preventDefault = ({ e, data }: Compose): Project | Task => {
   e.preventDefault();
   return data;
 }
 
-export const trimFields = (type: RegisterType, data: Project): Project => {
-  const { name, description, githubRepositoryLink } = data;
-  switch (type) {
-    case 'project':
-      return {
-        name: name.trim(),
-        description: description.trim(),
-        githubRepositoryLink: githubRepositoryLink.trim(),
-        uid: data.uid,
-      }
-    case 'task':
-      return { ...data };
-    default:
-      return;
-  }
+const trimProjectFields = (project: Project): Project => ({
+  name: project.name.trim(),
+  description: project.name.trim(),
+  githubRepositoryLink: project.githubRepositoryLink.trim(),
+  uid: project.uid,
+});
+
+const trimTaskFields = (task: Task): Task => ({
+  name: task.name.trim(),
+  description: task.name.trim(),
+  projectId: task.projectId,
+});
+
+export const trimFields = (type: RegisterType, credentials: Project & Task): Project | Task =>
+  type === 'project' ? trimProjectFields(credentials) : trimTaskFields(credentials);
+
+const checkProjectData = (project: Project): ProjectFormErrors => {
+  const errors: ProjectFormErrors = {};
+  const { name, description, githubRepositoryLink } = project;
+
+  if (name === '')
+    errors.name = 'The project name can not be empty!';
+  if (description === '')
+    errors.description = 'The project description can not be empty!';
+
+  return errors;
 }
 
-export const checkSubmitData = (type: RegisterType) => (credentials: Project): Compose => {
-  const errors: ProjectFormErrors = {};
+const checkTaskData = (task: Task): TaskFormErrors => {
+  const errors: TaskFormErrors = {};
+  const { name, description } = task;
+
+  if (name === '')
+    errors.name = 'The task name can not be empty!';
+  if (description === '')
+    errors.description = 'The task description can not be empty!';
+
+  return errors;
+}
+
+export const checkSubmitData = (type: RegisterType) => (credentials: Project & Task): Compose => {
   const data = trimFields(type, credentials);
-
-  switch (type) {
-    case 'project':
-      const { name, description, githubRepositoryLink } = data;
-
-      if (name === '')
-        errors.name = 'The project name can not be empty!';
-      if (description === '')
-        errors.description = 'The description can not be empty!';
-      break;
-    case 'task':
-      break;
-  }
-
+  const errors = type === 'project' ? checkProjectData(data) : checkTaskData(data);
   return { errors, data, type };
 }
 
-export const addRegister = (dispatch: Dispatch<any>) => ({
+const dispatchProjectFormErrors = (errors: ProjectFormErrors) => (dispatch: Dispatch<any>): Action => {
+  if (JSON.stringify(errors) !== '{}')
+    return dispatch((saveProjectFormErrorsAction(errors)));
+
+  return dispatch((saveProjectFormErrorsAction({})));
+}
+
+const dispatchTaskFormErrors = (errors: TaskFormErrors) => (dispatch: Dispatch<any>): Action => {
+  if (JSON.stringify(errors) !== '{}')
+    return dispatch((saveTaskFormErrorsAction(errors)));
+
+  return dispatch((saveTaskFormErrorsAction({})));
+}
+
+export const manageFormErrors = (errors: ProjectFormErrors | TaskFormErrors, type: RegisterType) => (dispatch: Dispatch<any>) =>
+  type === 'project' ? dispatch(dispatchProjectFormErrors(errors)) : dispatch(dispatchTaskFormErrors(errors));
+
+export const addRegister = (dispatch: Dispatch<any>, clearInputs: () => void) => ({
   errors,
   data,
   type,
 }: Compose) => {
-  if (JSON.stringify(errors) !== '{}')
-    return dispatch((saveProjectFormErrorsAction(errors)));
-
-  dispatch(saveProjectFormErrorsAction({}));
+  manageFormErrors(errors, type);
   const { name } = data;
 
-  const submitEvent = type === 'project' ? createNewProject(data) : null;
+  const submitEvent = type === 'project' ? createNewProject(data) : createNewTask(data);
 
   submitEvent
     .then(() => {
       dispatch(showNotificationAction(notificationMessages(name).success[type]));
-      dispatch(createProjectSuccessAction()); /* Change when creating a task event */
+      type === 'project' ? dispatch(createProjectSuccessAction()) : dispatch(createTaskSuccessAction());
+      clearInputs();
     })
     .catch(() => {
       dispatch(showNotificationAction(notificationMessages().error[type]));
-      dispatch(createProjectErrorsAction()); /* Change when creating a task event */
+      type === 'project' ? dispatch(createProjectErrorAction()) : dispatch(createTaskErrorAction());
     })
     .finally(() => dispatch(toggleModalAction(false)));
 }
