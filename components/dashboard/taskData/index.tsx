@@ -3,33 +3,47 @@ import { PanelHead, ProjectInfo } from '../../common';
 import { Container } from '../../ui';
 import { TaskTimer } from '..';
 import s from './taskData.module.scss';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../models/interfaces/common';
+import { formatDate } from '../../../utils/dashboard/common';
 
-interface Props {}
+interface Props { }
 
 const TaskData: React.FC<Props> = (): JSX.Element => {
+  const { selectedTask } = useSelector((state: RootState) => state.dashboard);
+
+  if (!selectedTask) return null;
+
+  const { name, description, createdAt, lastestUpdate, state, time } = selectedTask;
+
   return (
     <Container className={s.taskData} card='true'>
-      <Container className={s.taskData_data}>
-        <PanelHead type='task' name='Task for completion' />
+      <Container
+        bgColor={({ theme }) => theme.lightDarken}
+        className={s.taskData_data}
+      >
+        <PanelHead type='task' name={name} />
         <ProjectInfo
           title='Description'
-          description='Project description here lorem ipsum dolor sit ame asu madre'
+          description={description}
         />
         <ProjectInfo
           title='Created at'
-          description='March 13rd 2021, 09:32am'
+          description={formatDate(createdAt)}
         />
         <ProjectInfo
           title='Lastest update'
-          description='March 13rd 2021, 09:32am'
+          description={formatDate(lastestUpdate)}
         />
         <ProjectInfo
-          title='Github repository'
-          description='https://github.com/EduardoV-dev/Image-Finder'
-          link='true'
+          title='State'
+          description={state}
         />
       </Container>
-      <Container className={s.taskData_timer}>
+      <Container
+        bgColor={({ theme }) => theme.lightDarken}
+        className={s.taskData_timer}
+      >
         <TaskTimer />
       </Container>
     </Container>

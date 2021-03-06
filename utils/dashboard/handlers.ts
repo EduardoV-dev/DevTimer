@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { Compose, User } from "../../models/interfaces/dashboard";
-import { cleanProjectsListAction, createProjectAction, createProjectSuccessAction } from "../../redux/ducks/dashboard";
+import { cleanProjectsListAction, createProjectAction, createProjectSuccessAction, createTaskAction } from "../../redux/ducks/dashboard";
 import { uiLoadingAction } from "../../redux/ducks/ui";
 import { signOut } from "../../services/api/dashboard";
 import { LS_IMAGE } from "../../services/consts";
@@ -31,7 +31,7 @@ export const handleOnSubmit = ({
   type,
   clearInputs,
 }: Compose) => (dispatch: Dispatch<any>): void => {
-  dispatch(createProjectAction());
+  type === 'project' ? dispatch(createProjectAction()) : dispatch(createTaskAction());
 
   const args: Compose = {
     e,

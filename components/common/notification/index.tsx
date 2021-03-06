@@ -3,6 +3,8 @@ import { Container, P, Span, Wrapper } from '../../ui';
 import cn from 'classnames';
 import useNotification from '../../../hooks/useNotification';
 import s from './notification.module.scss';
+import { useDispatch } from 'react-redux';
+import { hideNotificationAction } from '../../../redux/ducks/ui';
 
 interface Props {
 
@@ -10,6 +12,7 @@ interface Props {
 
 const Notification: React.FC<Props> = (): JSX.Element => {
   const { isNotificationShown, notification } = useNotification();
+  const dispatch = useDispatch();
 
   const classNames = cn(s.notification, {
     [s[`notification_${isNotificationShown}`]]: isNotificationShown,
@@ -32,6 +35,7 @@ const Notification: React.FC<Props> = (): JSX.Element => {
                 fontColor={({ theme }) => notification.type === 'success' ? theme.light : theme.dark}
                 bold='true'
                 className={s.notification_x}
+                onClick={() => dispatch(hideNotificationAction())}
               >&times;</Span>
             </Container>
             <P

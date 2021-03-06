@@ -1,15 +1,29 @@
 @import "../../../styles/responsive";
 
 .taskData {
+  @include responsive(md) {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &_data {
-    padding-bottom: 1rem;
+    border-radius: 5px;
+    padding: 1rem;
     margin-bottom: 1rem;
-    border-bottom: 2px solid #2fb68e;
+
+    @include responsive(md) {
+      flex-basis: 65%;
+      margin-bottom: 0rem;
+      margin-right: 1rem;
+    }
   }
 
   &_timer {
-    @include responsive(lg) {
-      flex: 1;
+    border-radius: 5px;
+    padding: 1rem;
+
+    @include responsive(md) {
+      flex-basis: 30%;
     }
   }
 }

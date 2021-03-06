@@ -19,6 +19,19 @@ import { showNotificationAction, toggleModalAction } from "../../redux/ducks/ui"
 import { createNewProject, createNewTask } from "../../services/api/dashboard";
 import { notificationMessages } from "../../services/consts";
 
+export const formatDate = (timestamp: number): string => {
+  const date = new Date(timestamp);
+  const format = Intl.DateTimeFormat('en-US', { 
+    month: 'long', 
+    day: 'numeric', 
+    year: 'numeric', 
+    hour12: true,
+    hour: 'numeric',
+    minute: 'numeric',
+  });
+  return format.format(date);
+}
+
 export const preventDefault = ({ e, data }: Compose): Project | Task => {
   e.preventDefault();
   return data;
@@ -26,14 +39,14 @@ export const preventDefault = ({ e, data }: Compose): Project | Task => {
 
 const trimProjectFields = (project: Project): Project => ({
   name: project.name.trim(),
-  description: project.name.trim(),
+  description: project.description.trim(),
   githubRepositoryLink: project.githubRepositoryLink.trim(),
   uid: project.uid,
 });
 
 const trimTaskFields = (task: Task): Task => ({
   name: task.name.trim(),
-  description: task.name.trim(),
+  description: task.description.trim(),
   projectId: task.projectId,
 });
 

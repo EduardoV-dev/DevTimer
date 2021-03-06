@@ -16,7 +16,7 @@ const PanelHead: React.FC<Props> = ({
 }): JSX.Element => {
   return (
     <Container className={s.panelHead}>
-      <Title fontSize='1.25rem'>
+      <Title fontSize='1.25rem' className={s.panelHead_title}>
         {getPanelHeadType(type)}
         <Span
           fontColor={({ theme }) => theme.primary}
@@ -24,7 +24,7 @@ const PanelHead: React.FC<Props> = ({
           className={s.panelHead_span}
         >{name}</Span>
       </Title>
-      <Container>
+      <Container className={s.panelHead_actions}>
         <Actions type='delete' />
         <Actions type='edit' />
       </Container>

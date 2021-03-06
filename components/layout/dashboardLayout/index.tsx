@@ -24,11 +24,14 @@ interface Props { }
 const DashboardLayout: React.FC<Props> = (): JSX.Element => {
   const dispatch = useDispatch();
   const {
-    dashboard: { selectedProject },
+    dashboard: {
+      selectedProject,
+      projects,
+    },
     signIn: { user: { uid } },
   } = useSelector((state: RootState) => state);
 
-  useEffect(() => { dispatch(getProjectsByUserId(uid)) }, []);
+  useEffect(() => { dispatch(getProjectsByUserId(uid)) }, [selectedProject]);
 
   return (
     <Grid parent wrap='nowrap'>
@@ -44,7 +47,7 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
             <Container className={s.dashboardLayout_initialView}>
               <Wrapper>
                 <Headline className={s.dashboardLayout_title}>
-                  Create a project in order to display the panel
+                  {projects === null ? 'Create a project to display the panel' : 'Select a project to display the panel'}
               </Headline>
                 <IllustrationIcon
                   className={s.dashboardLayout_illustration}
@@ -52,24 +55,24 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
               </Wrapper>
             </Container>
           ) : (
-              <>
-                <Grid child xs={12} md={6} lg={7} xl={5}>
-                  <ProjectData />
-                </Grid>
-                <Grid child xs={12} md={6} lg={5} xl={4}>
-                  <ProjectState />
-                </Grid>
-                <Grid child xs={12} sm={6} lg={5} xl={3}>
-                  <AddTaskForm />
-                </Grid>
-                <Grid child xs={12} sm={6} lg={7} xl={4}>
-                  <TasksList />
-                </Grid>
-                <Grid child xs={12} lg={12} xl={8}>
-                  <TaskData />
-                </Grid>
-              </>
-            )}
+            <>
+              <Grid child xs={12} md={6} lg={7} xl={5}>
+                <ProjectData />
+              </Grid>
+              <Grid child xs={12} md={6} lg={5} xl={4}>
+                <ProjectState />
+              </Grid>
+              <Grid child xs={12} sm={6} lg={5} xl={3}>
+                <AddTaskForm />
+              </Grid>
+              <Grid child xs={12} sm={6} lg={7} xl={4}>
+                <TasksList />
+              </Grid>
+              <Grid child xs={12} lg={12} xl={8}>
+                <TaskData />
+              </Grid>
+            </>
+          )}
         </Grid>
       </Grid>
       <MenuToggler />

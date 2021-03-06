@@ -12,7 +12,10 @@ interface Props { }
 
 const AddTaskForm: React.FC<Props> = (): JSX.Element => {
   const dispatch = useDispatch();
-  const { selectedProject: { id } } = useSelector((state: RootState) => state.dashboard);
+  const { 
+    selectedProject: { id },  
+    isButtonLoading: { addTask },
+  } = useSelector((state: RootState) => state.dashboard);
 
   const { data, handleOnChange, clearInputs } = useForm<Task>({
     name: '',
@@ -49,6 +52,8 @@ const AddTaskForm: React.FC<Props> = (): JSX.Element => {
         <Button
           type='submit'
           primary='true'
+          disabled={addTask}
+          loading={addTask ? 'true' : 'false'}
         >Create task</Button>
       </Form>
     </Container>

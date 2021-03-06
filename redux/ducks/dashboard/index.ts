@@ -1,5 +1,5 @@
 import { Action, DashboardState } from "../../../models/interfaces/common";
-import { Project, ProjectFormErrors, TaskFormErrors } from "../../../models/interfaces/dashboard";
+import { Project, ProjectFormErrors, Task, TaskFormErrors } from "../../../models/interfaces/dashboard";
 
 const CREATE_PROJECT: string = 'devtimer/dashboard/CREATE_PROJECT';
 const CREATE_PROJECT_SUCCESS: string = 'devtimer/dashboard/CREATE_PROJECT_SUCCESS';
@@ -13,13 +13,14 @@ const SELECT_PROJECT: string = 'devtimer/dashboard/SELECT_PROJECT';
 const CLEAN_SESSION: string = 'devtimer/dashboard/CLEAN_SESSION';
 const LOAD_PROJECTS: string = 'devtimer/dashboard/LOAD_PROJECTS';
 const LOAD_TASKS: string = 'devtimer/dashboard/LOAD_TASKS';
+const SELECT_TASK: string = 'devtimer/dashboard/SELECT_TASK';
 
 const initialState: DashboardState = {
   isButtonLoading: {
     addProject: false,
     addTask: false,
   },
-  projects: null,
+  projects: undefined,
   projectFormErrors: {},
   selectedProject: null,
   taskFormErrors: {},
@@ -55,7 +56,7 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
         }
       }
     }
-    case CREATE_TASK_SUCCESS: 
+    case CREATE_TASK_SUCCESS:
     case CREATE_TASK_ERROR:
       return {
         ...state,
@@ -77,6 +78,7 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
       return {
         ...state,
         selectedProject: action.payload,
+        tasks: null,
       }
     case CLEAN_SESSION:
       return {
@@ -102,6 +104,11 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
           ...state.isButtonLoading,
           addTask: JSON.stringify(action.payload) === '{}' ? true : false,
         }
+      }
+    case SELECT_TASK:
+      return {
+        ...state,
+        selectedTask: action.payload,
       }
     default:
       return { ...state };
@@ -161,4 +168,9 @@ export const loadProjectsAction = (projects: any): Action => ({
 export const loadTasksAction = (tasks: any): Action => ({
   type: LOAD_TASKS,
   payload: tasks,
+});
+
+export const selectTaskAction = (task: Task): Action => ({
+  type: SELECT_TASK,
+  payload: task,
 });

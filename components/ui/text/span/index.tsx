@@ -11,6 +11,7 @@ interface Props extends Avatar, Titles, Bold {
   badgeActive?: Boolean;
   fontColor?: any;
   fontFamily?: 'Raleway' | 'Montserrat';
+  onClick?: (e: React.MouseEvent<HTMLSpanElement>) => void;
 }
 
 const Span: React.FC<Props> = (props): JSX.Element => {

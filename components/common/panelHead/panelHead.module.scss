@@ -4,6 +4,15 @@
   align-items: center;
   margin-bottom: 1rem;
 
+  &_title {
+    flex-basis: auto;
+  }
+
+  &_actions {
+    flex-basis: 4.125rem;
+    margin-left: 1rem;
+  }
+
   &_span {
     margin-left: 0.5rem;
   }

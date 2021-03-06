@@ -3,7 +3,7 @@ import { Container } from '../../ui';
 import { PanelHead, ProjectInfo } from '../../common';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../models/interfaces/common';
-import { formatDate } from '../../../utils/dashboard/datetime';
+import { formatDate } from '../../../utils/dashboard/common';
 
 interface Props {}
 

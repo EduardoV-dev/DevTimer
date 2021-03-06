@@ -8,7 +8,6 @@ interface Props {}
 const TaskTimer: React.FC<Props> = (): JSX.Element => {
   return (
     <Container
-      bgColor={({ theme }) => theme.lightDarken}
       className={s.taskTimer}>
       <Title uppercase='true'>Timer</Title>
       <P className={s.taskTimer_time}>00:05:30</P>

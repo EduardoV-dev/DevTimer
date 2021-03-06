@@ -18,12 +18,12 @@
     max-height: 22.5rem;
     overflow-y: auto;
 
-    @include responsive(lg) {
+    @include responsive(sm) {
       max-height: 11.5rem;
     }
 
     @include responsive(xl) {
-      max-height: 30rem;
+      max-height: 12.5rem;
     }
   }
 }

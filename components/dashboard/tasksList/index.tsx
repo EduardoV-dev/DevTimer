@@ -41,11 +41,6 @@ const TasksList: React.FC<Props> = (): JSX.Element => {
               />
             ))
           )}
-          {/* <Task type='todo' />
-          <Task type='todo' />
-          <Task type='progress' />
-          <Task type='completed' />
-          <Task type='completed' /> */}
         </Ul>
       </Container>
     </Container>

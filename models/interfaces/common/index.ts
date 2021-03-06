@@ -40,7 +40,7 @@ export interface DashboardState {
   selectedProject: null | Project;
   taskFormErrors: TaskFormErrors;
   tasks: Task[];
-  selectedTask: null | Project;
+  selectedTask: null | Task;
 }
 
 export interface Action {
