@@ -12,4 +12,4 @@ export { default as MenuToggler } from './menu/toggler';
 export { default as Menu } from './menu/menu';
 export { default as ProjectList } from './project/list';
 export { default as Project } from './project/item';
-export { default as AddProject } from './project/item';
+export { default as ProjectForm } from './project/form';

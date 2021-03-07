@@ -9,7 +9,7 @@ import {
   TaskData,
   MenuToggler,
   Menu,
-  AddProject,
+  ProjectForm,
 } from '../../dashboard';
 import { Container, Grid, Headline, Wrapper } from '../../ui';
 import { Notification } from '../../common';
@@ -77,7 +77,7 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
       </Grid>
       <MenuToggler />
       <Menu type='float' />
-      <AddProject />
+      <ProjectForm />
       <Notification />
     </Grid>
   );
