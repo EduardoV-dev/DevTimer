@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import useForm from '../../../hooks/useForm';
-import { RootState } from '../../../models/interfaces/common';
-import { Project } from '../../../models/interfaces/dashboard';
-import { handleOnSubmit } from '../../../utils/dashboard/handlers';
-import { FormGroup, Modal } from '../../common';
-import { Button, Form } from '../../ui';
+import useForm from '../../../../hooks/useForm';
+import { RootState } from '../../../../models/interfaces/common';
+import { Project } from '../../../../models/interfaces/dashboard';
+import { handleOnSubmit } from '../../../../utils/dashboard/handlers';
+import { FormGroup, Modal } from '../../../common';
+import { Button, Form } from '../../../ui';
 
 interface Props { }
 

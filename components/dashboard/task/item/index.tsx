@@ -1,14 +1,14 @@
 import React from 'react';
-import { Task as TaskInter } from '../../../models/interfaces/dashboard';
-import { TaskStatusType } from '../../../models/types/components';
-import { getTaskStatusTag } from '../../../utils/dashboard/components';
-import { Li, Span } from '../../ui';
-import { P } from '../../ui/text/p/p.component';
+import { Task as TaskInter } from '../../../../models/interfaces/dashboard';
+import { TaskStatusType } from '../../../../models/types/components';
+import { getTaskStatusTag } from '../../../../utils/dashboard/components';
+import { Li, Span } from '../../../ui';
+import { P } from '../../../ui/text/p/p.component';
 import { format } from 'timeago.js';
 import cn from 'classnames';
-import useSelectTask from '../../../hooks/useSelectTask';
+import useSelectTask from '../../../../hooks/useSelectTask';
 import s from './task.module.scss';
-import { selectTaskAction } from '../../../redux/ducks/dashboard';
+import { selectTaskAction } from '../../../../redux/ducks/dashboard';
 
 interface Props {
   type?: TaskStatusType;

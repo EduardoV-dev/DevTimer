@@ -9,7 +9,10 @@
   }
 
   &_actions {
-    flex-basis: 4.125rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-basis: 6rem;
     margin-left: 1rem;
   }
 

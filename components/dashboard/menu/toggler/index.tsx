@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { MenuToggleIcon } from '../../icons';
-import { Container } from '../../ui';
-import { handleMenu } from '../../../utils/ui';
+import { MenuToggleIcon } from '../../../icons';
+import { Container } from '../../../ui';
+import { handleMenu } from '../../../../utils/ui';
 import s from './menuToggler.module.scss';
 
 interface Props {

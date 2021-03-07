@@ -1,0 +1,17 @@
+@import '../../../../../styles/responsive';
+
+.taskList {  
+  &_list {
+    margin-top: 1rem;
+    max-height: 22.5rem;
+    overflow-y: auto;
+
+    @include responsive(sm) {
+      max-height: 11.5rem;
+    }
+
+    @include responsive(xl) {
+      max-height: 15.8rem;
+    }
+  }
+}

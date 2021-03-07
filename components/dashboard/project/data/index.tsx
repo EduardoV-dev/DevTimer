@@ -1,19 +1,23 @@
 import React from 'react';
-import { Container } from '../../ui';
-import { PanelHead, ProjectInfo } from '../../common';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../models/interfaces/common';
-import { formatDate } from '../../../utils/dashboard/common';
+import { Container } from '../../../ui';
+import { PanelHead, ProjectInfo } from '../../../common';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../models/interfaces/common';
+import { formatDate } from '../../../../utils/dashboard/common';
 
 interface Props {}
 
 const ProjectData: React.FC<Props> = (): JSX.Element => {
+  const dispatch = useDispatch();
   const { selectedProject } = useSelector((state: RootState) => state.dashboard);
   const { name, description, createdAt, lastestUpdate, githubRepositoryLink, } = selectedProject;
 
   return (
     <Container card='true'>
-      <PanelHead type='project' name={name} />
+      <PanelHead 
+        type='project' 
+        name={name}
+      />
       <ProjectInfo 
         title='Description'
         description={description}

@@ -1,6 +1,6 @@
 import React from 'react';
-import { PauseIcon } from '../../icons';
-import { Button, Container, P, Title } from '../../ui';
+import { PauseIcon } from '../../../icons';
+import { Button, Container, P, Title } from '../../../ui';
 import s from './taskTimer.module.scss';
 
 interface Props {}

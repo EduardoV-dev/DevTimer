@@ -1,11 +1,11 @@
 import React from 'react';
-import { PanelHead, ProjectInfo } from '../../common';
-import { Container } from '../../ui';
-import { TaskTimer } from '..';
-import s from './taskData.module.scss';
+import { PanelHead, ProjectInfo } from '../../../common';
+import { Container } from '../../../ui';
+import { TaskTimer } from '../..';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../models/interfaces/common';
-import { formatDate } from '../../../utils/dashboard/common';
+import { RootState } from '../../../../models/interfaces/common';
+import { formatDate } from '../../../../utils/dashboard/common';
+import s from './taskData.module.scss';
 
 interface Props { }
 
@@ -38,6 +38,7 @@ const TaskData: React.FC<Props> = (): JSX.Element => {
         <ProjectInfo
           title='State'
           description={state}
+          type={state}
         />
       </Container>
       <Container

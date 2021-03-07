@@ -1,6 +1,6 @@
 import React from 'react';
-import { TaskStatus } from '../../common';
-import { Container, Title } from '../../ui';
+import { TaskStatus } from '../../../common';
+import { Container, Title } from '../../../ui';
 
 interface Props {
 

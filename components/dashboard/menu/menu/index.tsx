@@ -1,15 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../models/interfaces/common';
-import { ProjectList } from '..';
-import { Backdrop, Logo, SearchInput } from '../../common';
-import { AddProjectIcon, ChevronIcon } from '../../icons';
-import { Button, Container, Span, Title, Wrapper } from '../../ui';
+import { RootState } from '../../../../models/interfaces/common';
+import { ProjectList } from '../..';
+import { Backdrop, Logo, SearchInput } from '../../../common';
+import { AddProjectIcon, ChevronIcon } from '../../../icons';
+import { Button, Container, Span, Title, Wrapper } from '../../../ui';
 import cn from 'classnames';
 import s from './menu.module.scss';
 import { useRouter } from 'next/router';
-import { handleSignOut } from '../../../utils/dashboard/handlers';
-import { handleModal, handleMenu } from '../../../utils/ui';
+import { handleSignOut } from '../../../../utils/dashboard/handlers';
+import { handleModal, handleMenu } from '../../../../utils/ui';
 
 interface Props {
   type: 'aside' | 'float';

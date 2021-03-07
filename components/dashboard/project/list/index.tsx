@@ -1,10 +1,10 @@
 import React from 'react';
-import { Container, P, Span, Ul, Wrapper } from '../../ui';
-import { Project } from '..';
+import { Container, Ul } from '../../../ui';
+import { Project } from '../..';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../models/interfaces/common';
-import { LoadingIcon, TodoListIcon } from '../../icons';
-import s from './projectList.module.scss';
+import { RootState } from '../../../../models/interfaces/common';
+import { LoadingIcon } from '../../../icons';
+import { NoRegister } from '../../../common';
 
 interface Props {
   className?: string;
@@ -37,13 +37,10 @@ const ProjectList: React.FC<Props> = ({
           ))}
         </Ul>
       ) : (
-          <Wrapper className={s.projectList_listMessage}>
-            <P className={s.projectList_text}>
-              You don’t have any project yet.
-              <Span>Create a new one to start working.</Span>
-            </P>
-            <TodoListIcon width={64} height={64} />
-          </Wrapper>
+          <NoRegister 
+            pText='You don’t have any project yet.'
+            spanText='Create a new one to start working'
+          />
         )}
     </Container>
   );

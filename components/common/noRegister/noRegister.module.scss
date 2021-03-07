@@ -1,0 +1,11 @@
+.noRegister {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
+  &_message {
+    margin-bottom: 1rem;
+  }
+}

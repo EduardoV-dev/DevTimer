@@ -18,10 +18,6 @@ export const SpanComp = styled.span<Props>`
   color: ${({ fontColor, theme }) => fontColor || theme.dark};
   font-weight: ${({ bold }) => bold === 'false' ? 'regular' : 'bold'};
 
-  ${({ type }) => type === 'total' && css`
-    text-decoration: underline;
-  `};
-
   ${({ type }) => type === 'todo' && css`
     color: ${({ theme }) => theme.todo};
   `};
