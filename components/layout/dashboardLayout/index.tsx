@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { PrivateRoute } from '../../hoc';
+import { withPrivateRoute } from '../../hoc';
 import {
   Header,
   ProjectData,
   ProjectState,
-  AddTaskForm,
+  TaskForm,
   TaskManager,
   TaskData,
   MenuToggler,
@@ -48,7 +48,7 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
               <Wrapper>
                 <Headline className={s.dashboardLayout_title}>
                   {projects === null ? 'Create a project to display the panel' : 'Select a project to display the panel'}
-              </Headline>
+                </Headline>
                 <IllustrationIcon
                   className={s.dashboardLayout_illustration}
                 />
@@ -56,19 +56,16 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
             </Container>
           ) : (
             <>
-              <Grid child xs={12} md={6} lg={7} xl={5}>
+              <Grid child xs={12} md={12} xl={7}>
                 <ProjectData />
               </Grid>
-              <Grid child xs={12} md={6} lg={5} xl={4}>
+              <Grid child xs={12} md={6} xl={5}>
                 <ProjectState />
               </Grid>
-              <Grid child xs={12} sm={6} lg={5} xl={3}>
-                <AddTaskForm />
-              </Grid>
-              <Grid child xs={12} sm={6} lg={7} xl={4}>
+              <Grid child xs={12} md={6} xl={4}>
                 <TaskManager />
               </Grid>
-              <Grid child xs={12} lg={12} xl={8}>
+              <Grid child xs={12} md={12} xl={8}>
                 <TaskData />
               </Grid>
             </>
@@ -78,9 +75,12 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
       <MenuToggler />
       <Menu type='float' />
       <ProjectForm />
+      {selectedProject && (
+        <TaskForm />
+      )}
       <Notification />
     </Grid>
   );
 }
 
-export default PrivateRoute(DashboardLayout);
+export default withPrivateRoute(DashboardLayout);

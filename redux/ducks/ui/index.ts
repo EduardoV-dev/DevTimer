@@ -1,7 +1,8 @@
 import { Action, UiState } from "../../../models/interfaces/common";
 import { Notification } from '../../../models/interfaces/common';
 
-const TOGGLE_MODAL: string = 'devtimer/ui/TOGGLE_MODAL';
+const TOGGLE_PROJECT_MODAL: string = 'devtimer/ui/TOGGLE_PROJECT_MODAL';
+const TOGGLE_TASK_MODAL: string = 'devtimer/ui/TOGGLE_TASK_MODAL';
 const TOGGLE_MENU: string = 'devtimer/ui/TOGGLE_MENU';
 const UI_LOADING: string = 'devtimer/ui/UI_LOADING';
 const SHOW_NOTIFICATION: string = 'devtimer/ui/SHOW_NOTIFICATION';
@@ -10,7 +11,10 @@ const HIDE_NOTIFICATION: string = 'devtimer/ui/HIDE_NOTIFICATION';
 const initialState: UiState = {
   isUiLoading: true,
   isMenuDisplayed: false,
-  isModalDisplayed: false,
+  isModalDisplayed: {
+    project: false,
+    task: false,
+  },
   isNotificationShown: false,
   notification: {},
 }
@@ -27,10 +31,21 @@ const uiReducer = (state: UiState = initialState, action: Action): UiState => {
         ...state,
         isUiLoading: action.payload,
       }
-    case TOGGLE_MODAL:
+    case TOGGLE_PROJECT_MODAL:
       return {
         ...state,
-        isModalDisplayed: action.payload,
+        isModalDisplayed: {
+          ...state.isModalDisplayed,
+          project: action.payload,
+        }
+      }
+    case TOGGLE_TASK_MODAL:
+      return {
+        ...state,
+        isModalDisplayed: {
+          ...state.isModalDisplayed,
+          task: action.payload,
+        }
       }
     case SHOW_NOTIFICATION:
       return {
@@ -50,9 +65,14 @@ const uiReducer = (state: UiState = initialState, action: Action): UiState => {
 
 export default uiReducer;
 
-export const toggleModalAction = (modalState: boolean): Action => ({
-  type: TOGGLE_MODAL,
-  payload: modalState,
+export const toggleProjectModalAction = (state: boolean): Action => ({
+  type: TOGGLE_PROJECT_MODAL,
+  payload: state,
+});
+
+export const toggleTaskModalAction = (state: boolean): Action => ({
+  type: TOGGLE_TASK_MODAL,
+  payload: state,
 });
 
 export const toggleMenuAction = (menuState: boolean): Action => ({

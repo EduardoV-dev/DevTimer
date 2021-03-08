@@ -1,79 +1,32 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import useForm from '../../../../hooks/useForm';
-import { RootState } from '../../../../models/interfaces/common';
-import { Project } from '../../../../models/interfaces/dashboard';
-import { handleOnSubmit } from '../../../../utils/dashboard/handlers';
-import { FormGroup, Modal } from '../../../common';
-import { Button, Form } from '../../../ui';
+import { ChevronIcon } from '../../../icons';
+import { Li, P } from '../../../ui';
+import { Project as ProjectInter } from '../../../../models/interfaces/dashboard';
+import { selectProjectAction } from '../../../../redux/ducks/dashboard';
+import useSelectProject from '../../../../hooks/useSelectProject';
+import cn from 'classnames';
+import s from './item.module.scss';
 
-interface Props { 
+interface Props {
+  project: ProjectInter;
   
 }
+const Project: React.FC<Props> = ({
+  project,
+}): JSX.Element => {
+  const { active, dispatch } = useSelectProject(project);
+  const { name } = project;
 
-const AddProjectModal: React.FC<Props> = (): JSX.Element => {
-  const dispatch = useDispatch();
-  const {
-    dashboard: {
-      projectFormErrors,
-      isButtonLoading: { addProject },
-    },
-    signIn: { user: { uid } },
-  } = useSelector((state: RootState) => state);
-
-  const { data, handleOnChange, clearInputs } = useForm<Project>({
-    name: '',
-    description: '',
-    githubRepositoryLink: '',
-    uid,
+  const classNames = cn(s.project, {
+    [s.project_active]: active,
   });
 
-  const { name, description, githubRepositoryLink } = data;
-
-  return (
-    <Modal>
-      <Form onSubmit={(e) => dispatch(handleOnSubmit({ e, data, type: 'project', clearInputs }))}>
-        <FormGroup
-          type='input'
-          componentType='input'
-          labelText='Project name'
-          placeholder='Name your project'
-          name='name'
-          value={name}
-          onChange={handleOnChange}
-          error={projectFormErrors.name}
-          autoFocus
-        />
-
-        <FormGroup
-          componentType='textarea'
-          labelText='Project description'
-          placeholder='Add a description that describes your project'
-          name='description'
-          value={description}
-          onChange={handleOnChange}
-          error={projectFormErrors.description}
-        />
-        <FormGroup
-          componentType='input'
-          labelText='Github repository link (Optional)'
-          placeholder='Add your link'
-          name='githubRepositoryLink'
-          value={githubRepositoryLink}
-          onChange={handleOnChange}
-          error={projectFormErrors.githubRepositoryLink}
-        />
-        <Button
-          type='submit'
-          primary='true'
-          disabled={addProject}
-          loading={addProject ? 'true' : 'false'}
-        >
-          Create project
-        </Button>
-      </Form>
-    </Modal>
+  return (  
+    <Li className={classNames} onClick={() => dispatch(selectProjectAction(project))}>
+      <P>{name}</P>
+      <ChevronIcon rotate='true' width={12} height={12} />
+    </Li>
   );
 }
 
-export default AddProjectModal;
+export default Project;

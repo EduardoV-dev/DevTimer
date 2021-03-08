@@ -1,5 +1,5 @@
 import React from 'react';
-import { PrivateRoute } from '../../hoc';
+import { withPrivateRoute } from '../../hoc';
 import { Grid } from '../../ui';
 import { ClockImage, SignIn } from '../../home';
 
@@ -18,4 +18,4 @@ const HomeLayout: React.FC<Props> = (): JSX.Element => {
   )
 }
 
-export default PrivateRoute(HomeLayout);
+export default withPrivateRoute(HomeLayout);

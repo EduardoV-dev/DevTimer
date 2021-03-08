@@ -16,7 +16,10 @@ export interface Notification {
 export interface UiState {
   isUiLoading: boolean;
   isMenuDisplayed: boolean;
-  isModalDisplayed: boolean;
+  isModalDisplayed: {
+    project: boolean;
+    task: boolean;
+  };
   isNotificationShown: boolean;
   notification: Notification;
 }

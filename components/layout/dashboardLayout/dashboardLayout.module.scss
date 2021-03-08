@@ -9,6 +9,7 @@
   &_title {
     margin-bottom: 3rem;
     margin-top: 3rem;
+    text-align: center;
 
     @include responsive(lg) {
       margin-top: 0;

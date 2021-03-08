@@ -11,6 +11,8 @@ export const signOut = () =>
 export const createNewProject = (project: Project) => {
   const now: number = Date.now();
 
+  console.log(project);
+
   const newProject: Project = {
     ...project,
     createdAt: now,
@@ -28,9 +30,13 @@ export const getProjectsByUserId = (uid: string) => (dispatch: Dispatch<any>): v
       dispatch(loadProjectsAction(projects));
     });
   } catch (e) {
+    console.log(e);
     dispatch(showNotificationAction(notificationMessages().error.getProjectsById));
   }
 }
+
+const updateProjectLastestUpdate = (projectId: string) =>
+  db.collection(PROJECTS).doc(projectId).update({ lastestUpdate: Date.now() });
 
 export const createNewTask = (task: Task) => {
   const now: number = Date.now();
@@ -42,7 +48,8 @@ export const createNewTask = (task: Task) => {
     state: 'todo',
   }
 
-  return db.collection(TASKS).add(newTask);
+  return updateProjectLastestUpdate(task.projectId)
+    .then(() => db.collection(TASKS).add(newTask));
 }
 
 export const getTasksById = (projectId: string) => (dispatch: Dispatch<any>): void => {

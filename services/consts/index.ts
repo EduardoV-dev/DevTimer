@@ -21,12 +21,12 @@ export const notificationMessages = (name: string = ''): NotificationMessages =>
     project: {
       type: 'error',
       title: 'Error',
-      message: 'DevTimer was not able to create register, check your internet connection!',
+      message: 'DevTimer was not able to create the project!',
     },
     task: {
       type: 'error',
       title: 'Error',
-      message: 'DevTimer was not able to create register, check your internet connection!',
+      message: 'DevTimer was not able to create the task',
     },
     network: {
       type: 'error',

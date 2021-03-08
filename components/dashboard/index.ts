@@ -1,7 +1,7 @@
 export { default as Header } from './header';
 export { default as ProjectData } from './project/data';
 export { default as ProjectState } from './project/state';
-export { default as AddTaskForm } from './addTaskForm';
+export { default as TaskForm } from './task/form';
 export { default as TaskList } from './task/manager/list';
 export { default as TaskManager } from './task/manager/manager';
 export { default as TaskManagerHead } from './task/manager/head';

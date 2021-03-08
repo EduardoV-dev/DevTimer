@@ -5,11 +5,11 @@ import { ProjectList } from '../..';
 import { Backdrop, Logo, SearchInput } from '../../../common';
 import { AddProjectIcon, ChevronIcon } from '../../../icons';
 import { Button, Container, Span, Title, Wrapper } from '../../../ui';
-import cn from 'classnames';
-import s from './menu.module.scss';
 import { useRouter } from 'next/router';
 import { handleSignOut } from '../../../../utils/dashboard/handlers';
 import { handleModal, handleMenu } from '../../../../utils/ui';
+import cn from 'classnames';
+import s from './menu.module.scss';
 
 interface Props {
   type: 'aside' | 'float';
@@ -43,7 +43,7 @@ const Menu: React.FC<Props> = ({
             type='button'
             fontColor={({ theme }) => theme.dark}
             className={s.menu_addProject}
-            onClick={() => dispatch(handleModal(true))}
+            onClick={() => dispatch(handleModal('project', true))}
           >
             <Span bold='false' className={s.menu_addProjectText}>
               New Project
@@ -53,7 +53,10 @@ const Menu: React.FC<Props> = ({
           <Title fontSize='1.25rem' className={s.menu_projectsTitle}>
             Your projects:
         </Title>
-          <SearchInput placeholder='Search a project' className={s.menu_search} />
+          <SearchInput 
+            placeholder='Search a project' 
+            className={s.menu_search}
+          />
           <ProjectList className={s.menu_projects} />
           <Button
             type='button'

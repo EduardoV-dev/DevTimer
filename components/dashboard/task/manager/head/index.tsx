@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { handleModal } from '../../../../../utils/ui';
 import { SearchInput } from '../../../../common';
 import { Button, Container, Span } from '../../../../ui';
 import s from './taskManagerHead.module.scss';
@@ -6,6 +8,8 @@ import s from './taskManagerHead.module.scss';
 interface Props { }
 
 const TasksManagerHead: React.FC<Props> = (): JSX.Element => {
+  const dispatch = useDispatch();
+
   return (
     <Container>
       <SearchInput placeholder='Search a task' noStyled='true' />
@@ -21,6 +25,7 @@ const TasksManagerHead: React.FC<Props> = (): JSX.Element => {
         <Button
           type='button'
           facebook='true'
+          onClick={() => dispatch(handleModal('task', true))}
         >
           New task
       </Button>

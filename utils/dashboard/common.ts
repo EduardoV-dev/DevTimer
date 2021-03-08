@@ -15,16 +15,16 @@ import {
   saveProjectFormErrorsAction,
   saveTaskFormErrorsAction,
 } from "../../redux/ducks/dashboard";
-import { showNotificationAction, toggleModalAction } from "../../redux/ducks/ui";
+import { showNotificationAction, toggleProjectModalAction, toggleTaskModalAction } from "../../redux/ducks/ui";
 import { createNewProject, createNewTask } from "../../services/api/dashboard";
 import { notificationMessages } from "../../services/consts";
 
 export const formatDate = (timestamp: number): string => {
   const date = new Date(timestamp);
-  const format = Intl.DateTimeFormat('en-US', { 
-    month: 'long', 
-    day: 'numeric', 
-    year: 'numeric', 
+  const format = Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
     hour12: true,
     hour: 'numeric',
     minute: 'numeric',
@@ -116,9 +116,10 @@ export const addRegister = (dispatch: Dispatch<any>, clearInputs: () => void) =>
       type === 'project' ? dispatch(createProjectSuccessAction()) : dispatch(createTaskSuccessAction());
       clearInputs();
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       dispatch(showNotificationAction(notificationMessages().error[type]));
       type === 'project' ? dispatch(createProjectErrorAction()) : dispatch(createTaskErrorAction());
     })
-    .finally(() => dispatch(toggleModalAction(false)));
+    .finally(() => type === 'project' ? dispatch(toggleProjectModalAction(false)) : dispatch(toggleTaskModalAction(false)));
 }

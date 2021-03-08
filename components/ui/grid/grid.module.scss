@@ -21,6 +21,7 @@ $wrap: (
   &_parent {
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
   }
 
   &_child {

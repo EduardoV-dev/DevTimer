@@ -9,8 +9,8 @@ export interface User {
 }
 
 export interface Project {
-  name: string;
-  description: string;
+  name?: string;
+  description?: string;
   githubRepositoryLink?: string;
   createdAt?: number;
   lastestUpdate?: number;
@@ -37,11 +37,18 @@ export interface ProjectFormErrors extends TaskFormErrors {
 
 export interface Task {
   projectId?: string;
-  name: string;
-  description: string;
+  name?: string;
+  description?: string;
   id?: string;
   time?: number;
   lastestUpdate?: number;
   createdAt?: number;
   state?: TaskStatusType;
+}
+
+export interface TaskStateQuantity {
+  total: number;
+  todo: number;
+  progress: number;
+  completed: number;
 }

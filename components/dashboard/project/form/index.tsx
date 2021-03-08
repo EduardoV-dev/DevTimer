@@ -1,35 +1,39 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import useForm from '../../../../hooks/useForm';
-import { RootState } from '../../../../models/interfaces/common';
+import { Dispatch } from 'redux';
+import { Project, ProjectFormErrors } from '../../../../models/interfaces/dashboard';
+import { OnChange } from '../../../../models/types/events';
 import { handleOnSubmit } from '../../../../utils/dashboard/handlers';
 import { FormGroup, Modal } from '../../../common';
+import { withProjectForm } from '../../../hoc';
 import { Button, Form } from '../../../ui';
 
-interface Props { }
+interface Props {
+  data: Project,
+  handleOnChange: (e: OnChange) => void;
+  clearInputs: () => void;
+  projectFormErrors: ProjectFormErrors;
+  addProject: boolean;
+  dispatch: Dispatch<any>;
+}
 
-const ProjectForm: React.FC<Props> = (): JSX.Element => {
-  const dispatch = useDispatch();
-  const {
-    dashboard: {
-      projectFormErrors,
-      isButtonLoading: { addProject },
-    },
-    signIn: { user: { uid } },
-  } = useSelector((state: RootState) => state);
-
-  const { data, handleOnChange } = useForm({
-    name: '',
-    description: '',
-    githubRepositoryLink: '',
-    uid,
-  });
-
+const ProjectForm: React.FC<Props> = ({
+  data,
+  handleOnChange,
+  clearInputs,
+  projectFormErrors,
+  addProject,
+  dispatch,
+}): JSX.Element => {
   const { name, description, githubRepositoryLink } = data;
 
   return (
-    <Modal>
-      <Form onSubmit={(e) => dispatch(handleOnSubmit({ e, data, type: 'project' }))}>
+    <Modal type='project'>
+      <Form onSubmit={(e) => dispatch(handleOnSubmit({
+        e,
+        data,
+        type: 'project',
+        clearInputs,
+      }))}>
         <FormGroup
           type='input'
           componentType='input'
@@ -73,4 +77,4 @@ const ProjectForm: React.FC<Props> = (): JSX.Element => {
   );
 }
 
-export default ProjectForm;
+export default withProjectForm(ProjectForm);

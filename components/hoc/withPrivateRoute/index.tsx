@@ -9,7 +9,7 @@ import { Container } from '../../ui';
 
 interface Props { }
 
-const PrivateRoute = (Component: any) => (props: Props): JSX.Element => {
+const withPrivateRoute = (Component: any) => (props: Props): JSX.Element => {
   Component.displayName = `withPrivateRoute(${Component.displayName || Component.name})`;
  
   const dispatch = useDispatch();
@@ -49,4 +49,4 @@ const PrivateRoute = (Component: any) => (props: Props): JSX.Element => {
   }
 }
 
-export default PrivateRoute;
+export default withPrivateRoute;

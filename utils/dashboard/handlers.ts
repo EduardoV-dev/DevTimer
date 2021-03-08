@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
-import { Compose, User } from "../../models/interfaces/dashboard";
-import { cleanProjectsListAction, createProjectAction, createProjectSuccessAction, createTaskAction } from "../../redux/ducks/dashboard";
+import { Compose, Task, TaskStateQuantity, User } from "../../models/interfaces/dashboard";
+import { TaskStatusType } from "../../models/types/components";
+import { cleanProjectsListAction, createProjectAction, createTaskAction } from "../../redux/ducks/dashboard";
 import { uiLoadingAction } from "../../redux/ducks/ui";
 import { signOut } from "../../services/api/dashboard";
 import { LS_IMAGE } from "../../services/consts";
@@ -45,3 +46,13 @@ export const handleOnSubmit = ({
     addRegister(dispatch, clearInputs),
   )(args);
 }
+
+const getTaskCount = (tasks: Task[], type: TaskStatusType): number => 
+  (tasks.filter(task => task.state === type)).length;
+
+export const handleTasksInState = (tasks: Task[]): TaskStateQuantity => ({
+  total: tasks.length,
+  todo: getTaskCount(tasks, 'todo'),
+  progress: getTaskCount(tasks, 'progress'),
+  completed: getTaskCount(tasks, 'completed'),
+});
