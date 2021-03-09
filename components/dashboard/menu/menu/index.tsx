@@ -43,7 +43,10 @@ const Menu: React.FC<Props> = ({
             type='button'
             fontColor={({ theme }) => theme.dark}
             className={s.menu_addProject}
-            onClick={() => dispatch(handleModal('project', true))}
+            onClick={() => dispatch(handleModal('project', { 
+              name: 'add',
+              value: true,
+            }))}
           >
             <Span bold='false' className={s.menu_addProjectText}>
               New Project

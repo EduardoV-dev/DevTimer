@@ -6,7 +6,7 @@ import {
   Task,
   TaskFormErrors,
 } from "../../models/interfaces/dashboard";
-import { RegisterType } from "../../models/types/common";
+import { FormAction, RegisterType } from "../../models/types/common";
 import {
   createProjectErrorAction,
   createProjectSuccessAction,
@@ -100,7 +100,16 @@ const dispatchTaskFormErrors = (errors: TaskFormErrors) => (dispatch: Dispatch<a
 export const manageFormErrors = (errors: ProjectFormErrors | TaskFormErrors, type: RegisterType) => (dispatch: Dispatch<any>) =>
   type === 'project' ? dispatch(dispatchProjectFormErrors(errors)) : dispatch(dispatchTaskFormErrors(errors));
 
-export const addRegister = (dispatch: Dispatch<any>, clearInputs: () => void) => ({
+const handleEvent = (type: RegisterType, formAction: FormAction) => {
+  switch(type) {
+    case 'project': 
+      return formAction === 'add' ? createNewProject : editProject;
+    case 'task':
+      return formAction === 'add' ? createNewTask : editTask;
+  }
+}
+
+export const addRegister = (dispatch: Dispatch<any>, clearInputs: () => void, formAction: FormAction) => ({
   errors,
   data,
   type,
@@ -121,5 +130,11 @@ export const addRegister = (dispatch: Dispatch<any>, clearInputs: () => void) =>
       dispatch(showNotificationAction(notificationMessages().error[type]));
       type === 'project' ? dispatch(createProjectErrorAction()) : dispatch(createTaskErrorAction());
     })
-    .finally(() => type === 'project' ? dispatch(toggleProjectModalAction(false)) : dispatch(toggleTaskModalAction(false)));
+    .finally(() => type === 'project' ? dispatch(toggleProjectModalAction({
+      name: formAction,
+      value: false,
+    })) : dispatch(toggleTaskModalAction({
+      name: formAction,
+      value: false,
+    })));
 }

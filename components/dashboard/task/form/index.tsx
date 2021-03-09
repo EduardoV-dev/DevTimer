@@ -27,12 +27,13 @@ const TaskForm: React.FC<Props> = ({
   const { name, description } = data;
 
   return (
-    <Modal type='task'>
+    <Modal type='task' action='add'>
       <Form onSubmit={e => dispatch(handleOnSubmit({
         e,
         data,
         type: 'task',
         clearInputs,
+        formAction: 'add',
       }))}>
         <FormGroup
           type='input'

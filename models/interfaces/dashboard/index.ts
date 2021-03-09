@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { RegisterType, SubmitEvent } from "../../types/common";
+import { FormAction, RegisterType, SubmitEvent } from "../../types/common";
 import { TaskStatusType } from "../../types/components";
 import { OnSubmit } from "../../types/events";
 
@@ -24,6 +24,7 @@ export interface Compose {
   data?: Project | Task;
   type?: RegisterType;
   clearInputs?: () => void;
+  formAction?: FormAction;
 }
 
 export interface TaskFormErrors {
@@ -52,3 +53,9 @@ export interface TaskStateQuantity {
   progress: number;
   completed: number;
 }
+
+export interface Modal {
+  name: FormAction;
+  value: boolean;
+}
+

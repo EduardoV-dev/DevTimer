@@ -31,6 +31,7 @@ export const handleOnSubmit = ({
   data,
   type,
   clearInputs,
+  formAction,
 }: Compose) => (dispatch: Dispatch<any>): void => {
   type === 'project' ? dispatch(createProjectAction()) : dispatch(createTaskAction());
 
@@ -43,7 +44,7 @@ export const handleOnSubmit = ({
   pipe(
     preventDefault,
     checkSubmitData(type),
-    addRegister(dispatch, clearInputs),
+    addRegister(dispatch, clearInputs, formAction),
   )(args);
 }
 

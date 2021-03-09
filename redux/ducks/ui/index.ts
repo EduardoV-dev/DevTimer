@@ -1,5 +1,6 @@
 import { Action, UiState } from "../../../models/interfaces/common";
 import { Notification } from '../../../models/interfaces/common';
+import { Modal } from "../../../models/interfaces/dashboard";
 
 const TOGGLE_PROJECT_MODAL: string = 'devtimer/ui/TOGGLE_PROJECT_MODAL';
 const TOGGLE_TASK_MODAL: string = 'devtimer/ui/TOGGLE_TASK_MODAL';
@@ -12,8 +13,14 @@ const initialState: UiState = {
   isUiLoading: true,
   isMenuDisplayed: false,
   isModalDisplayed: {
-    project: false,
-    task: false,
+    project: {
+      add: false,
+      edit: false,
+    },
+    task: {
+      add: false,
+      edit: false,
+    },
   },
   isNotificationShown: false,
   notification: {},
@@ -21,7 +28,7 @@ const initialState: UiState = {
 
 const uiReducer = (state: UiState = initialState, action: Action): UiState => {
   switch (action.type) {
-    case TOGGLE_MENU: 
+    case TOGGLE_MENU:
       return {
         ...state,
         isMenuDisplayed: action.payload,
@@ -36,7 +43,10 @@ const uiReducer = (state: UiState = initialState, action: Action): UiState => {
         ...state,
         isModalDisplayed: {
           ...state.isModalDisplayed,
-          project: action.payload,
+          project: {
+            ...state.isModalDisplayed.project,
+            [action.payload.name]: action.payload.value,
+          }
         }
       }
     case TOGGLE_TASK_MODAL:
@@ -44,7 +54,10 @@ const uiReducer = (state: UiState = initialState, action: Action): UiState => {
         ...state,
         isModalDisplayed: {
           ...state.isModalDisplayed,
-          task: action.payload,
+          task: {
+            ...state.isModalDisplayed.task,
+            [action.payload.name]: action.payload.value,
+          }
         }
       }
     case SHOW_NOTIFICATION:
@@ -53,7 +66,7 @@ const uiReducer = (state: UiState = initialState, action: Action): UiState => {
         isNotificationShown: true,
         notification: action.payload,
       }
-    case HIDE_NOTIFICATION: 
+    case HIDE_NOTIFICATION:
       return {
         ...state,
         isNotificationShown: false,
@@ -65,12 +78,12 @@ const uiReducer = (state: UiState = initialState, action: Action): UiState => {
 
 export default uiReducer;
 
-export const toggleProjectModalAction = (state: boolean): Action => ({
+export const toggleProjectModalAction = (state: Modal): Action => ({
   type: TOGGLE_PROJECT_MODAL,
   payload: state,
 });
 
-export const toggleTaskModalAction = (state: boolean): Action => ({
+export const toggleTaskModalAction = (state: Modal): Action => ({
   type: TOGGLE_TASK_MODAL,
   payload: state,
 });

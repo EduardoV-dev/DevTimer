@@ -17,8 +17,8 @@ export interface UiState {
   isUiLoading: boolean;
   isMenuDisplayed: boolean;
   isModalDisplayed: {
-    project: boolean;
-    task: boolean;
+    project: FormAction;
+    task: FormAction;
   };
   isNotificationShown: boolean;
   notification: Notification;
@@ -63,4 +63,9 @@ export interface NotificationMessages {
     getProjectsById: Notification,
     getTasksById: Notification,
   },
+}
+
+export interface FormAction {
+  add: boolean;
+  edit: boolean;
 }

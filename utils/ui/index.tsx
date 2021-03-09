@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import { Modal } from '../../models/interfaces/dashboard';
 import { RegisterType } from '../../models/types/common';
 import {
   toggleMenuAction,
@@ -12,16 +13,16 @@ export const handleMenu = (menuState: boolean) => (dispatch: Dispatch<any>): voi
   dispatch(toggleMenuAction(menuState));
 }
 
-const handleProjectModal = (state: boolean) => (dispatch: Dispatch<any>): void => {
-  handleBackdrop(state);
-  if (window.innerWidth < 992 && state) dispatch(toggleMenuAction(false));
-  dispatch(toggleProjectModalAction(state));
+const handleProjectModal = ({ name, value }: Modal) => (dispatch: Dispatch<any>): void => {
+  handleBackdrop(value);
+  if (window.innerWidth < 992 && value) dispatch(toggleMenuAction(false));
+  dispatch(toggleProjectModalAction({ name, value }));
 }
 
-const handleTaskModal = (state: boolean) => (dispatch: Dispatch<any>): void => {
-  handleBackdrop(state);
-  dispatch(toggleTaskModalAction(state));
+const handleTaskModal = ({ name, value }: Modal) => (dispatch: Dispatch<any>): void => {
+  handleBackdrop(value);
+  dispatch(toggleTaskModalAction({ name, value }));
 }
 
-export const handleModal = (type: RegisterType, state: boolean) => 
-  type === 'project' ? handleProjectModal(state) : handleTaskModal(state);
+export const handleModal = (type: RegisterType, modalState: Modal) =>
+  type === 'project' ? handleProjectModal(modalState) : handleTaskModal(modalState);

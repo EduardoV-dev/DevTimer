@@ -6,7 +6,11 @@ import {
   TasksIcon,
   TaskTodoIcon
 } from "../../components/icons";
-import { Input, TextArea } from '../../components/ui';
+import { 
+  Input, 
+  TextArea, 
+  Select,
+} from '../../components/ui';
 import {
   FormGroupType,
   PanelHeadType,
@@ -48,6 +52,8 @@ export const getFormGroup = (type: FormGroupType): Component => {
       return { component: Input };
     case 'textarea':
       return { component: TextArea };
+    case 'select': 
+      return { component: Select };
     default:
       break;
   }

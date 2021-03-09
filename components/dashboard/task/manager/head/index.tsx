@@ -25,7 +25,10 @@ const TasksManagerHead: React.FC<Props> = (): JSX.Element => {
         <Button
           type='button'
           facebook='true'
-          onClick={() => dispatch(handleModal('task', true))}
+          onClick={() => dispatch(handleModal('task', { 
+            name: 'add',
+            value: true,
+          }))}
         >
           New task
       </Button>

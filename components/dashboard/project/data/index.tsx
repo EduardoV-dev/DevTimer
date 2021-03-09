@@ -4,21 +4,30 @@ import { PanelHead, ProjectInfo } from '../../../common';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../models/interfaces/common';
 import { formatDate } from '../../../../utils/dashboard/common';
+import { handleModal } from '../../../../utils/ui';
 
 interface Props { }
 
 const ProjectData: React.FC<Props> = (): JSX.Element => {
+  const dispatch = useDispatch();
   const { selectedProject } = useSelector((state: RootState) => state.dashboard);
-
-  if (JSON.stringify(selectedProject) === '{}') return null;
-  
-  const { name, description, createdAt, lastestUpdate, githubRepositoryLink, } = selectedProject;
+  const {
+    name,
+    description,
+    createdAt,
+    lastestUpdate,
+    githubRepositoryLink,
+  } = selectedProject;
 
   return (
     <Container card='true'>
       <PanelHead
         type='project'
         name={name}
+        editOnClick={() => dispatch(handleModal('project', {
+          name: 'edit',
+          value: true,
+        }))}
       />
       <ProjectInfo
         title='Description'

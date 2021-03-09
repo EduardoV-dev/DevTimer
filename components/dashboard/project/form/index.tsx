@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { Project, ProjectFormErrors } from '../../../../models/interfaces/dashboard';
+import { FormAction } from '../../../../models/types/common';
 import { OnChange } from '../../../../models/types/events';
 import { handleOnSubmit } from '../../../../utils/dashboard/handlers';
 import { FormGroup, Modal } from '../../../common';
@@ -14,6 +15,7 @@ interface Props {
   projectFormErrors: ProjectFormErrors;
   addProject: boolean;
   dispatch: Dispatch<any>;
+  formAction: FormAction;
 }
 
 const ProjectForm: React.FC<Props> = ({
@@ -23,16 +25,18 @@ const ProjectForm: React.FC<Props> = ({
   projectFormErrors,
   addProject,
   dispatch,
+  formAction,
 }): JSX.Element => {
   const { name, description, githubRepositoryLink } = data;
 
   return (
-    <Modal type='project'>
+    <Modal type='project' action={formAction}>
       <Form onSubmit={(e) => dispatch(handleOnSubmit({
         e,
         data,
         type: 'project',
         clearInputs,
+        formAction,
       }))}>
         <FormGroup
           type='input'
@@ -45,7 +49,6 @@ const ProjectForm: React.FC<Props> = ({
           error={projectFormErrors.name}
           autoFocus
         />
-
         <FormGroup
           componentType='textarea'
           labelText='Project description'
@@ -70,7 +73,7 @@ const ProjectForm: React.FC<Props> = ({
           disabled={addProject}
           loading={addProject ? 'true' : 'false'}
         >
-          Create project
+          {formAction === 'add' ? 'Create project' : 'Edit project'}
         </Button>
       </Form>
     </Modal>

@@ -10,7 +10,7 @@ const useForm = <T>(initialState: T) => {
   const clearInputs = (): void =>
     setData({ ...initialState });
 
-  return { data, handleOnChange, clearInputs };
+  return { data, handleOnChange, clearInputs, setData };
 }
 
 export default useForm;

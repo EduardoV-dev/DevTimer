@@ -9,6 +9,7 @@ interface Props { }
 
 const ProjectState: React.FC<Props> = (): JSX.Element => {
   const { tasks } = useSelector((state: RootState) => state.dashboard);
+  if (!tasks) return null;
   const { total, todo, progress, completed } = handleTasksInState(tasks);
 
   return (

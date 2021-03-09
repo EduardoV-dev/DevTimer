@@ -16,3 +16,4 @@ export { default as Input } from './input';
 export { default as TextArea } from './textarea';
 export { default as Ul } from './list/ul';
 export { default as Li } from './list/li';
+export { default as Select } from './select';
