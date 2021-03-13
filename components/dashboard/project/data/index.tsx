@@ -3,7 +3,7 @@ import { Container } from '../../../ui';
 import { PanelHead, ProjectInfo } from '../../../common';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../models/interfaces/common';
-import { formatDate } from '../../../../utils/dashboard/common';
+import { handleFormatDate } from '../../../../utils/dashboard/handlers';
 import { handleModal } from '../../../../utils/ui';
 
 interface Props { }
@@ -11,11 +11,14 @@ interface Props { }
 const ProjectData: React.FC<Props> = (): JSX.Element => {
   const dispatch = useDispatch();
   const { selectedProject } = useSelector((state: RootState) => state.dashboard);
+
+  if (!selectedProject) return null;
+
   const {
     name,
     description,
     createdAt,
-    lastestUpdate,
+    latestUpdate,
     githubRepositoryLink,
   } = selectedProject;
 
@@ -35,11 +38,11 @@ const ProjectData: React.FC<Props> = (): JSX.Element => {
       />
       <ProjectInfo
         title='Created at'
-        description={formatDate(createdAt)}
+        description={handleFormatDate(createdAt)}
       />
       <ProjectInfo
         title='Lastest update'
-        description={formatDate(lastestUpdate)}
+        description={handleFormatDate(latestUpdate)}
       />
       <ProjectInfo
         title='Github repository'

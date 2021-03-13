@@ -4,26 +4,36 @@ export const LS_IMAGE = 'LS_IMAGE';
 export const PROJECTS = 'projects';
 export const TASKS = 'tasks';
 
-export const notificationMessages = (name: string = ''): NotificationMessages => ({
+export const NOTIFICATIONS = (name: string = ''): NotificationMessages => ({
   success: {
-    project: {
+    project_created: {
       type: 'success',
       title: 'New project created!!',
       message: `The project (${name}) was created successfully!`,
     },
-    task: {
+    task_created: {
       type: 'success',
       title: 'New task created!',
       message: `The task (${name}) was created successfully!`,
     },
+    project_edited: {
+      type: 'success',
+      title: 'Project edited!',
+      message: `The project (${name}) was edited successfully!`,
+    },
+    task_edited: {
+      type: 'success',
+      title: 'Task edited!',
+      message: `The task (${name}) was edited successfully!`,
+    }
   },
   error: {
-    project: {
+    project_created: {
       type: 'error',
       title: 'Error',
       message: 'DevTimer was not able to create the project!',
     },
-    task: {
+    task_created: {
       type: 'error',
       title: 'Error',
       message: 'DevTimer was not able to create the task',

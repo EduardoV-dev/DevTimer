@@ -1,5 +1,4 @@
-import { Dispatch } from "redux";
-import { FormAction, RegisterType, SubmitEvent } from "../../types/common";
+import { FormAction, RegisterType } from "../../types/common";
 import { TaskStatusType } from "../../types/components";
 import { OnSubmit } from "../../types/events";
 
@@ -13,7 +12,7 @@ export interface Project {
   description?: string;
   githubRepositoryLink?: string;
   createdAt?: number;
-  lastestUpdate?: number;
+  latestUpdate?: number;
   uid?: string;
   id?: string;
 }
@@ -42,7 +41,7 @@ export interface Task {
   description?: string;
   id?: string;
   time?: number;
-  lastestUpdate?: number;
+  latestUpdate?: number;
   createdAt?: number;
   state?: TaskStatusType;
 }
@@ -58,4 +57,3 @@ export interface Modal {
   name: FormAction;
   value: boolean;
 }
-

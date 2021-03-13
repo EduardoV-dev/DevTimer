@@ -12,7 +12,7 @@ import {
   signInSuccessAction,
 } from "../../redux/ducks/signIn";
 import { showNotificationAction } from "../../redux/ducks/ui";
-import { notificationMessages } from "../../services/consts";
+import { NOTIFICATIONS } from "../../services/consts";
 
 export const handleFacebookUserImage = pipe(
   extractFacebookUserImage,
@@ -42,6 +42,6 @@ export const handleSignIn = (provider: Provider, push: any) => (dispatch: Dispat
     .catch((err: any) => {
       console.log(err);
       dispatch(signInErrorAction(provider));
-      dispatch(showNotificationAction(notificationMessages.error.network));
+      dispatch(showNotificationAction(NOTIFICATIONS().error.network));
     });
 }

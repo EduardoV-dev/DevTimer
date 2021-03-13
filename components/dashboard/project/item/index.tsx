@@ -9,7 +9,6 @@ import s from './item.module.scss';
 
 interface Props {
   project: ProjectInter;
-  
 }
 const Project: React.FC<Props> = ({
   project,

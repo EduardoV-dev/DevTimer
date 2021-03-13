@@ -4,12 +4,13 @@ import {
   Header,
   ProjectData,
   ProjectState,
-  TaskForm,
+  ProjectAddForm,
   TaskManager,
   TaskData,
   MenuToggler,
   Menu,
-  ProjectForm,
+  TaskAddForm,
+  ProjectEditForm,
 } from '../../dashboard';
 import { Container, Grid, Headline, Wrapper } from '../../ui';
 import { Notification } from '../../common';
@@ -31,7 +32,9 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
     signIn: { user: { uid } },
   } = useSelector((state: RootState) => state);
 
-  useEffect(() => { dispatch(getProjectsByUserId(uid)) }, [selectedProject]);
+  useEffect(() => { dispatch(getProjectsByUserId(uid)) }, []);
+
+  if (!projects) return null;
 
   return (
     <Grid parent wrap='nowrap'>
@@ -43,11 +46,11 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
           <Header />
         </Grid>
         <Grid parent xs={12} spacing='sm'>
-          {!selectedProject ? (
+          {!projects.length ? (
             <Container className={s.dashboardLayout_initialView}>
               <Wrapper>
                 <Headline className={s.dashboardLayout_title}>
-                  {projects === null ? 'Create a project to display the panel' : 'Select a project to display the panel'}
+                  {!projects.length ? 'Create a project to display the panel' : 'Select a project to display the panel'}
                 </Headline>
                 <IllustrationIcon
                   className={s.dashboardLayout_illustration}
@@ -56,27 +59,34 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
             </Container>
           ) : (
             <>
-              <Grid child xs={12} md={12} xl={7}>
-                <ProjectData />
-              </Grid>
-              <Grid child xs={12} md={6} xl={5}>
-                <ProjectState />
-              </Grid>
-              <Grid child xs={12} md={6} xl={4}>
-                <TaskManager />
-              </Grid>
-              <Grid child xs={12} md={12} xl={8}>
-                <TaskData />
-              </Grid>
+              {selectedProject && (
+                <>
+                  <Grid child xs={12} md={12} xl={7}>
+                    <ProjectData />
+                  </Grid>
+                  <Grid child xs={12} md={6} xl={5}>
+                    <ProjectState />
+                  </Grid>
+                  <Grid child xs={12} md={6} xl={4}>
+                    <TaskManager />
+                  </Grid>
+                  <Grid child xs={12} md={12} xl={8}>
+                    <TaskData />
+                  </Grid>
+                </>
+              )}
             </>
           )}
         </Grid>
       </Grid>
       <MenuToggler />
       <Menu type='float' />
-      <ProjectForm />
+      <ProjectAddForm />
       {selectedProject && (
-        <TaskForm />
+        <>
+          <ProjectEditForm />
+          <TaskAddForm />
+        </>
       )}
       <Notification />
     </Grid>

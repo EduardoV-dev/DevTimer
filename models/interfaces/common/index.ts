@@ -35,8 +35,8 @@ export interface SignInState {
 
 export interface DashboardState {
   isButtonLoading: {
-    addProject: boolean;
-    addTask: boolean;
+    project: boolean;
+    task: boolean;
   }
   projects: Project[];
   projectFormErrors: ProjectFormErrors;
@@ -53,15 +53,23 @@ export interface Action {
 
 export interface NotificationMessages {
   success: {
-    project: Notification,
-    task: Notification,
+    project_created: Notification;
+    task_created: Notification;
+    project_edited: Notification;
+    task_edited: Notification;
+    project_deleted?: Notification;
+    task_deleted?: Notification;
   },
   error: {
-    project: Notification,
-    task: Notification,
-    network: Notification,
-    getProjectsById: Notification,
-    getTasksById: Notification,
+    project_created: Notification;
+    task_created: Notification;
+    project_edited?: Notification;
+    task_edited?: Notification;
+    project_deleted?: Notification;
+    task_deleted?: Notification;
+    network: Notification;
+    getProjectsById: Notification;
+    getTasksById: Notification;
   },
 }
 

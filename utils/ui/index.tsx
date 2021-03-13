@@ -24,5 +24,7 @@ const handleTaskModal = ({ name, value }: Modal) => (dispatch: Dispatch<any>): v
   dispatch(toggleTaskModalAction({ name, value }));
 }
 
-export const handleModal = (type: RegisterType, modalState: Modal) =>
-  type === 'project' ? handleProjectModal(modalState) : handleTaskModal(modalState);
+export const handleModal = (type: RegisterType, modalState: Modal) => (dispatch: Dispatch<any>) =>
+  type === 'project'
+    ? dispatch(handleProjectModal(modalState))
+    : dispatch(handleTaskModal(modalState));

@@ -24,7 +24,7 @@ const Task: React.FC<Props> = ({
     [s.task_active]: active,
   });
 
-  const { name, description, lastestUpdate, state } = task;
+  const { name, description, latestUpdate, state } = task;
 
   return (
     <Li
@@ -36,9 +36,9 @@ const Task: React.FC<Props> = ({
       <P
         className={s.task_content}
         bold='true'
-      >{name} · <Span
+      >{name} <Span
         fontColor={({ theme }) => theme.primary}
-      >{format(lastestUpdate)}</Span></P>
+      >· {format(latestUpdate)}</Span></P>
       <P className={s.task_content}>{description}</P>
       <Span type={state}>{getTaskStatusTag(state)}</Span>
     </Li>

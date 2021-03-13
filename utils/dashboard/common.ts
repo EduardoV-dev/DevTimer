@@ -1,4 +1,4 @@
-import { Action, Dispatch } from "redux";
+import { Dispatch } from "redux";
 import {
   Compose,
   Project,
@@ -6,31 +6,14 @@ import {
   Task,
   TaskFormErrors,
 } from "../../models/interfaces/dashboard";
-import { FormAction, RegisterType } from "../../models/types/common";
+import { RegisterType } from "../../models/types/common";
+import { TaskStatusType } from "../../models/types/components";
 import {
-  createProjectErrorAction,
-  createProjectSuccessAction,
-  createTaskErrorAction,
-  createTaskSuccessAction,
   saveProjectFormErrorsAction,
   saveTaskFormErrorsAction,
 } from "../../redux/ducks/dashboard";
-import { showNotificationAction, toggleProjectModalAction, toggleTaskModalAction } from "../../redux/ducks/ui";
-import { createNewProject, createNewTask } from "../../services/api/dashboard";
-import { notificationMessages } from "../../services/consts";
-
-export const formatDate = (timestamp: number): string => {
-  const date = new Date(timestamp);
-  const format = Intl.DateTimeFormat('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-    hour12: true,
-    hour: 'numeric',
-    minute: 'numeric',
-  });
-  return format.format(date);
-}
+import { createNewProject, createNewTask, editExistingProject } from "../../services/api/dashboard";
+import { handleCreateProjectResponse, handleCreateTaskResponse, handleEditProjectResponse } from './handlers';
 
 export const preventDefault = ({ e, data }: Compose): Project | Task => {
   e.preventDefault();
@@ -38,16 +21,16 @@ export const preventDefault = ({ e, data }: Compose): Project | Task => {
 }
 
 const trimProjectFields = (project: Project): Project => ({
+  ...project,
   name: project.name.trim(),
   description: project.description.trim(),
   githubRepositoryLink: project.githubRepositoryLink.trim(),
-  uid: project.uid,
 });
 
 const trimTaskFields = (task: Task): Task => ({
+  ...task,
   name: task.name.trim(),
   description: task.description.trim(),
-  projectId: task.projectId,
 });
 
 export const trimFields = (type: RegisterType, credentials: Project & Task): Project | Task =>
@@ -80,61 +63,43 @@ const checkTaskData = (task: Task): TaskFormErrors => {
 export const checkSubmitData = (type: RegisterType) => (credentials: Project & Task): Compose => {
   const data = trimFields(type, credentials);
   const errors = type === 'project' ? checkProjectData(data) : checkTaskData(data);
-  return { errors, data, type };
+  return { errors, data, };
 }
 
-const dispatchProjectFormErrors = (errors: ProjectFormErrors) => (dispatch: Dispatch<any>): Action => {
+export const getTaskCount = (tasks: Task[], type: TaskStatusType): number =>
+  (tasks.filter(task => task.state === type)).length;
+
+export const createProject = (dispatch: Dispatch<any>, clearInputs: VoidFunction) => ({
+  errors,
+  data,
+}: Compose) => {
   if (JSON.stringify(errors) !== '{}')
-    return dispatch((saveProjectFormErrorsAction(errors)));
+    return dispatch(saveProjectFormErrorsAction(errors));
 
-  return dispatch((saveProjectFormErrorsAction({})));
+  dispatch(saveProjectFormErrorsAction({}));
+  const { name } = data;
+  dispatch(handleCreateProjectResponse(createNewProject(data), name, clearInputs));
 }
 
-const dispatchTaskFormErrors = (errors: TaskFormErrors) => (dispatch: Dispatch<any>): Action => {
+export const createTask = (dispatch: Dispatch<any>, clearInputs: VoidFunction) => ({
+  errors,
+  data,
+}: Compose) => {
   if (JSON.stringify(errors) !== '{}')
     return dispatch((saveTaskFormErrorsAction(errors)));
 
-  return dispatch((saveTaskFormErrorsAction({})));
+  dispatch((saveTaskFormErrorsAction({})));
+  const { name } = data;
+  dispatch(handleCreateTaskResponse(createNewTask(data), name, clearInputs));
 }
 
-export const manageFormErrors = (errors: ProjectFormErrors | TaskFormErrors, type: RegisterType) => (dispatch: Dispatch<any>) =>
-  type === 'project' ? dispatch(dispatchProjectFormErrors(errors)) : dispatch(dispatchTaskFormErrors(errors));
-
-const handleEvent = (type: RegisterType, formAction: FormAction) => {
-  switch(type) {
-    case 'project': 
-      return formAction === 'add' ? createNewProject : editProject;
-    case 'task':
-      return formAction === 'add' ? createNewTask : editTask;
-  }
-}
-
-export const addRegister = (dispatch: Dispatch<any>, clearInputs: () => void, formAction: FormAction) => ({
+export const editProject = (dispatch: Dispatch<any>, clearInputs: VoidFunction) => ({
   errors,
   data,
-  type,
 }: Compose) => {
-  manageFormErrors(errors, type);
-  const { name } = data;
+  if (JSON.stringify(errors) !== '{}')
+    return dispatch(saveProjectFormErrorsAction(errors));
 
-  const submitEvent = type === 'project' ? createNewProject(data) : createNewTask(data);
-
-  submitEvent
-    .then(() => {
-      dispatch(showNotificationAction(notificationMessages(name).success[type]));
-      type === 'project' ? dispatch(createProjectSuccessAction()) : dispatch(createTaskSuccessAction());
-      clearInputs();
-    })
-    .catch((err) => {
-      console.log(err);
-      dispatch(showNotificationAction(notificationMessages().error[type]));
-      type === 'project' ? dispatch(createProjectErrorAction()) : dispatch(createTaskErrorAction());
-    })
-    .finally(() => type === 'project' ? dispatch(toggleProjectModalAction({
-      name: formAction,
-      value: false,
-    })) : dispatch(toggleTaskModalAction({
-      name: formAction,
-      value: false,
-    })));
+  dispatch(saveProjectFormErrorsAction({}));
+  dispatch(handleEditProjectResponse(editExistingProject(data), data, clearInputs));
 }

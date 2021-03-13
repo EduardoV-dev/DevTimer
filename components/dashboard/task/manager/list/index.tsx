@@ -16,7 +16,7 @@ const TasksList: React.FC<Props> = (): JSX.Element => {
     tasks,
   } = useSelector((state: RootState) => state.dashboard);
 
-  useEffect(() => { dispatch(getTasksById(id)) }, [id]);
+  useEffect(() => { if (!tasks) dispatch(getTasksById(id)) }, [id]);
 
   if (!tasks) return null;
 

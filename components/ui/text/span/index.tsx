@@ -4,7 +4,7 @@ import { Boolean, TaskStatusType } from '../../../../models/types/components';
 import { SpanComp } from './span.component';
 
 interface Props extends Avatar, Titles, Bold {
-  children: string | number;
+  children: string | number | string[];
   className?: string;
   type?: TaskStatusType;
   badge?: Boolean;

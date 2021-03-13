@@ -43,7 +43,7 @@ const Menu: React.FC<Props> = ({
             type='button'
             fontColor={({ theme }) => theme.dark}
             className={s.menu_addProject}
-            onClick={() => dispatch(handleModal('project', { 
+            onClick={() => dispatch(handleModal('project', {
               name: 'add',
               value: true,
             }))}
@@ -55,9 +55,9 @@ const Menu: React.FC<Props> = ({
           </Button>
           <Title fontSize='1.25rem' className={s.menu_projectsTitle}>
             Your projects:
-        </Title>
-          <SearchInput 
-            placeholder='Search a project' 
+          </Title>
+          <SearchInput
+            placeholder='Search a project'
             className={s.menu_search}
           />
           <ProjectList className={s.menu_projects} />

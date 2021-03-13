@@ -4,6 +4,9 @@ import { Project, ProjectFormErrors, Task, TaskFormErrors } from "../../../model
 const CREATE_PROJECT: string = 'devtimer/dashboard/CREATE_PROJECT';
 const CREATE_PROJECT_SUCCESS: string = 'devtimer/dashboard/CREATE_PROJECT_SUCCESS';
 const CREATE_PROJECT_ERROR: string = 'devtimer/dashboard/CREATE_PROJECT_ERROR';
+const EDIT_PROJECT: string = 'devtimer/dashboard/EDIT_PROJECT';
+const EDIT_PROJECT_SUCCESS: string = 'devtimer/dashboard/EDIT_PROJECT_SUCCESS';
+const EDIT_PROJECT_ERROR: string = 'devtimer/dashboard/EDIT_PROJECT_ERROR';
 const CREATE_TASK: string = 'devtimer/dashboard/CREATE_TASK';
 const CREATE_TASK_SUCCESS: string = 'devtimer/dashboard/CREATE_TASK_SUCCESS';
 const CREATE_TASK_ERROR: string = 'devtimer/dashboard/CREATE_TASK_ERROR';
@@ -17,10 +20,10 @@ const SELECT_TASK: string = 'devtimer/dashboard/SELECT_TASK';
 
 const initialState: DashboardState = {
   isButtonLoading: {
-    addProject: false,
-    addTask: false,
+    project: false,
+    task: false,
   },
-  projects: undefined,
+  projects: null,
   projectFormErrors: {},
   selectedProject: null,
   taskFormErrors: {},
@@ -31,28 +34,39 @@ const initialState: DashboardState = {
 const dashboardReducer = (state: DashboardState = initialState, action: Action): DashboardState => {
   switch (action.type) {
     case CREATE_PROJECT:
+    case EDIT_PROJECT:
       return {
         ...state,
         isButtonLoading: {
           ...state.isButtonLoading,
-          addProject: true,
+          project: true,
         }
       }
     case CREATE_PROJECT_SUCCESS:
     case CREATE_PROJECT_ERROR:
+    case EDIT_PROJECT_ERROR:
       return {
         ...state,
         isButtonLoading: {
           ...state.isButtonLoading,
-          addProject: false,
+          project: false,
         },
+      }
+    case EDIT_PROJECT_SUCCESS:
+      return {
+        ...state,
+        isButtonLoading: {
+          ...state.isButtonLoading,
+          project: false,
+        },
+        selectedProject: action.payload,
       }
     case CREATE_TASK: {
       return {
         ...state,
         isButtonLoading: {
           ...state.isButtonLoading,
-          addTask: true,
+          task: true,
         }
       }
     }
@@ -62,7 +76,7 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
         ...state,
         isButtonLoading: {
           ...state.isButtonLoading,
-          addTask: false,
+          task: false,
         }
       }
     case SAVE_PROJECT_FORM_ERRORS:
@@ -71,7 +85,7 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
         projectFormErrors: action.payload,
         isButtonLoading: {
           ...state.isButtonLoading,
-          addProject: JSON.stringify(action.payload) === '{}' ? true : false,
+          project: JSON.stringify(action.payload) === '{}' ? true : false,
         }
       }
     case SELECT_PROJECT:
@@ -84,6 +98,9 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
       return {
         ...state,
         projects: null,
+        tasks: null,
+        selectedProject: null,
+        selectedTask: null,
         projectFormErrors: {},
       }
     case LOAD_PROJECTS:
@@ -102,7 +119,7 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
         taskFormErrors: action.payload,
         isButtonLoading: {
           ...state.isButtonLoading,
-          addTask: JSON.stringify(action.payload) === '{}' ? true : false,
+          task: JSON.stringify(action.payload) === '{}' ? true : false,
         }
       }
     case SELECT_TASK:
@@ -127,6 +144,19 @@ export const createProjectSuccessAction = (): Action => ({
 
 export const createProjectErrorAction = (): Action => ({
   type: CREATE_PROJECT_ERROR,
+});
+
+export const editProjectAction = (): Action => ({
+  type: EDIT_PROJECT,
+});
+
+export const editProjectSuccessAction = (project: Project): Action => ({
+  type: EDIT_PROJECT_SUCCESS,
+  payload: project,
+});
+
+export const editProjectErrorAction = (): Action => ({
+  type: EDIT_PROJECT_ERROR,
 });
 
 export const createTaskAction = (): Action => ({

@@ -4,7 +4,7 @@ import { Container } from '../../../ui';
 import { TaskTimer } from '../..';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../models/interfaces/common';
-import { formatDate } from '../../../../utils/dashboard/common';
+import { handleFormatDate } from '../../../../utils/dashboard/handlers';
 import s from './taskData.module.scss';
 
 interface Props { }
@@ -14,7 +14,7 @@ const TaskData: React.FC<Props> = (): JSX.Element => {
 
   if (!selectedTask) return null;
 
-  const { name, description, createdAt, lastestUpdate, state, time } = selectedTask;
+  const { name, description, createdAt, latestUpdate, state, time } = selectedTask;
 
   return (
     <Container className={s.taskData} card='true'>
@@ -29,11 +29,11 @@ const TaskData: React.FC<Props> = (): JSX.Element => {
         />
         <ProjectInfo
           title='Created at'
-          description={formatDate(createdAt)}
+          description={handleFormatDate(createdAt)}
         />
         <ProjectInfo
           title='Lastest update'
-          description={formatDate(lastestUpdate)}
+          description={handleFormatDate(latestUpdate)}
         />
         <ProjectInfo
           title='State'

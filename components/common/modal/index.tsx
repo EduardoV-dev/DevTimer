@@ -20,7 +20,7 @@ const Modal: React.FC<Props> = ({
 }): JSX.Element => {
   const dispatch = useDispatch();
   const { isModalDisplayed } = useSelector((state: RootState) => state.ui);
-
+  
   return (
     <>
       {isModalDisplayed[type][action] && (
@@ -28,11 +28,11 @@ const Modal: React.FC<Props> = ({
           <Backdrop onClick={() => dispatch(handleModal(type, {
             name: action,
             value: false,
-          }))} />
+          }))}/>
           <Container
             bgColor={({ theme }) => theme.light}
-            className={s.modal}>
-            {children}
+            className={s.modal}
+          >{children}
           </Container>
         </>
       )}
