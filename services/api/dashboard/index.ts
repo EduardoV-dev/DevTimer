@@ -72,3 +72,21 @@ export const editExistingProject = (project: Project) =>
 export const editExistingTask = (task: Task) =>
   updateTaskLatestUpdate(task.id)
     .then(() => db.collection(TASKS).doc(task.id).update(task));
+
+export const deleteProject = (projectId: string) =>
+  updateProjectLatestUpdate(projectId)
+    .then(() => db.collection(PROJECTS).doc(projectId).delete())
+    .then(() => db.collection(TASKS).where('projectId', '==', projectId).onSnapshot(snapshot =>
+      new Promise((res, rej) => {
+        try {
+          snapshot.docs.map(task => db.collection(TASKS).doc(task.id).delete());
+          res('deleted');
+        } catch (e) {
+          rej(e);
+        }
+      })
+    ));
+
+export const deleteTask = (taskId: string) =>
+  updateProjectLatestUpdate(taskId)
+    .then(() => db.collection(TASKS).doc(taskId).delete());

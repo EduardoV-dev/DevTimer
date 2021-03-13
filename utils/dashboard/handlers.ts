@@ -13,12 +13,18 @@ import {
   createTaskAction,
   createTaskErrorAction,
   createTaskSuccessAction,
+  deleteProjectAction,
+  deleteProjectErrorAction,
+  deleteProjectSuccessAction,
+  deleteTaskAction,
   editProjectAction,
   editProjectErrorAction,
   editProjectSuccessAction,
+  loadTasksAction,
+  selectProjectAction,
 } from "../../redux/ducks/dashboard";
-import { showNotificationAction, toggleProjectModalAction, toggleTaskModalAction, uiLoadingAction } from "../../redux/ducks/ui";
-import { signOut } from "../../services/api/dashboard";
+import { showNotificationAction, toggleProjectAlertAction, toggleProjectModalAction, toggleTaskAlertAction, toggleTaskModalAction, uiLoadingAction } from "../../redux/ducks/ui";
+import { deleteProject, deleteTask, signOut } from "../../services/api/dashboard";
 import { LS_IMAGE, NOTIFICATIONS } from "../../services/consts";
 import { Compose } from '../../models/interfaces/dashboard';
 import { pipe } from "../common";
@@ -30,6 +36,7 @@ import {
   createTask,
   editProject,
 } from './common';
+import { handleModal } from "../ui";
 
 export const handleSignOut = (push: any) => (dispatch: Dispatch<any>) =>
   signOut()
@@ -81,10 +88,7 @@ export const handleCreateProjectResponse = (response: Promise<any>, name: string
       dispatch(showNotificationAction(NOTIFICATIONS().error.project_created));
       dispatch(createProjectErrorAction());
     })
-    .finally(() => dispatch(toggleProjectModalAction({
-      name: 'add',
-      value: false,
-    })));
+    .finally(() => dispatch(handleModal('project', { name: 'add', value: false })));
 }
 
 export const handleCreateTaskResponse = (response: Promise<any>, name: string, clearInputs: () => void) => (dispatch: Dispatch<any>) => {
@@ -99,10 +103,7 @@ export const handleCreateTaskResponse = (response: Promise<any>, name: string, c
       dispatch(showNotificationAction(NOTIFICATIONS().error.task_created));
       dispatch(createTaskErrorAction());
     })
-    .finally(() => dispatch(toggleTaskModalAction({
-      name: 'add',
-      value: false,
-    })));
+    .finally(() => dispatch(handleModal('task', { name: 'add', value: false })));
 }
 
 export const handleEditProjectResponse = (response: Promise<any>, project: Project, clearInputs: () => void) => (dispatch: Dispatch<any>) => {
@@ -123,6 +124,34 @@ export const handleEditProjectResponse = (response: Promise<any>, project: Proje
     })));
 }
 
+export const handleDeleteProjectResponse = (response: Promise<any>) => (dispatch: Dispatch<any>) => {
+  response
+    .then(() => {
+      dispatch(deleteProjectSuccessAction());
+      dispatch(toggleProjectAlertAction(false));
+      dispatch(selectProjectAction(null));
+      dispatch(loadTasksAction(null));
+      dispatch(showNotificationAction(NOTIFICATIONS().success.project_deleted));
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch(deleteProjectErrorAction());
+      dispatch(showNotificationAction(NOTIFICATIONS().error.project_deleted));
+    })
+}
+
+export const handleDeleteTaskResponse = (response: Promise<any>) => (dispatch: Dispatch<any>) => {
+  response
+    .then(() => {
+      dispatch(toggleTaskAlertAction(false));
+      dispatch(showNotificationAction(NOTIFICATIONS().success.task_deleted));
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch(showNotificationAction(NOTIFICATIONS().error.task_deleted));
+    })
+}
+
 export const handleCreateProject = ({ e, data, clearInputs }: Compose) => (dispatch: Dispatch<any>) => {
   dispatch(createProjectAction());
   const args: Compose = { e, data };
@@ -139,4 +168,14 @@ export const handleEditProject = ({ e, data, clearInputs }: Compose) => (dispatc
   dispatch(editProjectAction());
   const args: Compose = { e, data };
   pipe(preventDefault, checkSubmitData('project'), editProject(dispatch, clearInputs))(args);
+}
+
+export const handleDeleteProject = (projectId: string) => (dispatch: Dispatch<any>) => {
+  dispatch(deleteProjectAction());
+  dispatch(handleDeleteProjectResponse(deleteProject(projectId)));
+}
+
+export const handleDeleteTask = (taskId: string) => (dispatch: Dispatch<any>) => {
+  dispatch(deleteTaskAction());
+  dispatch(handleDeleteTaskResponse(deleteTask(taskId)));
 }

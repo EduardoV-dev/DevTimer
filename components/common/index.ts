@@ -10,3 +10,4 @@ export { default as Backdrop } from './backdrop';
 export { default as Notification } from './notification';
 export { default as Modal } from './modal';
 export { default as NoRegister } from './noRegister';
+export { default as Alert } from './alert';

@@ -3,7 +3,9 @@ import { Notification } from '../../../models/interfaces/common';
 import { Modal } from "../../../models/interfaces/dashboard";
 
 const TOGGLE_PROJECT_MODAL: string = 'devtimer/ui/TOGGLE_PROJECT_MODAL';
+const TOGGLE_PROJECT_ALERT: string = 'devtimer/ui/TOGGLE_PROJECT_ALERT';
 const TOGGLE_TASK_MODAL: string = 'devtimer/ui/TOGGLE_TASK_MODAL';
+const TOGGLE_TASK_ALERT: string = 'devtimer/ui/TOGGLE_TASK_ALERT';
 const TOGGLE_MENU: string = 'devtimer/ui/TOGGLE_MENU';
 const UI_LOADING: string = 'devtimer/ui/UI_LOADING';
 const SHOW_NOTIFICATION: string = 'devtimer/ui/SHOW_NOTIFICATION';
@@ -21,6 +23,10 @@ const initialState: UiState = {
       add: false,
       edit: false,
     },
+  },
+  isAlertDisplayed: {
+    project: false,
+    task: false,
   },
   isNotificationShown: false,
   notification: {},
@@ -71,6 +77,22 @@ const uiReducer = (state: UiState = initialState, action: Action): UiState => {
         ...state,
         isNotificationShown: false,
       }
+    case TOGGLE_PROJECT_ALERT:
+      return {
+        ...state,
+        isAlertDisplayed: {
+          ...state.isAlertDisplayed,
+          project: action.payload,
+        }
+      }
+    case TOGGLE_TASK_ALERT:
+      return {
+        ...state,
+        isAlertDisplayed: {
+          ...state.isAlertDisplayed,
+          task: action.payload,
+        }
+      }
     default:
       return { ...state };
   }
@@ -83,8 +105,18 @@ export const toggleProjectModalAction = (state: Modal): Action => ({
   payload: state,
 });
 
+export const toggleProjectAlertAction = (state: boolean): Action => ({
+  type: TOGGLE_PROJECT_ALERT,
+  payload: state,
+});
+
 export const toggleTaskModalAction = (state: Modal): Action => ({
   type: TOGGLE_TASK_MODAL,
+  payload: state,
+});
+
+export const toggleTaskAlertAction = (state: boolean): Action => ({
+  type: TOGGLE_TASK_ALERT,
   payload: state,
 });
 

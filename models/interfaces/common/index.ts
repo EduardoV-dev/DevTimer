@@ -20,6 +20,10 @@ export interface UiState {
     project: FormAction;
     task: FormAction;
   };
+  isAlertDisplayed: {
+    project: false,
+    task: false,
+  };
   isNotificationShown: boolean;
   notification: Notification;
 }

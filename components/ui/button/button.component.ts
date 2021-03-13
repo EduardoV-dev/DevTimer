@@ -61,4 +61,17 @@ export const Btn = styled.button<ButtonProps>`
       box-shadow: 0px 0px 0 2px ${({ theme: { secondary } }) => secondary};
     }
   `}
+
+  ${({ danger }) => danger && css`
+    background-color: ${({ theme }) => theme.danger};
+
+    &:hover,
+    &:focus {
+      background-color: ${({ theme: { dangerHover } }) => dangerHover};
+    }
+
+    &:active {
+      box-shadow: 0px 0px 0 2px ${({ theme: { danger } }) => danger};
+    }
+  `};
 `;

@@ -13,7 +13,7 @@ import {
   ProjectEditForm,
 } from '../../dashboard';
 import { Container, Grid, Headline, Wrapper } from '../../ui';
-import { Notification } from '../../common';
+import { Alert, Notification } from '../../common';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../models/interfaces/common';
 import { IllustrationIcon } from '../../icons';
@@ -89,6 +89,7 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
         </>
       )}
       <Notification />
+      <Alert />
     </Grid>
   );
 }

@@ -7,6 +7,12 @@ const CREATE_PROJECT_ERROR: string = 'devtimer/dashboard/CREATE_PROJECT_ERROR';
 const EDIT_PROJECT: string = 'devtimer/dashboard/EDIT_PROJECT';
 const EDIT_PROJECT_SUCCESS: string = 'devtimer/dashboard/EDIT_PROJECT_SUCCESS';
 const EDIT_PROJECT_ERROR: string = 'devtimer/dashboard/EDIT_PROJECT_ERROR';
+const DELETE_PROJECT: string = 'devtimer/dashboard/DELETE_PROJECT';
+const DELETE_PROJECT_SUCCESS: string = 'devtimer/dashboard/DELETE_PROJECT_SUCCESS';
+const DELETE_PROJECT_ERROR: string = 'devtimer/dashboard/DELETE_PROJECT_ERROR';
+const DELETE_TASK: string = 'devtimer/dashboard/DELETE_TASK';
+const DELETE_TASK_SUCCESS: string = 'devtimer/dashboard/DELETE_TASK_SUCCESS';
+const DELETE_TASK_ERROR: string = 'devtimer/dashboard/DELETE_TASK_ERROR';
 const CREATE_TASK: string = 'devtimer/dashboard/CREATE_TASK';
 const CREATE_TASK_SUCCESS: string = 'devtimer/dashboard/CREATE_TASK_SUCCESS';
 const CREATE_TASK_ERROR: string = 'devtimer/dashboard/CREATE_TASK_ERROR';
@@ -35,6 +41,7 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
   switch (action.type) {
     case CREATE_PROJECT:
     case EDIT_PROJECT:
+    case DELETE_PROJECT:
       return {
         ...state,
         isButtonLoading: {
@@ -45,6 +52,10 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
     case CREATE_PROJECT_SUCCESS:
     case CREATE_PROJECT_ERROR:
     case EDIT_PROJECT_ERROR:
+    case DELETE_PROJECT_SUCCESS:
+    case DELETE_PROJECT_ERROR:
+    case DELETE_TASK_SUCCESS:
+    case DELETE_TASK_ERROR:
       return {
         ...state,
         isButtonLoading: {
@@ -61,7 +72,8 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
         },
         selectedProject: action.payload,
       }
-    case CREATE_TASK: {
+    case CREATE_TASK:
+    case DELETE_TASK:
       return {
         ...state,
         isButtonLoading: {
@@ -69,7 +81,6 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
           task: true,
         }
       }
-    }
     case CREATE_TASK_SUCCESS:
     case CREATE_TASK_ERROR:
       return {
@@ -159,6 +170,18 @@ export const editProjectErrorAction = (): Action => ({
   type: EDIT_PROJECT_ERROR,
 });
 
+export const deleteProjectAction = (): Action => ({
+  type: DELETE_PROJECT,
+});
+
+export const deleteProjectSuccessAction = (): Action => ({
+  type: DELETE_PROJECT_SUCCESS,
+});
+
+export const deleteProjectErrorAction = (): Action => ({
+  type: DELETE_PROJECT_ERROR,
+});
+
 export const createTaskAction = (): Action => ({
   type: CREATE_TASK,
 });
@@ -174,6 +197,18 @@ export const createTaskErrorAction = (): Action => ({
 export const saveProjectFormErrorsAction = (errors: ProjectFormErrors): Action => ({
   type: SAVE_PROJECT_FORM_ERRORS,
   payload: errors,
+});
+
+export const deleteTaskAction = (): Action => ({
+  type: DELETE_TASK,
+});
+
+export const deleteTaskSuccessAction = (): Action => ({
+  type: DELETE_TASK_SUCCESS,
+});
+
+export const deleteTaskErrorAction = (): Action => ({
+  type: DELETE_TASK_ERROR,
 });
 
 export const saveTaskFormErrorsAction = (errors: TaskFormErrors): Action => ({

@@ -11,21 +11,31 @@ export const NOTIFICATIONS = (name: string = ''): NotificationMessages => ({
       title: 'New project created!!',
       message: `The project (${name}) was created successfully!`,
     },
-    task_created: {
-      type: 'success',
-      title: 'New task created!',
-      message: `The task (${name}) was created successfully!`,
-    },
     project_edited: {
       type: 'success',
       title: 'Project edited!',
       message: `The project (${name}) was edited successfully!`,
     },
+    project_deleted: {
+      type: 'success',
+      title: 'Project deleted!',
+      message: `The project was deleted successfully!`,
+    },
+    task_created: {
+      type: 'success',
+      title: 'New task created!',
+      message: `The task (${name}) was created successfully!`,
+    },
     task_edited: {
       type: 'success',
       title: 'Task edited!',
       message: `The task (${name}) was edited successfully!`,
-    }
+    },
+    task_deleted: {
+      type: 'success',
+      title: 'Task deleted!',
+      message: `The task was deleted successfully!`,
+    },
   },
   error: {
     project_created: {
@@ -33,10 +43,30 @@ export const NOTIFICATIONS = (name: string = ''): NotificationMessages => ({
       title: 'Error',
       message: 'DevTimer was not able to create the project!',
     },
+    project_edited: {
+      type: 'error',
+      title: 'Error!',
+      message: `DevTimer was not able to edit the project`,
+    },
+    project_deleted: {
+      type: 'error',
+      title: 'Error!',
+      message: `TDevTimer was not able to delete the project`,
+    },
     task_created: {
       type: 'error',
       title: 'Error',
       message: 'DevTimer was not able to create the task',
+    },
+    task_edited: {
+      type: 'error',
+      title: 'Error!',
+      message: `DevTimer was not able to edit the task`,
+    },
+    task_deleted: {
+      type: 'error',
+      title: 'Error!',
+      message: `DevTimer was not able to delete the task`,
     },
     network: {
       type: 'error',

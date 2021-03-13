@@ -2,6 +2,7 @@ import { Boolean } from '../../types/components';
 
 export interface ButtonProps {
   primary?: Boolean;
+  danger?: Boolean;
   facebook?: Boolean;
   github?: Boolean;
   loading?: Boolean;
