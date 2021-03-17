@@ -7,6 +7,9 @@ const CREATE_PROJECT_ERROR: string = 'devtimer/dashboard/CREATE_PROJECT_ERROR';
 const EDIT_PROJECT: string = 'devtimer/dashboard/EDIT_PROJECT';
 const EDIT_PROJECT_SUCCESS: string = 'devtimer/dashboard/EDIT_PROJECT_SUCCESS';
 const EDIT_PROJECT_ERROR: string = 'devtimer/dashboard/EDIT_PROJECT_ERROR';
+const EDIT_TASK: string = 'devtimer/dashboard/EDIT_TASK';
+const EDIT_TASK_SUCCESS: string = 'devtimer/dashboard/EDIT_TASK_SUCCESS';
+const EDIT_TASK_ERROR: string = 'devtimer/dashboard/EDIT_TASK_ERROR';
 const DELETE_PROJECT: string = 'devtimer/dashboard/DELETE_PROJECT';
 const DELETE_PROJECT_SUCCESS: string = 'devtimer/dashboard/DELETE_PROJECT_SUCCESS';
 const DELETE_PROJECT_ERROR: string = 'devtimer/dashboard/DELETE_PROJECT_ERROR';
@@ -73,6 +76,7 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
         selectedProject: action.payload,
       }
     case CREATE_TASK:
+    case EDIT_TASK:
     case DELETE_TASK:
       return {
         ...state,
@@ -83,11 +87,30 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
       }
     case CREATE_TASK_SUCCESS:
     case CREATE_TASK_ERROR:
+    case DELETE_TASK_ERROR:
+    case DELETE_TASK_SUCCESS:
+    case EDIT_TASK_ERROR:
       return {
         ...state,
         isButtonLoading: {
           ...state.isButtonLoading,
           task: false,
+        }
+      }
+    case EDIT_TASK_SUCCESS:
+      return {
+        ...state,
+        isButtonLoading: {
+          ...state.isButtonLoading,
+          task: false,
+        },
+        selectedTask: {
+          ...action.payload,
+          latestUpdate: Date.now(),
+        },
+        selectedProject: {
+          ...state.selectedProject,
+          latestUpdate: Date.now(),
         }
       }
     case SAVE_PROJECT_FORM_ERRORS:
@@ -168,6 +191,19 @@ export const editProjectSuccessAction = (project: Project): Action => ({
 
 export const editProjectErrorAction = (): Action => ({
   type: EDIT_PROJECT_ERROR,
+});
+
+export const editTaskAction = (): Action => ({
+  type: EDIT_TASK,
+});
+
+export const editTaskSuccessAction = (task: Task): Action => ({
+  type: EDIT_TASK_SUCCESS,
+  payload: task,
+});
+
+export const editTaskErrorAction = (): Action => ({
+  type: EDIT_TASK_ERROR,
 });
 
 export const deleteProjectAction = (): Action => ({

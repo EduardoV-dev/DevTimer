@@ -8,15 +8,17 @@ import { Button, Container, P, Span } from '../../ui';
 import s from './alert.module.scss';
 
 interface Props {
-  type?: RegisterType;
   state: boolean;
-  idForDeleting: string;
+  type: RegisterType;
+  taskId?: string;
+  projectId?: string;
 }
 
 const Alert: React.FC<Props> = ({
   type,
   state,
-  idForDeleting,
+  taskId,
+  projectId,
 }): JSX.Element => {
   const dispatch = useDispatch();
 
@@ -52,8 +54,8 @@ const Alert: React.FC<Props> = ({
               className={s.alert_button}
               onClick={() => dispatch(
                 type === 'project'
-                  ? handleDeleteProject(idForDeleting)
-                  : handleDeleteTask(idForDeleting)
+                  ? handleDeleteProject(projectId)
+                  : handleDeleteTask(taskId, projectId)
               )}
             >
               Delete {type}

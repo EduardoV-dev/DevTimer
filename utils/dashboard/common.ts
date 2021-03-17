@@ -12,8 +12,8 @@ import {
   saveProjectFormErrorsAction,
   saveTaskFormErrorsAction,
 } from "../../redux/ducks/dashboard";
-import { createNewProject, createNewTask, editExistingProject } from "../../services/api/dashboard";
-import { handleCreateProjectResponse, handleCreateTaskResponse, handleEditProjectResponse } from './handlers';
+import { createNewProject, createNewTask, editExistingProject, editExistingTask } from "../../services/api/dashboard";
+import { handleCreateProjectResponse, handleCreateTaskResponse, handleEditProjectResponse, handleEditTaskResponse } from './handlers';
 
 export const preventDefault = ({ e, data }: Compose): Project | Task => {
   e.preventDefault();
@@ -102,4 +102,15 @@ export const editProject = (dispatch: Dispatch<any>, clearInputs: VoidFunction) 
 
   dispatch(saveProjectFormErrorsAction({}));
   dispatch(handleEditProjectResponse(editExistingProject(data), data, clearInputs));
+}
+
+export const editTask = (dispatch: Dispatch<any>, clearInputs: VoidFunction) => ({
+  errors,
+  data,
+}: Compose) => {
+  if (JSON.stringify(errors) !== '{}')
+    return dispatch(saveTaskFormErrorsAction(errors));
+
+  dispatch(saveTaskFormErrorsAction({}));
+  dispatch(handleEditTaskResponse(editExistingTask(data), data, clearInputs));
 }

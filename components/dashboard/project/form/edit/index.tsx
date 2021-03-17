@@ -36,7 +36,7 @@ const ProjectEditForm: React.FC<Props> = (): JSX.Element => {
 
   const { name, description, githubRepositoryLink } = data;
 
-  useEffect(() => setData({ ...selectedProject }), [edit]);
+  useEffect(() => edit && setData({ ...selectedProject }), [edit]);
 
   return (
     <Modal type='project' action='edit'>

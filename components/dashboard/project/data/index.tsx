@@ -49,7 +49,7 @@ const ProjectData: React.FC<Props> = (): JSX.Element => {
           description={handleFormatDate(createdAt)}
         />
         <ProjectInfo
-          title='Lastest update'
+          title='Latest update'
           description={handleFormatDate(latestUpdate)}
         />
         <ProjectInfo
@@ -58,7 +58,7 @@ const ProjectData: React.FC<Props> = (): JSX.Element => {
           link={!githubRepositoryLink ? 'false' : 'true'}
         />
       </Container>
-      <Alert type='project' state={project} idForDeleting={selectedProject.id}/>
+      <Alert type='project' state={project} projectId={selectedProject.id}/>
     </>
   );
 }

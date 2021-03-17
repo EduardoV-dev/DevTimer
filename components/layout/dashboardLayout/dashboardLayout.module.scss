@@ -1,5 +1,3 @@
-@import '../../../styles/responsive';
-
 .dashboardLayout {
   &_initialView {
     max-width: 30rem;
@@ -10,10 +8,6 @@
     margin-bottom: 3rem;
     margin-top: 3rem;
     text-align: center;
-
-    @include responsive(lg) {
-      margin-top: 0;
-    }
   }
 
   &_illustration {

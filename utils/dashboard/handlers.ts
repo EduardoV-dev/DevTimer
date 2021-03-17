@@ -20,10 +20,19 @@ import {
   editProjectAction,
   editProjectErrorAction,
   editProjectSuccessAction,
+  editTaskAction,
+  editTaskErrorAction,
+  editTaskSuccessAction,
+  loadProjectsAction,
   loadTasksAction,
   selectProjectAction,
 } from "../../redux/ducks/dashboard";
-import { showNotificationAction, toggleProjectAlertAction, toggleProjectModalAction, toggleTaskAlertAction, toggleTaskModalAction, uiLoadingAction } from "../../redux/ducks/ui";
+import {
+  showNotificationAction,
+  toggleProjectAlertAction,
+  toggleTaskAlertAction,
+  uiLoadingAction,
+} from "../../redux/ducks/ui";
 import { deleteProject, deleteTask, signOut } from "../../services/api/dashboard";
 import { LS_IMAGE, NOTIFICATIONS } from "../../services/consts";
 import { Compose } from '../../models/interfaces/dashboard';
@@ -35,8 +44,10 @@ import {
   createProject,
   createTask,
   editProject,
+  editTask,
 } from './common';
 import { handleModal } from "../ui";
+import { OnChange } from "../../models/types/events";
 
 export const handleSignOut = (push: any) => (dispatch: Dispatch<any>) =>
   signOut()
@@ -45,7 +56,7 @@ export const handleSignOut = (push: any) => (dispatch: Dispatch<any>) =>
       dispatch(cleanProjectsListAction());
       push('/');
     })
-    .catch((err: any) => console.log(err.message));
+    .catch(err => console.log(err.message));
 
 export const handleAvatarPictureURL = (user: any): User => ({
   displayName: user.displayName,
@@ -118,10 +129,22 @@ export const handleEditProjectResponse = (response: Promise<any>, project: Proje
       dispatch(showNotificationAction(NOTIFICATIONS().error.project_edited));
       dispatch(editProjectErrorAction());
     })
-    .finally(() => dispatch(toggleProjectModalAction({
-      name: 'edit',
-      value: false,
-    })));
+    .finally(() => dispatch(handleModal('project', { name: 'edit', value: false })));
+}
+
+export const handleEditTaskResponse = (response: Promise<any>, task: Task, clearInputs: () => void) => (dispatch: Dispatch<any>) => {
+  response
+    .then(() => {
+      dispatch(showNotificationAction(NOTIFICATIONS(task.name).success.project_edited));
+      dispatch(editTaskSuccessAction(task));
+      clearInputs();
+    })
+    .catch(err => {
+      console.log(err, task);
+      dispatch(showNotificationAction(NOTIFICATIONS().error.project_edited));
+      dispatch(editTaskErrorAction());
+    })
+    .finally(() => dispatch(handleModal('task', { name: 'edit', value: false })));
 }
 
 export const handleDeleteProjectResponse = (response: Promise<any>) => (dispatch: Dispatch<any>) => {
@@ -137,7 +160,7 @@ export const handleDeleteProjectResponse = (response: Promise<any>) => (dispatch
       console.log(err);
       dispatch(deleteProjectErrorAction());
       dispatch(showNotificationAction(NOTIFICATIONS().error.project_deleted));
-    })
+    });
 }
 
 export const handleDeleteTaskResponse = (response: Promise<any>) => (dispatch: Dispatch<any>) => {
@@ -170,12 +193,18 @@ export const handleEditProject = ({ e, data, clearInputs }: Compose) => (dispatc
   pipe(preventDefault, checkSubmitData('project'), editProject(dispatch, clearInputs))(args);
 }
 
+export const handleEditTask = ({ e, data, clearInputs }: Compose) => (dispatch: Dispatch<any>) => {
+  dispatch(editTaskAction());
+  const args: Compose = { e, data };
+  pipe(preventDefault, checkSubmitData('task'), editTask(dispatch, clearInputs))(args);
+}
+
 export const handleDeleteProject = (projectId: string) => (dispatch: Dispatch<any>) => {
   dispatch(deleteProjectAction());
   dispatch(handleDeleteProjectResponse(deleteProject(projectId)));
 }
 
-export const handleDeleteTask = (taskId: string) => (dispatch: Dispatch<any>) => {
+export const handleDeleteTask = (taskId: string, projectId: string) => (dispatch: Dispatch<any>) => {
   dispatch(deleteTaskAction());
-  dispatch(handleDeleteTaskResponse(deleteTask(taskId)));
+  dispatch(handleDeleteTaskResponse(deleteTask(taskId, projectId)));
 }

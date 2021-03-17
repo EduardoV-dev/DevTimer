@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../models/interfaces/common';
 import { ProjectList } from '../..';
@@ -10,6 +10,9 @@ import { handleSignOut } from '../../../../utils/dashboard/handlers';
 import { handleModal, handleMenu } from '../../../../utils/ui';
 import cn from 'classnames';
 import s from './menu.module.scss';
+import { Project } from '../../../../models/interfaces/dashboard';
+import { OnChange } from '../../../../models/types/events';
+import useSearch from '../../../../hooks/useSearch';
 
 interface Props {
   type: 'aside' | 'float';
@@ -19,7 +22,12 @@ const Menu: React.FC<Props> = ({
   type,
 }): JSX.Element => {
   const dispatch = useDispatch();
-  const { isMenuDisplayed } = useSelector((state: RootState) => state.ui);
+  const {
+    dashboard: { projects },
+    ui: { isMenuDisplayed }
+  } = useSelector((state: RootState) => state);
+  const { filteredData, handleOnChange } = useSearch<Project>(projects);
+
   const { push } = useRouter();
 
   const classNames = cn(s.menu, {
@@ -59,8 +67,12 @@ const Menu: React.FC<Props> = ({
           <SearchInput
             placeholder='Search a project'
             className={s.menu_search}
+            onChange={handleOnChange}
           />
-          <ProjectList className={s.menu_projects} />
+          <ProjectList
+            className={s.menu_projects}
+            filteredProjects={filteredData}
+          />
           <Button
             type='button'
             fontColor={({ theme }) => theme.dark}

@@ -11,9 +11,10 @@ import {
   Menu,
   TaskAddForm,
   ProjectEditForm,
+  TaskEditForm,
 } from '../../dashboard';
 import { Container, Grid, Headline, Wrapper } from '../../ui';
-import { Alert, Notification } from '../../common';
+import { Notification } from '../../common';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../models/interfaces/common';
 import { IllustrationIcon } from '../../icons';
@@ -28,6 +29,7 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
     dashboard: {
       selectedProject,
       projects,
+      selectedTask,
     },
     signIn: { user: { uid } },
   } = useSelector((state: RootState) => state);
@@ -50,7 +52,7 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
             <Container className={s.dashboardLayout_initialView}>
               <Wrapper>
                 <Headline className={s.dashboardLayout_title}>
-                  {!projects.length ? 'Create a project to display the panel' : 'Select a project to display the panel'}
+                  Create or select a project to display the panel
                 </Headline>
                 <IllustrationIcon
                   className={s.dashboardLayout_illustration}
@@ -88,8 +90,10 @@ const DashboardLayout: React.FC<Props> = (): JSX.Element => {
           <TaskAddForm />
         </>
       )}
+      {selectedProject && selectedTask && (
+        <TaskEditForm />
+      )}
       <Notification />
-      <Alert />
     </Grid>
   );
 }

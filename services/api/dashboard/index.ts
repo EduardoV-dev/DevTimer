@@ -37,7 +37,7 @@ const updateProjectLatestUpdate = (projectId: string) =>
   db.collection(PROJECTS).doc(projectId).update({ latestUpdate: Date.now() });
 
 const updateTaskLatestUpdate = (taskId: string) =>
-  db.collection(PROJECTS).doc(taskId).update({ latestUpdate: Date.now() });
+  db.collection(TASKS).doc(taskId).update({ latestUpdate: Date.now() });
 
 export const createNewTask = (task: Task) => {
   const now: number = Date.now();
@@ -66,12 +66,13 @@ export const getTasksById = (projectId: string) => (dispatch: Dispatch<any>): vo
 }
 
 export const editExistingProject = (project: Project) =>
-  updateProjectLatestUpdate(project.id)
-    .then(() => db.collection(PROJECTS).doc(project.id).update(project));
+  db.collection(PROJECTS).doc(project.id).update(project)
+    .then(() => updateProjectLatestUpdate(project.id));
 
 export const editExistingTask = (task: Task) =>
-  updateTaskLatestUpdate(task.id)
-    .then(() => db.collection(TASKS).doc(task.id).update(task));
+  db.collection(TASKS).doc(task.id).update(task)
+    .then(() => updateProjectLatestUpdate(task.projectId))
+    .then(() => updateTaskLatestUpdate(task.id));
 
 export const deleteProject = (projectId: string) =>
   updateProjectLatestUpdate(projectId)
@@ -87,6 +88,6 @@ export const deleteProject = (projectId: string) =>
       })
     ));
 
-export const deleteTask = (taskId: string) =>
-  updateProjectLatestUpdate(taskId)
-    .then(() => db.collection(TASKS).doc(taskId).delete());
+export const deleteTask = (taskId: string, projectId: string) =>
+  db.collection(TASKS).doc(taskId).delete()
+    .then(() => updateProjectLatestUpdate(projectId));

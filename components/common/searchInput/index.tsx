@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import { Boolean } from '../../../models/types/components';
 import { SearchIcon } from '../../icons';
 import { Container, Input } from '../../ui';
 import cn from 'classnames';
 import s from './searchInput.module.scss';
 import { OnChange } from '../../../models/types/events';
+import { Project } from '../../../models/interfaces/dashboard';
 
 interface Props {
   placeholder: string;
   noStyled?: Boolean;
   className?: string;
   onChange?: (e: OnChange) => void;
+  setSearchInput?: React.Dispatch<SetStateAction<Project[]>>;
 }
 
 const SearchInput: React.FC<Props> = ({

@@ -7,6 +7,7 @@ import s from './formGroup.module.scss';
 import { OnChange } from '../../../models/types/events';
 
 interface Props {
+  children?: JSX.Element | JSX.Element[];
   labelText: string;
   componentType: FormGroupType;
   type?: string;
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const FormGroup: React.FC<Props> = ({
+  children,
   labelText,
   componentType,
   type,
@@ -36,6 +38,7 @@ const FormGroup: React.FC<Props> = ({
       <Label className={s.formGroup_label}>{labelText}</Label>
       <formInput.component
         {... {
+          children,
           type,
           placeholder,
           name,
