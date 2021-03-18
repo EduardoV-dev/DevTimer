@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Task } from '../../..';
 import { RootState } from '../../../../../models/interfaces/common';
-import { Task as TaskInter} from '../../../../../models/interfaces/dashboard';
+import { Task as TaskInter } from '../../../../../models/interfaces/dashboard';
 import { getTasksById } from '../../../../../services/api/dashboard';
 import { NoRegister } from '../../../../common';
 import { Container, Ul } from '../../../../ui';
 import s from './taskList.module.scss';
 
-interface Props { 
+interface Props {
   className?: string;
   filteredTasks?: TaskInter[];
 }
@@ -16,14 +16,7 @@ interface Props {
 const TasksList: React.FC<Props> = ({
   filteredTasks,
 }): JSX.Element => {
-  const dispatch = useDispatch();
-  const {
-    selectedProject: { id },
-    tasks,
-  } = useSelector((state: RootState) => state.dashboard);
-
-  useEffect(() => { !tasks && dispatch(getTasksById(id)) }, [id]);
-  if (!tasks) return null;
+  const { tasks } = useSelector((state: RootState) => state.dashboard);
 
   return (
     <Container>

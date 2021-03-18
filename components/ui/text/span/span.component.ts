@@ -38,6 +38,7 @@ export const SpanComp = styled.span<Props>`
     padding: 0.5rem 1rem;
     border-radius: 30px;
     cursor: default;
+    user-select: none;
     transition: all 0.3s ease;
 
     &:hover {

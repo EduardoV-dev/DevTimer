@@ -14,7 +14,7 @@ const useSearch = <T>(data: T[]) => {
       project.name.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())
     ));
 
-  useEffect(() => handleSearch(), [searchTerm, data]);
+  useEffect(() => data && handleSearch(), [searchTerm, data]);
 
   return { filteredData, handleOnChange };
 }

@@ -53,10 +53,10 @@ export const createNewTask = (task: Task) => {
     .then(() => db.collection(TASKS).add(newTask));
 }
 
-export const getTasksById = (projectId: string) => (dispatch: Dispatch<any>): void => {
+export const getTasksById = (projectId: string, orderBy: string) => (dispatch: Dispatch<any>): void => {
   if (!projectId) return;
   try {
-    db.collection(TASKS).where('projectId', '==', projectId).orderBy('latestUpdate', 'desc').onSnapshot(snapshot => {
+    db.collection(TASKS).where('projectId', '==', projectId).orderBy(orderBy, 'desc').onSnapshot(snapshot => {
       const tasks = snapshot.docs.map(task => ({ id: task.id, ...task.data() }));
       dispatch(loadTasksAction(tasks));
     });
