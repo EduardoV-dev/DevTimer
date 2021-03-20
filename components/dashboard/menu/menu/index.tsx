@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../models/interfaces/common';
 import { ProjectList } from '../..';
@@ -8,11 +8,10 @@ import { Button, Container, Span, Title, Wrapper } from '../../../ui';
 import { useRouter } from 'next/router';
 import { handleSignOut } from '../../../../utils/dashboard/handlers';
 import { handleModal, handleMenu } from '../../../../utils/ui';
+import { Project } from '../../../../models/interfaces/dashboard';
+import useSearch from '../../../../hooks/useSearch';
 import cn from 'classnames';
 import s from './menu.module.scss';
-import { Project } from '../../../../models/interfaces/dashboard';
-import { OnChange } from '../../../../models/types/events';
-import useSearch from '../../../../hooks/useSearch';
 
 interface Props {
   type: 'aside' | 'float';

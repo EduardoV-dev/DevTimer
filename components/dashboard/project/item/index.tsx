@@ -22,8 +22,8 @@ const Project: React.FC<Props> = ({
 
   return (  
     <Li className={classNames} onClick={() => dispatch(selectProjectAction(project))}>
-      <P>{name}</P>
-      <ChevronIcon rotate='true' width={12} height={12} />
+      <P className={s.project_name}>{name}</P>
+      <ChevronIcon width={12} height={12} />
     </Li>
   );
 }

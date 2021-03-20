@@ -57,3 +57,9 @@ export interface Modal {
   name: FormAction;
   value: boolean;
 }
+
+export interface Time {
+  secs: number;
+  mins: number;
+  hrs: number;
+}

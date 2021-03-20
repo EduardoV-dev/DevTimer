@@ -1,10 +1,8 @@
 .project {
-  display: flex;
   background-color: #fff !important;
   padding: 0.5rem;
-  justify-content: space-between;
-  align-items: center;
   user-select: none;
+  position: relative;
   transition: all 0.2s ease;
 
   &_name {
@@ -46,6 +44,14 @@
         width: 25%;
       }
     }
+  }
+
+  & svg {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: 1%;
+    transform: translateY(-50%) rotate(180deg);
   }
 
   &_active p {

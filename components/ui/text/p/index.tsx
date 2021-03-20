@@ -3,7 +3,7 @@ import { Bold } from '../../../../models/interfaces/components';
 import { P as Pgph } from './p.component';
 
 interface Props extends Bold {
-  children: (JSX.Element | string)[] | string;
+  children: (JSX.Element | string)[] | string | JSX.Element;
   className?: string;
   fontColor?: any;
 }
