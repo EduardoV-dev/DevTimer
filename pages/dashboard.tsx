@@ -1,5 +1,6 @@
 import React from 'react';
-import { DashboardLayout } from '../components/layout/';
+import Head from 'next/head';
+import { DashboardLayout } from '../components/layout';
 
 interface Props {
 
@@ -7,7 +8,12 @@ interface Props {
 
 const Dashboard: React.FC<Props> = (): JSX.Element => {
   return (
-    <DashboardLayout />
+    <>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
+      <DashboardLayout />
+    </>
   );
 }
 

@@ -30,7 +30,9 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang='en'>
-        <Head />
+        <Head>
+          <link rel="shortcut icon" href="/devtimer-favicon.ico" type="image/x-icon"/>
+        </Head>
         <body>
           <Main />
           <NextScript />
