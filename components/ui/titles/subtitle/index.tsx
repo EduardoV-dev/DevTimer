@@ -1,10 +1,10 @@
 import React from 'react';
+import { Titles } from '../../../../models/interfaces/components';
 import { H3 } from './subtitle.component';
 
-interface Props {
+interface Props extends Titles {
   children: string;
   className?: string;
-  uppercase?: boolean;
 }
 
 const Subtitle: React.FC<Props> = (props): JSX.Element => {

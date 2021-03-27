@@ -23,7 +23,7 @@ const SignIn: React.FC<Props> = (): JSX.Element => {
       className={s.signIn}
     >
       <Logo className={s.signIn_logo} />
-      <Subtitle uppercase className={s.signIn_subtitle}>
+      <Subtitle uppercase='true' className={s.signIn_subtitle}>
         Sign in to start working with this great tool.
       </Subtitle>
       <Title className={s.signIn_title}>

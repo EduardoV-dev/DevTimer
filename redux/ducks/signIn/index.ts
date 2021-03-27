@@ -1,4 +1,4 @@
-import { Action, SignInError, SignInState } from "../../../models/interfaces/common";
+import { Action, SignInState } from "../../../models/interfaces/common";
 import { Provider } from "../../../models/types/common";
 
 const SAVE_USER: string = 'devtimer/signIn/SAVE_USER';
