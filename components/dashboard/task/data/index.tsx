@@ -21,8 +21,6 @@ const TaskData: React.FC<Props> = (): JSX.Element => {
     ui: { isAlertDisplayed: { task } },
   } = useSelector((state: RootState) => state);
 
-  console.log(selectedTask);
-
   if (!selectedTask) return <Container className={s.taskData} card='true' />;
 
   const { name, description, createdAt, latestUpdate, state } = selectedTask;

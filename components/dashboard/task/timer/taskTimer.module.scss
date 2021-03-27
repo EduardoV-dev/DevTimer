@@ -7,7 +7,6 @@
   padding: 1rem;
   border-radius: 5px;
   position: relative;
-  z-index: 2;
 
   &_time {
     font-size: 3rem !important;
@@ -17,5 +16,14 @@
 
   &_button {
     margin-top: 1.2rem;
+  }
+
+  &_control {
+    position: relative;
+    z-index: 15;
+  }
+
+  &_backdrop {
+    z-index: 8 !important;
   }
 }

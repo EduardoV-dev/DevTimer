@@ -39,6 +39,7 @@ const useTimer = () => {
   const handleOnClick = () => {
     setLoading(true);
     handleNewTimeOnTask(timeValues, id, projectId, dispatch)
+      .then(() => dispatch(timingStateAction(null)))
       .finally(() => setLoading(false));
   }
 

@@ -1,17 +1,16 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import useTimer from '../../../../hooks/useTimer';
 import { RootState } from '../../../../models/interfaces/common';
 import { Backdrop } from '../../../common';
 import { PauseIcon, PlayIcon } from '../../../icons';
 import { Button, Container, P, Span, Title } from '../../../ui';
+import useTimer from '../../../../hooks/useTimer';
 import s from './taskTimer.module.scss';
 
 interface Props { }
 
 const TaskTimer: React.FC<Props> = (): JSX.Element => {
   const { isTiming } = useSelector((state: RootState) => state.dashboard);
-
   const { timeValues, loading, start, pause, handleOnClick } = useTimer();
   const { secs, mins, hrs } = timeValues;
 
@@ -27,7 +26,7 @@ const TaskTimer: React.FC<Props> = (): JSX.Element => {
         </P>
         {!isTiming
           ? <PlayIcon onClick={start} />
-          : <PauseIcon onClick={pause} />
+          : <PauseIcon onClick={pause} className={s.taskTimer_control} />
         }
         {isTiming !== null && !isTiming && (
           <Button
@@ -41,7 +40,7 @@ const TaskTimer: React.FC<Props> = (): JSX.Element => {
         )}
       </Container>
       {isTiming && (
-        <Backdrop />
+        <Backdrop className={s.taskTimer_backdrop} />
       )}
     </>
   );
