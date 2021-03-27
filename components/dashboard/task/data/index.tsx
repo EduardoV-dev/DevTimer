@@ -14,16 +14,18 @@ interface Props { }
 const TaskData: React.FC<Props> = (): JSX.Element => {
   const dispatch = useDispatch();
   const {
-    dashboard: { 
+    dashboard: {
       selectedTask,
       selectedProject,
     },
     ui: { isAlertDisplayed: { task } },
   } = useSelector((state: RootState) => state);
 
-  if (!selectedTask) return null;
+  console.log(selectedTask);
 
-  const { name, description, createdAt, latestUpdate, state, time } = selectedTask;
+  if (!selectedTask) return <Container className={s.taskData} card='true' />;
+
+  const { name, description, createdAt, latestUpdate, state } = selectedTask;
 
   return (
     <>
@@ -63,7 +65,12 @@ const TaskData: React.FC<Props> = (): JSX.Element => {
           <TaskTimer />
         </Container>
       </Container>
-      <Alert type='task' state={task} taskId={selectedTask.id}  projectId={selectedProject.id} />
+      <Alert
+        type='task'
+        state={task}
+        taskId={selectedTask.id}
+        projectId={selectedProject.id}
+      />
     </>
   );
 }

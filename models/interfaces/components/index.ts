@@ -34,3 +34,8 @@ export interface PrivateRoutingConfig {
   user: any;
   push: any;
 }
+
+export interface BadgeOrderBy {
+  latest: boolean;
+  name: boolean;
+}

@@ -40,7 +40,7 @@ export interface Task {
   name?: string;
   description?: string;
   id?: string;
-  time?: number;
+  time?: Time;
   latestUpdate?: number;
   createdAt?: number;
   state?: TaskStatusType;

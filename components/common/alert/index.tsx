@@ -1,6 +1,7 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Backdrop } from '..';
+import { RootState } from '../../../models/interfaces/common';
 import { RegisterType } from '../../../models/types/common';
 import { toggleProjectAlertAction, toggleTaskAlertAction } from '../../../redux/ducks/ui';
 import { handleDeleteProject, handleDeleteTask } from '../../../utils/dashboard/handlers';
@@ -20,6 +21,7 @@ const Alert: React.FC<Props> = ({
   taskId,
   projectId,
 }): JSX.Element => {
+  const { isButtonLoading } = useSelector((state: RootState) => state.dashboard);
   const dispatch = useDispatch();
 
   return (
@@ -52,6 +54,8 @@ const Alert: React.FC<Props> = ({
               type='button'
               github='true'
               className={s.alert_button}
+              loading={isButtonLoading[type] ? 'true' : 'false'}
+              disabled={isButtonLoading[type]}
               onClick={() => dispatch(
                 type === 'project'
                   ? handleDeleteProject(projectId)

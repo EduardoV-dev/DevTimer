@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { Project, Task } from "../../../models/interfaces/dashboard";
+import { Project, Task, Time } from "../../../models/interfaces/dashboard";
 import { loadProjectsAction, loadTasksAction } from "../../../redux/ducks/dashboard";
 import { showNotificationAction } from "../../../redux/ducks/ui";
 import { NOTIFICATIONS, PROJECTS, TASKS } from "../../consts";
@@ -47,16 +47,21 @@ export const createNewTask = (task: Task) => {
     createdAt: now,
     latestUpdate: now,
     state: 'todo',
+    time: {
+      secs: 0,
+      mins: 0,
+      hrs: 0,
+    },
   }
 
   return updateProjectLatestUpdate(task.projectId)
     .then(() => db.collection(TASKS).add(newTask));
 }
 
-export const getTasksById = (projectId: string, orderBy: string) => (dispatch: Dispatch<any>): void => {
+export const getTasksById = (projectId: string) => (dispatch: Dispatch<any>): void => {
   if (!projectId) return;
   try {
-    db.collection(TASKS).where('projectId', '==', projectId).orderBy(orderBy, 'desc').onSnapshot(snapshot => {
+    db.collection(TASKS).where('projectId', '==', projectId).orderBy('latestUpdate', 'desc').onSnapshot(snapshot => {
       const tasks = snapshot.docs.map(task => ({ id: task.id, ...task.data() }));
       dispatch(loadTasksAction(tasks));
     });
@@ -91,3 +96,8 @@ export const deleteProject = (projectId: string) =>
 export const deleteTask = (taskId: string, projectId: string) =>
   db.collection(TASKS).doc(taskId).delete()
     .then(() => updateProjectLatestUpdate(projectId));
+
+export const newTimeOnTask = (time: Time, taskId: string, projectId: string) =>
+  db.collection(TASKS).doc(taskId).update({ time, state: 'progress' })
+    .then(() => updateProjectLatestUpdate(projectId))
+    .then(() => updateTaskLatestUpdate(taskId));

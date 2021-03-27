@@ -36,6 +36,11 @@ export const NOTIFICATIONS = (name: string = ''): NotificationMessages => ({
       title: 'Task deleted!',
       message: `The task was deleted successfully!`,
     },
+    task_time: {
+      type: 'success',
+      title: 'Time saved!',
+      message: `A new time was added on this task!`,
+    },
   },
   error: {
     project_created: {
@@ -82,6 +87,11 @@ export const NOTIFICATIONS = (name: string = ''): NotificationMessages => ({
       type: 'error',
       title: 'Error',
       message: `DevTimer was not able to load the project's tasks, check your internet connection!`,
+    },
+    task_time: {
+      type: 'error',
+      title: 'Error',
+      message: `DevTimer was not able to save the new time, check your internet connection!`,
     },
   }
 });

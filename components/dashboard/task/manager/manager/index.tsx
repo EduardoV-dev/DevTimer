@@ -1,29 +1,35 @@
 import React from 'react';
 import { TaskList, TaskManagerHead } from '../../..';
-import useSearch from '../../../../../hooks/useSearch';
+import useSearch from '../../../../../hooks/useSearchAndFilter';
 import { Task } from '../../../../../models/interfaces/dashboard';
 import { TaskOrderBy } from '../../../../../models/types/common';
-import withTaskSearch from '../../../../hoc/withTaskSearch';
+import withTaskSearch from '../../../../hoc/withTaskDataFetch';
 import { Container } from '../../../../ui';
 
 interface Props {
   tasks?: Task[];
-  orderBy: TaskOrderBy;
-  setOrderBy: React.Dispatch<React.SetStateAction<TaskOrderBy>>;
+  active: any;
+  handleOrder: (orderBy: TaskOrderBy) => void;
 }
 
 const TasksManager: React.FC<Props> = ({
   tasks,
-  setOrderBy,
 }): JSX.Element => {
-  const { filteredData, handleOnChange } = useSearch<Task>(tasks);
+  const {
+    order,
+    filteredData,
+    handleOnChange,
+    handleOrderChange,
+  } = useSearch(tasks);
 
   return (
     <Container card='true'>
       <TaskManagerHead
         onChange={handleOnChange}
         {... {
-          setOrderBy,
+          tasks,
+          order,
+          handleOrderChange,
         }}
       />
       <TaskList

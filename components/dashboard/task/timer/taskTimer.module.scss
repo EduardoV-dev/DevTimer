@@ -6,6 +6,8 @@
   min-height: 10rem;
   padding: 1rem;
   border-radius: 5px;
+  position: relative;
+  z-index: 2;
 
   &_time {
     font-size: 3rem !important;

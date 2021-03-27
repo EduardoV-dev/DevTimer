@@ -42,7 +42,11 @@
     border-radius: 5px;
     height: 12.5rem;
     overflow-y: auto;
-    max-width: 15.625rem;
+    width: 100%;
+
+    @include responsive(lg) {
+      max-width: 15.625rem;
+    }
   }
 
   &_addProject {

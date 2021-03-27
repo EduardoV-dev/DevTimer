@@ -48,6 +48,7 @@ export interface DashboardState {
   taskFormErrors: TaskFormErrors;
   tasks: Task[];
   selectedTask: null | Task;
+  isTiming: boolean | null;
 }
 
 export interface Action {
@@ -63,6 +64,7 @@ export interface NotificationMessages {
     task_edited: Notification;
     project_deleted?: Notification;
     task_deleted?: Notification;
+    task_time?: Notification;
   },
   error: {
     project_created: Notification;
@@ -74,6 +76,7 @@ export interface NotificationMessages {
     network: Notification;
     getProjectsById: Notification;
     getTasksById: Notification;
+    task_time?: Notification;
   },
 }
 

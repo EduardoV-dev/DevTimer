@@ -3,6 +3,7 @@ import {
   Project,
   Task,
   TaskStateQuantity,
+  Time,
   User,
 } from "../../models/interfaces/dashboard";
 import {
@@ -17,13 +18,14 @@ import {
   deleteProjectErrorAction,
   deleteProjectSuccessAction,
   deleteTaskAction,
+  deleteTaskErrorAction,
+  deleteTaskSuccessAction,
   editProjectAction,
   editProjectErrorAction,
   editProjectSuccessAction,
   editTaskAction,
   editTaskErrorAction,
   editTaskSuccessAction,
-  loadProjectsAction,
   loadTasksAction,
   selectProjectAction,
 } from "../../redux/ducks/dashboard";
@@ -33,7 +35,7 @@ import {
   toggleTaskAlertAction,
   uiLoadingAction,
 } from "../../redux/ducks/ui";
-import { deleteProject, deleteTask, signOut } from "../../services/api/dashboard";
+import { deleteProject, deleteTask, newTimeOnTask, signOut } from "../../services/api/dashboard";
 import { LS_IMAGE, NOTIFICATIONS } from "../../services/consts";
 import { Compose } from '../../models/interfaces/dashboard';
 import { pipe } from "../common";
@@ -47,7 +49,6 @@ import {
   editTask,
 } from './common';
 import { handleModal } from "../ui";
-import { OnChange } from "../../models/types/events";
 
 export const handleSignOut = (push: any) => (dispatch: Dispatch<any>) =>
   signOut()
@@ -166,11 +167,13 @@ export const handleDeleteProjectResponse = (response: Promise<any>) => (dispatch
 export const handleDeleteTaskResponse = (response: Promise<any>) => (dispatch: Dispatch<any>) => {
   response
     .then(() => {
+      dispatch(deleteTaskSuccessAction());
       dispatch(toggleTaskAlertAction(false));
       dispatch(showNotificationAction(NOTIFICATIONS().success.task_deleted));
     })
     .catch(err => {
       console.log(err);
+      dispatch(deleteTaskErrorAction());
       dispatch(showNotificationAction(NOTIFICATIONS().error.task_deleted));
     })
 }
@@ -208,3 +211,17 @@ export const handleDeleteTask = (taskId: string, projectId: string) => (dispatch
   dispatch(deleteTaskAction());
   dispatch(handleDeleteTaskResponse(deleteTask(taskId, projectId)));
 }
+
+export const handleNewTimeOnTask = (time: Time, taskId: string, projectId: string, dispatch: Dispatch<any>)=>
+  new Promise((res, rej) =>
+    newTimeOnTask(time, taskId, projectId)
+      .then(() => {
+        dispatch(showNotificationAction(NOTIFICATIONS().success.task_time));
+        res('');
+      })
+      .catch((e) => {
+        dispatch(showNotificationAction(NOTIFICATIONS().error.task_time));
+        console.log(e);
+        rej(e);
+      })
+  );

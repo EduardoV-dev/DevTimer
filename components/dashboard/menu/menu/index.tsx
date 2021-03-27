@@ -8,8 +8,7 @@ import { Button, Container, Span, Title, Wrapper } from '../../../ui';
 import { useRouter } from 'next/router';
 import { handleSignOut } from '../../../../utils/dashboard/handlers';
 import { handleModal, handleMenu } from '../../../../utils/ui';
-import { Project } from '../../../../models/interfaces/dashboard';
-import useSearch from '../../../../hooks/useSearch';
+import useSearch from '../../../../hooks/useSearchAndFilter';
 import cn from 'classnames';
 import s from './menu.module.scss';
 
@@ -25,7 +24,7 @@ const Menu: React.FC<Props> = ({
     dashboard: { projects },
     ui: { isMenuDisplayed }
   } = useSelector((state: RootState) => state);
-  const { filteredData, handleOnChange } = useSearch<Project>(projects);
+  const { filteredData, handleOnChange } = useSearch(projects);
 
   const { push } = useRouter();
 

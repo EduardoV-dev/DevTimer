@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Ul } from '../../../ui';
 import { Project } from '../..';
 import { LoadingIcon } from '../../../icons';
 import { NoRegister } from '../../../common';
 import { Project as ProjectInter } from '../../../../models/interfaces/dashboard';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../models/interfaces/common';
+import { selectTaskAction } from '../../../../redux/ducks/dashboard';
 
 interface Props {
   className?: string;
@@ -16,8 +17,12 @@ const ProjectList: React.FC<Props> = ({
   className,
   filteredProjects,
 }): JSX.Element => {
-  const { projects } = useSelector((state: RootState) => state.dashboard);
-  
+  const dispatch = useDispatch();
+  const {
+    projects,
+    selectedProject,
+  } = useSelector((state: RootState) => state.dashboard);
+
   if (!projects) return (
     <Container
       bgColor={({ theme }) => theme.lightDarken}
@@ -27,6 +32,8 @@ const ProjectList: React.FC<Props> = ({
       <LoadingIcon width={32} height={32} fill='#333' />
     </Container>
   );
+
+  useEffect(() => { dispatch(selectTaskAction(null)) }, [selectedProject]);
 
   return (
     <Container bgColor={({ theme }) => theme.lightDarken} {...{ className }}>
@@ -40,11 +47,11 @@ const ProjectList: React.FC<Props> = ({
           ))}
         </Ul>
       ) : (
-          <NoRegister 
-            pText='You don’t have any project yet.'
-            spanText='Create a new one to start working'
-          />
-        )}
+        <NoRegister
+          pText='You don’t have any project yet.'
+          spanText='Create a new one to start working'
+        />
+      )}
     </Container>
   );
 }

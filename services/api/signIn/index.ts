@@ -5,12 +5,14 @@ import { auth } from '../../firebase';
 
 export const signInWithFacebook = () => {
   const facebookProvider = new auth.FacebookAuthProvider();
-  return auth().signInWithPopup(facebookProvider);
+  return auth().setPersistence(auth.Auth.Persistence.SESSION)
+    .then(() => auth().signInWithPopup(facebookProvider));
 }
 
 export const signInWithGithub = () => {
   const githubProvider = new auth.GithubAuthProvider();
-  return auth().signInWithPopup(githubProvider);
+  return auth().setPersistence(auth.Auth.Persistence.SESSION)
+    .then(() => auth().signInWithPopup(githubProvider));
 }
 
 export const handleUserAuthChange = () => (dispatch: Dispatch<any>) => {

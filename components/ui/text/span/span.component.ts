@@ -47,7 +47,7 @@ export const SpanComp = styled.span<Props>`
     }
   `};
 
-  ${({ badgeActive }) => badgeActive && css`
+  ${({ badgeActive }) => badgeActive === 'true' && css`
     background-color: ${({ theme }) => theme.primary};
     color: ${({ theme }) => theme.light};
   `};

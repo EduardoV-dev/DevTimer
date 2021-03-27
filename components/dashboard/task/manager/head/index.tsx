@@ -1,5 +1,6 @@
-import React, { SetStateAction, useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Task } from '../../../../../models/interfaces/dashboard';
 import { TaskOrderBy } from '../../../../../models/types/common';
 import { OnChange } from '../../../../../models/types/events';
 import { handleModal } from '../../../../../utils/ui';
@@ -8,51 +9,38 @@ import { Button, Container, Span } from '../../../../ui';
 import s from './taskManagerHead.module.scss';
 
 interface Props {
+  tasks: Task[];
+  order: TaskOrderBy;
   onChange: (e: OnChange) => void;
-  setOrderBy: React.Dispatch<SetStateAction<TaskOrderBy>>;
+  handleOrderChange: (orderBy: TaskOrderBy) => void;
 }
 
 const TasksManagerHead: React.FC<Props> = ({
+  order,
   onChange,
-  setOrderBy,
+  handleOrderChange,
 }): JSX.Element => {
   const dispatch = useDispatch();
-  const [active, setActive] = useState<any>({
-    latest: true,
-    alphabetic: false,
-  });
 
   return (
     <Container>
       <SearchInput
         placeholder='Search a task'
         noStyled='true'
-        onChange={onChange}
+        {... { onChange }}
       />
       <Container className={s.taskManagerHead_controlsContainer}>
         <Container>
           <Span
             className={s.taskManagerHead_badge}
             badge='true'
-            badgeActive={active.latest}
-            onClick={() => {
-              setOrderBy('latestUpdate');
-              setActive({
-                latest: true,
-                alphabetic: false,
-              });
-            }}
-            >Lastest</Span>
+            badgeActive={order === 'latestUpdate' ? 'true' : 'false'}
+            onClick={() => handleOrderChange('latestUpdate')}
+          >Latest</Span>
           <Span
             badge='true'
-            badgeActive={active.alphabetic}
-            onClick={() => {
-              setOrderBy('name')
-              setActive({
-                latest: false,
-                alphabetic: true,
-              });
-            }}
+            badgeActive={order === 'name' ? 'true' : 'false'}
+            onClick={() => handleOrderChange('name')}
           >A-Z</Span>
         </Container>
         <Button

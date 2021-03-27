@@ -26,6 +26,7 @@ const CLEAN_SESSION: string = 'devtimer/dashboard/CLEAN_SESSION';
 const LOAD_PROJECTS: string = 'devtimer/dashboard/LOAD_PROJECTS';
 const LOAD_TASKS: string = 'devtimer/dashboard/LOAD_TASKS';
 const SELECT_TASK: string = 'devtimer/dashboard/SELECT_TASK';
+const TIMING_STATE: string = 'devtimer/dashboard/TIMING_STATE';
 
 const initialState: DashboardState = {
   isButtonLoading: {
@@ -38,6 +39,7 @@ const initialState: DashboardState = {
   taskFormErrors: {},
   tasks: null,
   selectedTask: null,
+  isTiming: null,
 }
 
 const dashboardReducer = (state: DashboardState = initialState, action: Action): DashboardState => {
@@ -54,11 +56,10 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
       }
     case CREATE_PROJECT_SUCCESS:
     case CREATE_PROJECT_ERROR:
+    case EDIT_PROJECT_SUCCESS:
     case EDIT_PROJECT_ERROR:
     case DELETE_PROJECT_SUCCESS:
     case DELETE_PROJECT_ERROR:
-    case DELETE_TASK_SUCCESS:
-    case DELETE_TASK_ERROR:
       return {
         ...state,
         isButtonLoading: {
@@ -87,8 +88,9 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
       }
     case CREATE_TASK_SUCCESS:
     case CREATE_TASK_ERROR:
-    case DELETE_TASK_ERROR:
     case DELETE_TASK_SUCCESS:
+    case DELETE_TASK_ERROR:
+    case EDIT_TASK_SUCCESS:
     case EDIT_TASK_ERROR:
       return {
         ...state,
@@ -160,6 +162,11 @@ const dashboardReducer = (state: DashboardState = initialState, action: Action):
       return {
         ...state,
         selectedTask: action.payload,
+      }
+    case TIMING_STATE:
+      return {
+        ...state,
+        isTiming: action.payload,
       }
     default:
       return { ...state };
@@ -275,3 +282,8 @@ export const selectTaskAction = (task: Task): Action => ({
   type: SELECT_TASK,
   payload: task,
 });
+
+export const timingStateAction = (state: boolean | null): Action => ({
+  type: TIMING_STATE,
+  payload: state,
+})
