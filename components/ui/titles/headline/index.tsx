@@ -3,7 +3,7 @@ import { H1 } from './headline.component';
 
 interface Props {
   children: string; 
-  className: string;
+  className?: string;
 }
 
 const Headline: React.FC<Props> = (props): JSX.Element => {
